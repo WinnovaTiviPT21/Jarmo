@@ -6,3 +6,6 @@ CONFIG -= qt
 SOURCES += \
         io.cpp \
         main.cpp
+
+HEADERS += \
+    io.h

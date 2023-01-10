@@ -1,8 +1,6 @@
 #include <iostream>
+#include "io.h"
 using namespace std;
-
-int kysymys(string txt);
-void tulostus(int x, int y);
 
 int main()
 {
