@@ -4,9 +4,10 @@ using namespace std;
 
 int main()
 {
-    int pv;
-    int kk;
-    int vuosi;
+    int pv, kk, vuosi;
+    //char c;
+
+    //cin >> pv >> c >> kk >> c >> vuosi;
 
     cout << "Anna paivamaara: ";
     cin >> pv;
