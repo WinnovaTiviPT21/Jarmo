@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    /*int pv;
+    int pv;
     int kk;
     int vuosi;
 
@@ -41,6 +41,6 @@ int main()
     else
     {
         cout << "Kyseessa ei ole karkausvuosi\n\n";
-    }*/
+    }
     return 0;
 }
