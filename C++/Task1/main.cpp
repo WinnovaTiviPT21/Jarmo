@@ -2,24 +2,27 @@
 
 using namespace std;
 
-int main()
+int kysymys()
 {
-    int x;
-    int y;
-    int summa;
-    int erotus;
-
+    int luku;
     cout << "Anna luku: ";
-    cin >> x;
+    cin >> luku;
+    return luku;
+}
 
-    cout << "Anna toinen luku: ";
-    cin >> y;
-
-    summa = x + y;
-    erotus = x - y;
-
+void tulostus(int x, int y)
+{
+    int summa = x + y;
+    int erotus = x - y;
     cout << "Antamiesi lukujen summa on: " << summa << endl;
     cout << "Antamiesi lukujen erotus on: " << erotus << endl;
+}
 
+int main()
+{
+    int x = kysymys();
+    int y = kysymys();
+
+    tulostus(x, y);
     return 0;
 }
