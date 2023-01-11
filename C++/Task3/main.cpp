@@ -13,7 +13,7 @@ int main()
     if (!inf)
     {
         // Print an error and exit
-        std::cerr << "Uh oh, test.csv could not be opened for reading!\n";
+        cerr << "Uh oh, test.csv could not be opened for reading!\n";
         return 1;
     }
 
@@ -23,9 +23,9 @@ int main()
     while (inf)
     {
         // read stuff from the file into a string and print it
-        std::string strInput;
-        std::getline(inf, strInput);
-        std::cout << strInput << '\n';
+        string strInput;
+        getline(inf, strInput);
+        cout << strInput << '\n';
     }
 
     return 0;
