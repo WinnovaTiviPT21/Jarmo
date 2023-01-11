@@ -2,7 +2,7 @@
 using namespace std;
 
 // Opettajan esimerkki
-struct Date
+struct /*class*/ Date
 {
     int day;
     int month;
@@ -12,12 +12,16 @@ struct Date
     bool kVuosi();
 };
 
-// Opettajan esimerkki
+// Opettajan esimerkistä jatkettua
 bool Date::isValid()
 {
-    if (day < 1)
+    if (day < 1 || day > 31)
         return false;
     if (month < 1 || month > 12)
+        return false;
+    if ((day == 29 && month == 2 && kVuosi() == true))
+        return true;
+    if ((day > 28 && month == 2) || (day > 30 && month == 4) || (day > 30 && month == 6) || (day > 30 && month == 9) || (day > 30 && month == 11))
         return false;
     return true;
 }
