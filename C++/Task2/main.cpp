@@ -1,47 +1,58 @@
 #include <iostream>
-
 using namespace std;
+
+// Opettajan esimerkki
+struct Date
+{
+    int day;
+    int month;
+    int year;
+
+    bool isValid();
+    bool kVuosi();
+};
+
+// Opettajan esimerkki
+bool Date::isValid()
+{
+    if (day < 1)
+        return false;
+    if (month < 1 || month > 12)
+        return false;
+    return true;
+}
+
+// Omaa koodia
+// Tarkistetaan onko kyseessä karkausvuosi
+bool Date::kVuosi()
+{
+    if(year % 400 == 0)
+        return true;
+    else if(year % 100 == 0)
+        return true;
+    else if(year % 4 == 0)
+        return true;
+    return false;
+}
 
 int main()
 {
-    int pv, kk, vuosi;
-    //char c;
+    // Opettajan esimerkki
+    Date pvml;
 
-    //cin >> pv >> c >> kk >> c >> vuosi;
+    cout << "Anna pvm: ";
+    char c;
+    cin >> pvml.day >> c >> pvml.month >> c >> pvml.year;
 
-    cout << "Anna paivamaara: ";
-    cin >> pv;
-    if(pv < 1 || pv > 31)
-    {
-        cout << "Antamasi paivamaara on virheellinen!\n";
-    }
-
-    cout << "Anna kuukausi: ";
-    cin >> kk;
-    if(kk < 1 || kk > 12)
-    {
-        cout << "Antamasi kuukausi on virheellinen!\n";
+    cout << "Annoit: " << pvml.day << c << pvml.month << c << pvml.year << endl;
+    if (pvml.isValid() == false){
+        cout << "Pvm on virheellinen!" << endl;
     }
 
-    cout << "Anna vuosiluku: ";
-    cin >> vuosi;
+    // Oma koodi
+    if (pvml.kVuosi() == true){
+        cout << "Kyseessa on karkausvuosi" << endl;
+    }
 
-    cout << "Antamasi paivamara on: " << pv << "." << kk << "." << vuosi << endl;
-    if(vuosi % 400 == 0)
-    {
-        cout << "Kyseessa on karkausvuosi\n";
-    }
-    else if(vuosi % 100 == 0)
-    {
-        cout << "Kyseessa ei ole karkausvuosi\n";
-    }
-    else if(vuosi % 4 == 0)
-    {
-        cout << "Kyseessa on karkausvuosi\n";
-    }
-    else
-    {
-        cout << "Kyseessa ei ole karkausvuosi\n\n";
-    }
     return 0;
 }
