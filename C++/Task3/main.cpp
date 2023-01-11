@@ -50,6 +50,8 @@ int main()
         employees.push_back(e);
     }
 
-    cout << employees.size() << endl;
+    cout << "Tyontekijoiden kokonais maara: " << employees.size() << endl;
+
+    cout << endl;
     return 0;
 }
