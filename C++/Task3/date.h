@@ -2,7 +2,7 @@
 #define DATE_H
 
 // Opettajan esimerkki
-struct /*class*/ Date
+class /*struct*/ Date
 {
     int day;
     int month;
@@ -10,6 +10,8 @@ struct /*class*/ Date
 
     bool isValid();
     bool kVuosi();
+
+    // friend bool operator < (Date d1, Date d2);
 };
 
 #endif // DATE_H
