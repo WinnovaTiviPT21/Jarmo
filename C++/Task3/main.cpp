@@ -10,7 +10,6 @@ public:
     string m_etunimi;
     string m_sukunimi;
     string m_sukupuoli;
-    string m_sAika;
 };
 
 int main()
@@ -38,14 +37,12 @@ int main()
 
         int comma1 = strInput.find(',');
         int comma2 = strInput.find(',', comma1+1);
-        int comma4 = strInput.find(',', comma2+3);
+        // int comma4 = strInput.find(',', comma2+3);
 
         Employee e;
         e.m_etunimi = strInput.substr(0, comma1);
         e.m_sukunimi = strInput.substr(comma1 + 1, comma2 - comma1 - 1);
         e.m_sukupuoli = strInput.substr(comma2 + 1, 1);
-        // e.m_sAika =  strInput.substr(comma2 + 3, comma4 - comma2 - 3); // Rikkoo koodin
-        // e.birthDate() = Date(stoi)
         // laskee miesten määrän
         if(e.m_sukupuoli == "M"){
             m = m + 1;
@@ -58,6 +55,13 @@ int main()
         // string sDate;
         // sDate = strInput.substr(comma2 + 3, comma4 - comma2 - 3);
         // e.birthDate() = Date(stoi)
+
+        int minimum = numbers[0];
+        for(unsigned int i = 1; i < numbers.size(); i++){
+            if (numbers[i] < minimum){
+                minimum = numbers[i];
+            }
+        }
 
         employees.push_back(e);
     }
