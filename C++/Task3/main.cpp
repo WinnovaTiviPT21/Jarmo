@@ -59,7 +59,7 @@ int main()
         employees.push_back(e);
     }
 
-    //cout << "Tyontekijoiden kokonais maara: " << employees.size() << endl; // employees.push_back(e); lisää ylimääräisen rivin?
+    //cout << "Tyontekijoiden kokonais maara: " << employees.size() << endl; // pitäisi toimia, mutta employees.push_back(e); lisää ylimääräisen rivin?
     cout << "Tyontekijoiden kokonais maara: " << maara << endl;
     cout << "Miehia: " << m << endl;
     cout << "Naisia: " << f << endl;
