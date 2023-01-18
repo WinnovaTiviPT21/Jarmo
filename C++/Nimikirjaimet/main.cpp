@@ -10,7 +10,7 @@ string firstLetterWord(string line)
 
     // Traverse the string.
     bool v = true;
-    for (int i = 0; i < line.length(); i++)
+    for (unsigned int i = 0; i < line.length(); i++)
     {
         // If it is space, set v as true.
         if (line[i] == ' '){
