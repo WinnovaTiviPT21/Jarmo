@@ -23,7 +23,7 @@ int main()
 
     getline(inf, firstLine);
 //    int counter{0};
-    while(!inf.eof() && inf.good()){
+    while(!inf.eof() /*&& inf.good()*/){
         int year, month, day;
         float air, airMin, airMax;
 
@@ -31,7 +31,7 @@ int main()
 
 //        counter++;
 
-        // Etsii matalimman lämpätilan
+        // Etsii matalimman lämpätilan ja mittaus pvm
         airMin1 = airMin;
         if(airMin1 < airMin2){
             airMin2 = airMin1;
@@ -39,7 +39,7 @@ int main()
             airMinMonth = month;
             airMinDay = day;
         }
-        // Etsii korkeimman lämpätilan
+        // Etsii korkeimman lämpätilan ja mittaus pvm
         airMax1 = airMax;
         if(airMax1 > airMax2){
             airMax2 = airMax1;
