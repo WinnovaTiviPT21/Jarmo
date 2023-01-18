@@ -1,6 +1,6 @@
 #include <iostream>
 #include "date.h"
-using namespace std;
+// using namespace std; // Ei tarvita?
 
 // Opettajan esimerkistä jatkettua
 bool Date::isValid()
@@ -27,4 +27,9 @@ bool Date::kVuosi()
     else if(year % 4 == 0)
         return true;
     return false;
+}
+
+// ???
+bool operator < (Date d1, Date d2) {
+    return true;
 }

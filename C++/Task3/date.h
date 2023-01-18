@@ -1,8 +1,11 @@
 #ifndef DATE_H
 #define DATE_H
+//#include <string>
 
-// Opettajan esimerkki
-class /*struct*/ Date
+// The only difference between a struct and class in C++ is the default accessibility of member variables and methods.
+// In a struct they are public; in a class they are private.
+// Opettajan esimerkistä
+struct /*class*/ Date
 {
     int day;
     int month;
@@ -11,7 +14,10 @@ class /*struct*/ Date
     bool isValid();
     bool kVuosi();
 
-    // friend bool operator < (Date d1, Date d2);
+//    std::string bDate;
+
+    // ???
+    friend bool operator < (Date d1, Date d2);
 };
 
 #endif // DATE_H
