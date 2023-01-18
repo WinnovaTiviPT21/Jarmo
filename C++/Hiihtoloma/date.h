@@ -3,13 +3,13 @@
 #include <string>
 
 // Opettajan esimerkki
-struct /*class*/ Date
-{
+class Date
+{ public:
     int day;
     int month;
     int year;
 
-    std::string hiihtoLoma;
+    std::string hLoma;
 
     bool isValid();
     bool kVuosi();
