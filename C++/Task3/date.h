@@ -1,12 +1,10 @@
 #ifndef DATE_H
 #define DATE_H
-//#include <string>
 
 // The only difference between a struct and class in C++ is the default accessibility of member variables and methods.
 // In a struct they are public; in a class they are private.
-// Opettajan esimerkistä
 struct /*class*/ Date
-{
+{ /*public*/
     int day;
     int month;
     int year;
