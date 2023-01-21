@@ -28,7 +28,7 @@ bool Date::kVuosi()
 }
 
 // Custom vertailu operaattori (Overloading the comparison operators)
-// jota käytetään tarkistamaan onko pvm hiihtoloma
+// jota käytetään tarkistamaan onko käyttäjän antama pvm hiihtoloma
 bool operator< (const Date& d1, const Date& d2){
     if(d1.m_year == d2.m_year){
         if (d1.m_month == d2.m_month){
