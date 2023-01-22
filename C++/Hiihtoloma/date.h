@@ -10,11 +10,12 @@ class Date
     bool isValid();
     bool kVuosi();
 
-    // Default consturctor, ei saa(tarvitse) mitään parametreja.
-    // Luokassa voi olla useita eri consturctoreita!
+    /* Default consturctor, ei saa(tarvitse) mitään parametreja.
+     * Luokassa voi olla useita eri consturctoreita kunhan eivät
+     * ole identtisiä rakenteeltaan! */
     Date(){
-        m_day = 0; // tulevien atribuuttien alustus, ei pakollinen, mutta suositeltavaa
-        m_month = 0;
+        m_day = 0;      // Tulevien atribuuttien alustus,
+        m_month = 0;    // ei pakollista, mutta suositeltavaa.
         m_year = 0;
     }
 
@@ -25,7 +26,11 @@ class Date
         m_year = year;
     }
 
-    // Tämä tarvitaan "custom" operaattorin toimiseksi main ohjelmassa
+    /* Tämä tarvitaan "custom" operaattorin toimiseksi main ohjelmassa,
+     * tämä tuo lainauksen custom operaattorista Date luokkaan. Ohjelma
+     * toimii myös, jos vertailuoperaattori kirjoitetaan suoraan luokan
+     * sisälle, mutta myös silloin se tarvitsee friend etuliitteen,
+     * tämän syytä en täysin osaa selittää. */
     friend bool operator< (const Date& d1, const Date& d2);
 };
 

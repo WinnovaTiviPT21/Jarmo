@@ -15,7 +15,7 @@ bool Date::isValid()
     return true;
 }
 
-// Tarkistetaan onko kyseessä karkausvuosi
+// Tarkisteaa onko kyseessä karkausvuosi
 bool Date::kVuosi()
 {
     if(m_year % 400 == 0)
@@ -27,8 +27,13 @@ bool Date::kVuosi()
     return false;
 }
 
-// Custom vertailu operaattori (Overloading the comparison operators)
-// jota käytetään tarkistamaan onko käyttäjän antama pvm hiihtoloma
+/* Custom vertailu operaattori (Overloading the comparison operators),
+ * jota käytetään tarkistamaan onko käyttäjän antama pvm hiihtoloma.
+ * Käytännössä operaattori on normaali funktio. Tämä lause selitti aika paljon:
+ * This allows you to create variations of a function to work with different
+ * data types, without having to think up a unique name for each variant.
+ * https://www.learncpp.com/cpp-tutorial/introduction-to-function-overloading/
+ * https://www.learncpp.com/cpp-tutorial/introduction-to-operator-overloading/ */
 bool operator< (const Date& d1, const Date& d2){
     if(d1.m_year == d2.m_year){
         if (d1.m_month == d2.m_month){
