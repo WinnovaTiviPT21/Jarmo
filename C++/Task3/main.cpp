@@ -3,23 +3,16 @@
 #include <string>
 #include <vector>
 #include "date.h"
+#include "employee.h"
 
 using namespace std;
-
-class Employee{
-public:
-    string m_etunimi;
-    string m_sukunimi;
-    string m_sukupuoli;
-    string m_birthDate;
-};
 
 int main()
 {
     int m{0};
     int f{0};
 
-    ifstream inf{"test.csv"};
+    ifstream inf{"test.csv"}; // .csv = comma-separated values
     // If we couldn't open the output file stream for reading
     if (!inf)
     {
@@ -28,6 +21,7 @@ int main()
         return 1;
     }
 
+    // Dynamic array
     vector<Employee> employees;
 
     // While there's still stuff left to read
@@ -42,42 +36,43 @@ int main()
         int comma4 = strInput.find(',', comma2+3);
 
         Employee e;
-        e.m_etunimi = strInput.substr(0, comma1);
-        e.m_sukunimi = strInput.substr(comma1 + 1, comma2 - comma1 - 1);
-        e.m_sukupuoli = strInput.substr(comma2 + 1, 1);
+        e.etunimi = strInput.substr(0, comma1);
+        e.sukunimi = strInput.substr(comma1 + 1, comma2 - comma1 - 1);
+        e.sukupuoli = strInput.substr(comma2 + 1, 1);
+
         // laskee miesten määrän
-        if(e.m_sukupuoli == "M"){
+        if(e.sukupuoli == "M"){
             m = m + 1;
         }
         // laskee naisten määrän
-        if(e.m_sukupuoli == "F"){
+        if(e.sukupuoli == "F"){
             f = f + 1;
         }
 
-//        // ???
-//        string bDate;
-//        bDate = strInput.substr(comma2 + 3, comma4 - comma2 - 3);
-//        e.m_birthDate = Date(stoi(bDate.substr(8, 2), stoi(bDate.substr(5, 6)))); //00.00.0000
+        string sDate;
+        sDate = strInput.substr(comma2 + 3, comma4 - comma2 - 3);
+        e.birthDate = Date(stoi(sDate.substr(8, 2)), stoi(sDate.substr(5, 2)), stoi(sDate.substr(0, 4)));
 
-//        // ???
-//        int minimum = numbers[0];
-//        for(unsigned int i = 1; i < numbers.size(); i++){
-//            if (numbers[i] < minimum){
-//                minimum = numbers[i];
-//            }
-//        }
-
-//        // ???
-//        Date pvm1;
-//        Date pvm2;
-//        if (pvm1 < pvm2) {}
+        sDate = strInput.substr(comma4 + 1, strInput.length() - comma4 - 1);
+        e.hiringDate = Date(stoi(sDate.substr(8, 2)), stoi(sDate.substr(5, 2)), stoi(sDate.substr(0, 4)));
 
         employees.push_back(e);
     }
 
-    cout << "Tyontekijoiden kokonais maara: " << employees.size() << endl;
+    Employee oldest = employees[0];
+    for(unsigned int i = 0; i < employees.size(); i++){
+        Employee e = employees[i];
+        if(e.birthDate < oldest.birthDate){
+            oldest = e;
+        }
+    }
+
+    cout << "Tyontekijoita: " << employees.size() << endl;
     cout << "Miehia: " << m << endl;
     cout << "Naisia: " << f << endl;
+    cout << "Vanhimman tiedot: " << oldest.etunimi << " " << oldest.sukunimi << ", " << oldest.sukupuoli << ", " << oldest.birthDate.day << "."
+         << oldest.birthDate.month << "." << oldest.birthDate.year << ", " << oldest.hiringDate.day << "." << oldest.hiringDate.month << "." << oldest.hiringDate.year << endl;
+
 
     cout << "------------------------" << endl;
     return 0;

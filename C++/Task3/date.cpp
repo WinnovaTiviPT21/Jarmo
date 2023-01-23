@@ -1,8 +1,6 @@
 #include <iostream>
 #include "date.h"
-// using namespace std; // Ei tarvita?
 
-// Opettajan esimerkistä jatkettua
 bool Date::isValid()
 {
     if (day < 1 || day > 31)
@@ -16,8 +14,6 @@ bool Date::isValid()
     return true;
 }
 
-// Omaa koodia
-// Tarkistetaan onko kyseessä karkausvuosi
 bool Date::kVuosi()
 {
     if(year % 400 == 0)
@@ -29,7 +25,16 @@ bool Date::kVuosi()
     return false;
 }
 
-// ???
-bool operator < (Date d1, Date d2) {
-    return true;
+bool operator < (const Date& d1, const Date& d2){
+    if(d1.year == d2.year){
+        if (d1.month == d2.month){
+            return d1.day < d2.day;
+        }
+        else{
+            return d1.month < d2.month;
+        }
+    }
+    else{
+        return d1.year < d2.year;
+    }
 }
