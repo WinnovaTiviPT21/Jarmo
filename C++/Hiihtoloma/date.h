@@ -14,8 +14,8 @@ class Date
      * Luokassa voi olla useita eri consturctoreita kunhan eivät
      * ole identtisiä rakenteeltaan! */
     Date(){
-        m_day = 0;      // Tulevien atribuuttien alustus,
-        m_month = 0;    // ei pakollista, mutta suositeltavaa.
+        m_day = 0;   // Tulevien parametrien/atribuuttien alustus,
+        m_month = 0; // ei pakollista, mutta suositeltavaa.
         m_year = 0;
     }
 
