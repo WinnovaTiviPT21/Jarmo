@@ -1,6 +1,6 @@
 #include "rectangle.h"
 
-//Rectangle::Rectangle(float l, float h){
+//Rectangle::Rectangle(float l){
 //    m_hight = h;
 //    m_length = l;
 //}

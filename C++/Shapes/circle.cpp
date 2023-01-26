@@ -8,7 +8,7 @@ Circle::Circle(float r){
 }
 
 float Circle::area(){
-  return 3.14 * m_radius * m_radius;
+    return 3.14 * m_radius * m_radius;
 }
 
 float Circle::perimeter(){
@@ -16,5 +16,6 @@ float Circle::perimeter(){
 }
 
 void Circle::print(){
-
+    cout << "Ympyran pinta-ala on: " << Circle::area() << endl;
+    cout << "Ympyran ypmarysmitta on: " << Circle::perimeter() << endl;
 }

@@ -4,9 +4,9 @@
 
 class Rectangle : public Shape{
 //    float m_hight;
-    float m_length;
+//    float m_length;
 public:
-//    Rectangle(float l, float h);
+//    Rectangle(float l);
     float area();
     float perimeter();
     void print();
