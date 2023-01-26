@@ -10,8 +10,4 @@ public:
     float perimerer();
 };
 
-Circle::Circle(float r){
-    m_radius = r;
-}
-
 #endif // CIRCLE_H

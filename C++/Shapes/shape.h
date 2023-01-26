@@ -3,8 +3,17 @@
 
 class Shape{
 public:
-    float area();
-    float perimeter();
+    virtual float area();
+    virtual float perimeter();
+
+    Shape();
+
+    void print();
+
 };
+
+void Shape::print(){
+
+}
 
 #endif // SHAPE_H

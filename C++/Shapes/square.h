@@ -10,8 +10,4 @@ public:
     float perimerer();
 };
 
-Square::Square(float l){
-    m_length = l;
-}
-
 #endif // SQUARE_H
