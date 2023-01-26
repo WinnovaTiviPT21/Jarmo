@@ -9,6 +9,10 @@ float Square::area(){
     return m_length * m_length;
 }
 
-float Square::perimerer(){
+float Square::perimeter(){
     return 4 * m_length;
+}
+
+void Square::print(){
+
 }

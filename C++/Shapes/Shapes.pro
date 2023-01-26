@@ -5,7 +5,9 @@ CONFIG -= qt
 
 SOURCES += \
         circle.cpp \
+        ellipsi.cpp \
         main.cpp \
+        rectangle.cpp \
         square.cpp
 
 HEADERS += \

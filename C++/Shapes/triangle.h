@@ -5,7 +5,7 @@
 class Triangle : public Shape{
 public:
     float area();
-    float perimerer();
+    float perimeter();
 };
 
 #endif // TRIANGLE_H

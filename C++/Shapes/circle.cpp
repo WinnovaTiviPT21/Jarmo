@@ -11,6 +11,10 @@ float Circle::area(){
   return 3.14 * m_radius * m_radius;
 }
 
-float Circle::perimerer(){
+float Circle::perimeter(){
     return 2 * 3.14 * m_radius;
+}
+
+void Circle::print(){
+
 }

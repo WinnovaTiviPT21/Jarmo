@@ -5,12 +5,10 @@
 class Ellipse : public Shape{
 public:
     float area();
-    float perimerer();
+    float perimeter();
     void print();
 };
 
-void Ellipse::print(){
 
-}
 
 #endif // ELLIPSE_H

@@ -7,7 +7,10 @@ class Square : public Rectangle{
 public:
     Square(float l);
     float area();
-    float perimerer();
+    float perimeter();
+    void print();
 };
+
+
 
 #endif // SQUARE_H

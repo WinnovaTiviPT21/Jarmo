@@ -7,12 +7,10 @@ class Circle : public Ellipse{
 public:
     Circle(float r);
     float area();
-    float perimerer();
+    float perimeter();
     void print();
 };
 
 
-void Circle::print(){
 
-}
 #endif // CIRCLE_H
