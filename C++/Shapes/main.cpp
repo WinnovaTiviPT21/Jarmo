@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include "shape.h"
+#include "rectangle.h"
 #include "circle.h"
 #include "square.h"
 using namespace std;
@@ -19,10 +20,18 @@ int main()
     shapes.push_back(shape1);
     shape1->print();
 
-    shared_ptr<Shape> shape2(new Square (10));
+    cout << endl;
+
+    shared_ptr<Shape> shape2(new Rectangle (10, 20));
     shapes.push_back(shape2);
     shape2->print();
 
-    cout << "---------------" << endl;
+    cout << endl;
+
+//    shared_ptr<Shape> shape3(new Square (10));
+//    shapes.push_back(shape3);
+//    shape3->print();
+
+    cout << "----------------------------" << endl;
     return 0;
 }
