@@ -2,16 +2,17 @@
 #include "square.h"
 using namespace std;
 
-//Square::Square(float l){
-//    m_length = l;
-//}
+// Muita parempia tapoja kirjoittaa?
+Square::Square(float s) : Rectangle(s, s) {
+    m_side = s;
+}
 
 float Square::area(){
-    return m_length * m_length;
+    return m_side * m_side;
 }
 
 float Square::perimeter(){
-    return 4 * m_length;
+    return 4 * m_side;
 }
 
 void Square::print(){

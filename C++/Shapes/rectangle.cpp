@@ -2,17 +2,21 @@
 #include "rectangle.h"
 using namespace std;
 
-Rectangle::Rectangle(float l, float h){
-    m_length = l;
+// Kumpi olisi suositeltavampi tapa kirjoittaa?
+// Rectangle::Rectangle(float w, float h) : width(w), height(h) {}
+Rectangle::Rectangle(float w, float h){
+    m_width = w;
     m_height = h;
 }
 
 float Rectangle::area(){
-    return m_height * m_length;
+    return m_width * m_height;
 }
+
 float Rectangle::perimeter(){
-    return 2 * m_length + 2 * m_height;
+    return 2 * (m_width + m_height);
 }
+
 void Rectangle::print(){
     cout << "Suorakulmion pinta-ala on: " << Rectangle::area() << endl;
     cout << "Suorakulmion ypmarysmitta on: " << Rectangle::perimeter() << endl;

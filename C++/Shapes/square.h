@@ -3,9 +3,9 @@
 #include "rectangle.h"
 
 class Square : public Rectangle{
-    float m_length;
+    float m_side;
 public:
-    Square(float l);
+    Square(float s);
     float area();
     float perimeter();
     void print();

@@ -28,9 +28,9 @@ int main()
 
     cout << endl;
 
-//    shared_ptr<Shape> shape3(new Square (10));
-//    shapes.push_back(shape3);
-//    shape3->print();
+    shared_ptr<Shape> shape3(new Square (30));
+    shapes.push_back(shape3);
+    shape3->print();
 
     cout << "----------------------------" << endl;
     return 0;

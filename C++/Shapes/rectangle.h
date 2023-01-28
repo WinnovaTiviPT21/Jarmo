@@ -3,10 +3,9 @@
 #include "shape.h"
 
 class Rectangle : public Shape{
-    float m_length;
-    float m_height;
+    float m_width, m_height;
 public:
-    Rectangle(float l, float h);
+    Rectangle(float w, float h);
     float area();
     float perimeter();
     void print();
