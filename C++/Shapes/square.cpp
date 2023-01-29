@@ -17,5 +17,5 @@ float Square::perimeter(){
 
 void Square::print(){
     cout << "Nelion pinta-ala on: " << Square::area() << endl;
-    cout << "Nelion ypmarysmitta on: " << Square::perimeter() << endl;
+    cout << "Nelion ymparysmitta on: " << Square::perimeter() << endl;
 }

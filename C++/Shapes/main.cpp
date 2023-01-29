@@ -41,7 +41,7 @@ int main()
 
     cout << endl;
 
-    shared_ptr<Shape> shape5(new Triangle (10, 20, 30));
+    shared_ptr<Shape> shape5(new Triangle (10, 20));
     shapes.push_back(shape5);
     shape5->print();
 

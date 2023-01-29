@@ -16,5 +16,5 @@ float Circle::perimeter(){
 
 void Circle::print(){
     cout << "Ympyran pinta-ala on: " << Circle::area() << endl;
-    cout << "Ympyran ypmarysmitta on: " << Circle::perimeter() << endl;
+    cout << "Ympyran ymparysmitta on: " << Circle::perimeter() << endl;
 }

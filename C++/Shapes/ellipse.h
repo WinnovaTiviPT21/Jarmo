@@ -11,6 +11,4 @@ public:
     void print();
 };
 
-
-
 #endif // ELLIPSE_H
