@@ -2,7 +2,7 @@
 #include "circle.h"
 using namespace std;
 
-Circle::Circle(float r){
+Circle::Circle(float r) : Ellipse(r, r){
     m_radius = r;
 }
 
