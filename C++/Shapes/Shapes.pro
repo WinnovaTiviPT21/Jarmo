@@ -8,7 +8,8 @@ SOURCES += \
         ellipsi.cpp \
         main.cpp \
         rectangle.cpp \
-        square.cpp
+        square.cpp \
+        triangle.cpp
 
 HEADERS += \
     circle.h \

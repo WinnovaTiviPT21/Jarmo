@@ -5,6 +5,7 @@
 #include "rectangle.h"
 #include "circle.h"
 #include "square.h"
+#include "triangle.h"
 using namespace std;
 
 int main()
@@ -16,22 +17,34 @@ int main()
         shape->print();
     }
 
-    shared_ptr<Shape> shape1(new Circle (10));
+    shared_ptr<Shape> shape1(new Rectangle (10, 20));
     shapes.push_back(shape1);
     shape1->print();
 
     cout << endl;
 
-    shared_ptr<Shape> shape2(new Rectangle (10, 20));
+    shared_ptr<Shape> shape2(new Square (30));
     shapes.push_back(shape2);
     shape2->print();
 
     cout << endl;
 
-    shared_ptr<Shape> shape3(new Square (30));
+    shared_ptr<Shape> shape3(new Ellipse (10, 20));
     shapes.push_back(shape3);
     shape3->print();
 
-    cout << "----------------------------" << endl;
+    cout << endl;
+
+    shared_ptr<Shape> shape4(new Circle (10));
+    shapes.push_back(shape4);
+    shape4->print();
+
+    cout << endl;
+
+    shared_ptr<Shape> shape5(new Triangle (10, 20, 30));
+    shapes.push_back(shape5);
+    shape5->print();
+
+    cout << "\n--------------------------------------" << endl;
     return 0;
 }

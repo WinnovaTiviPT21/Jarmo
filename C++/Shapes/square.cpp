@@ -2,7 +2,7 @@
 #include "square.h"
 using namespace std;
 
-// Muita parempia tapoja kirjoittaa?
+// Parempia tapoja kirjoittaa/toteuttaa?
 Square::Square(float s) : Rectangle(s, s) {
     m_side = s;
 }
