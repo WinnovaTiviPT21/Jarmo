@@ -11,6 +11,4 @@ public:
     void print();
 };
 
-
-
 #endif // CIRCLE_H

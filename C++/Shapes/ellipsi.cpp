@@ -17,4 +17,5 @@ float Ellipse::perimeter(){
 void Ellipse::print(){
     cout << "Soikion pinta-ala on: " << Ellipse::area() << endl;
     cout << "Soikion ymparysmitta on: " << Ellipse::perimeter() << endl;
+    cout << endl;
 }
