@@ -56,6 +56,18 @@ int main()
         }
     }
 
+    shared_ptr<Shape> s;
+
+    shared_ptr<Shape> largest = shapes[0];
+    for(unsigned int i = 0; i < shapes.size(); i++){
+        shared_ptr<Shape> s = shapes[i];
+        if(s->area() < largest->area()){
+            largest = s;
+        }
+    }
+
+    cout << "Pinta-alaltaan suurin shape: " << s->area() << endl;
+
     /*
     shared_ptr<Shape> shape1(new Rectangle (10, 20));
     shapes.push_back(shape1);
