@@ -28,7 +28,6 @@ int main()
     for(unsigned int i = 0; i < 10; i++){
         int x = die1(rng);
         int y = die2(rng);
-
         if(x == 1){
             shared_ptr<Shape> shape(new Rectangle (y, y));
             shapes.push_back(shape);
