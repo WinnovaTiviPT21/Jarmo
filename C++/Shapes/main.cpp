@@ -65,7 +65,7 @@ int main()
         }
     }
 
-    cout << "Pinta-alaltaan suurin shape: " << s->area() << endl;
+    cout << "Pinta-alaltaan suurin shape: " << largest << endl;
 
     /*
     shared_ptr<Shape> shape1(new Rectangle (10, 20));
