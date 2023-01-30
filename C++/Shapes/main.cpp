@@ -15,8 +15,8 @@ using namespace std;
 int main()
 {
     mt19937 rng{}; // Instantiate a 32-bit Mersenne Twister
-    uniform_int_distribution die1{ 1, 5 };
-    uniform_int_distribution die2{ 1, 100 };
+    uniform_int_distribution die1{1, 5};
+    uniform_int_distribution die2{1, 100};
 
     vector<shared_ptr<Shape>> shapes;
 
@@ -25,6 +25,38 @@ int main()
         shape->print();
     }
 
+    for(unsigned int i = 0; i < 10; i++){
+        int x = die1(rng);
+        int y = die2(rng);
+
+        if(x == 1){
+            shared_ptr<Shape> shape(new Rectangle (y, y));
+            shapes.push_back(shape);
+            shape->print();
+        }
+        if(x == 2){
+            shared_ptr<Shape> shape(new Square (y));
+            shapes.push_back(shape);
+            shape->print();
+        }
+        if(x == 3){
+            shared_ptr<Shape> shape(new Ellipse (y, y));
+            shapes.push_back(shape);
+            shape->print();
+        }
+        if(x == 4){
+            shared_ptr<Shape> shape(new Circle (y));
+            shapes.push_back(shape);
+            shape->print();
+        }
+        if(x == 5){
+            shared_ptr<Shape> shape(new Triangle (y, y));
+            shapes.push_back(shape);
+            shape->print();
+        }
+    }
+
+    /*
     shared_ptr<Shape> shape1(new Rectangle (10, 20));
     shapes.push_back(shape1);
     shape1->print();
@@ -74,6 +106,7 @@ int main()
     cout << die2(rng) << endl;
     cout << die2(rng) << endl;
     cout << die2(rng) << endl;
+    */
 
     return 0;
 }
