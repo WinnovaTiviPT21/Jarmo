@@ -73,7 +73,10 @@ int main()
 
     cout << "Pinta-alaltaan suurin shape: " << largest << endl;
 
-    cout << shapes[0] << endl;
+//    cout << shapes[0] << endl;
+
+//    for (auto i = shapes.begin(); i != shapes.end(); ++i)
+//            cout << *i << " " << endl;
 
     /*
     shared_ptr<Shape> shape1(new Rectangle (10, 20));
