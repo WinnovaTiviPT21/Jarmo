@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
+import Calculator.Enums 1.0
 
 Window {
     id: window
@@ -38,455 +39,172 @@ Window {
             Layout.fillHeight: true
             Layout.fillWidth: true
             placeholderText: qsTr("Text Field")
+            text: calculator.display
         }
 
-        Button {
+        MyButton {
             id: backspace
-            visible: true
             text: qsTr("Backspace")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.fillHeight: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             Layout.columnSpan: 2
-            Layout.rowSpan: 1
-            Layout.margins: 6
-            Layout.fillWidth: true
-            clip: false
-            transformOrigin: Item.Center
+            onClicked: calculator.backspaceClicked()
         }
 
-        Button {
+        MyButton {
             id: clear
-            visible: true
             text: qsTr("Clear")
-            flat: false
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
             Layout.columnSpan: 2
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.clear()
         }
 
-        Button {
+        MyButton {
             id: clear_all
-            visible: true
             text: qsTr("Clear All")
-            flat: false
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
             Layout.columnSpan: 2
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.clearAll()
         }
 
-        Button {
+        MyButton {
             id: mc
-            visible: true
             text: qsTr("MC")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.clearMemory()
         }
 
-        Button {
+        MyButton {
             id: num7
-            visible: true
             text: qsTr("7")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.digitClicked("7")
         }
 
-        Button {
+        MyButton {
             id: num8
-            visible: true
             text: qsTr("8")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.digitClicked("8")
         }
 
-        Button {
+        MyButton {
             id: num9
-            visible: true
             text: qsTr("9")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.digitClicked("9")
         }
 
-        Button {
+        MyButton {
             id: jako
-            visible: true
             text: qsTr("÷")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.multiplicativeOperatorClicked(Calculator.Division)
         }
 
-        Button {
+        MyButton {
             id: neliojuuri
-            visible: true
             text: qsTr("Sqrt")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.unaryOperatorClicked(Calculator.SquareRoot)
         }
 
-        Button {
+        MyButton {
             id: mr
-            visible: true
             text: qsTr("MR")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.readMemory()
         }
 
-        Button {
+        MyButton {
             id: num4
-            visible: true
             text: qsTr("4")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.digitClicked("4")
         }
 
-        Button {
+        MyButton {
             id: num5
-            visible: true
             text: qsTr("5")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.digitClicked("5")
         }
 
-        Button {
+        MyButton {
             id: num6
-            visible: true
             text: qsTr("6")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.digitClicked("6")
         }
 
-        Button {
+        MyButton {
             id: kerto
-            visible: true
             text: qsTr("×")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.multiplicativeOperatorClicked(Calculator.Multiplication)
         }
 
-        Button {
+        MyButton {
             id: potensi
-            visible: true
             text: qsTr("x²")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.unaryOperatorClicked(Calculator.Square)
         }
 
-        Button {
+        MyButton {
             id: ms
-            visible: true
             text: qsTr("MS")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.setMemory()
         }
 
-        Button {
+        MyButton {
             id: num1
-            visible: true
             text: qsTr("1")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.digitClicked("1")
         }
 
-        Button {
+        MyButton {
             id: num2
-            visible: true
             text: qsTr("2")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.digitClicked("2")
         }
 
-        Button {
+        MyButton {
             id: num3
-            visible: true
             text: qsTr("3")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.digitClicked("3")
         }
 
-        Button {
+        MyButton {
             id: miinus
-            visible: true
             text: qsTr("-")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.additiveOperatorClicked(Calculator.Subtraction)
         }
 
-        Button {
+        MyButton {
             id: yksiKauttaX
-            visible: true
             text: qsTr("1/x")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.unaryOperatorClicked(Calculator.Inverse)
         }
 
-        Button {
+        MyButton {
             id: m_plus
-            visible: true
             text: qsTr("M+")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.addToMemory()
         }
 
-        Button {
+        MyButton {
             id: num0
-            visible: true
             text: qsTr("0")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.digitClicked("0")
         }
 
-        Button {
+        MyButton {
             id: pilkku
-            visible: true
             text: qsTr(",")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.pointClicked()
         }
 
-        Button {
+        MyButton {
             id: plusMiinus
-            visible: true
             text: qsTr("+/-")
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.changeSignClicked()
         }
 
-        Button {
+        MyButton {
             id: plus
-            visible: true
             text: qsTr("+")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.additiveOperatorClicked(Calculator.Addition)
         }
 
-        Button {
+        MyButton {
             id: onyhtakuin
-            visible: true
             text: qsTr("=")
-            highlighted: false
-            font.bold: false
-            font.pointSize: 12
-            Layout.columnSpan: 1
-            transformOrigin: Item.Center
-            Layout.margins: 6
-            clip: false
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.rowSpan: 1
-            Layout.fillHeight: true
+            onClicked: calculator.equalClicked()
         }
 
 
