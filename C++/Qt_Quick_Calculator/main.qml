@@ -19,15 +19,11 @@ Window {
         id: drawer
         width: 0.66 * window.width
         height: window.height
-        modal: inPortrait
-        interactive: inPortrait
-        position: inPortrait ? 0 : 1
-        visible: !inPortrait
 
         Label {
             id: content
 
-            text: "Aa"
+            text: "Hello World"
             font.pixelSize: 96
             anchors.fill: parent
             verticalAlignment: Label.AlignVCenter
