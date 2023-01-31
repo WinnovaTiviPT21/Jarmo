@@ -7,6 +7,7 @@
 #include "circle.h"
 #include "square.h"
 #include "triangle.h"
+
 using namespace std;
 
 // Luo instansseja sattumanvaraisesti 10000 kappaletta.
@@ -14,17 +15,20 @@ using namespace std;
 // Hae pinta-alaltaan suurin shape ja tulosta sen tiedot.
 int main()
 {
+    // Generating random numbers using Mersenne Twister
     mt19937 rng{}; // Instantiate a 32-bit Mersenne Twister
-    uniform_int_distribution die1{1, 5};
-    uniform_int_distribution die2{1, 100};
+    uniform_int_distribution die1{1, 5}; // Noppa 1 rajoittaa arvot 1-5 välille
+    uniform_int_distribution die2{1, 100}; // Noppa 2 rajoittaa arvot 1-100 välille
 
     vector<shared_ptr<Shape>> shapes;
 
+    // Tarkoitus?
     for(unsigned int i = 0; i < shapes.size(); i++){
         shared_ptr<Shape> shape = shapes[i];
         shape->print();
     }
 
+    // luo x määrän sattumanvaraisia instansseja ja antaa niille sattumanvaraiset arvot
     for(unsigned int i = 0; i < 10; i++){
         int x = die1(rng);
         int y = die2(rng);
@@ -55,8 +59,10 @@ int main()
         }
     }
 
+    // getline()
+    // readline()
     shared_ptr<Shape> s;
-
+    // while{}
     shared_ptr<Shape> largest = shapes[0];
     for(unsigned int i = 0; i < shapes.size(); i++){
         shared_ptr<Shape> s = shapes[i];
@@ -66,6 +72,8 @@ int main()
     }
 
     cout << "Pinta-alaltaan suurin shape: " << largest << endl;
+
+    cout << shapes[0] << endl;
 
     /*
     shared_ptr<Shape> shape1(new Rectangle (10, 20));
