@@ -20,5 +20,4 @@ float Rectangle::perimeter(){
 void Rectangle::print(){
     cout << "Suorakulmion pinta-ala on: " << Rectangle::area() << endl;
     cout << "Suorakulmion ymparysmitta on: " << Rectangle::perimeter() << endl;
-    cout << endl;
 }

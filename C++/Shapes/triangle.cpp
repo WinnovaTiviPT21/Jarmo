@@ -19,5 +19,4 @@ float Triangle::perimeter(){
 void Triangle::print(){
     cout << "Kolmion pinta-ala on: " << Triangle::area() << endl;
     cout << "Kolmion ymparysmitta on: " << Triangle::perimeter() << endl;
-    cout << endl;
 }
