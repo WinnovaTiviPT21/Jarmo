@@ -23,7 +23,6 @@ ApplicationWindow {
 
         Label {
             id: content
-
             text: "Copyright © 2023 by Jarmo Vuorinen\n" //All rights reserved.\n
             font.pixelSize: 12
             anchors.fill: parent
@@ -40,6 +39,7 @@ ApplicationWindow {
             text: qsTr("Dark Theme")
             checked: false
 
+//            x: anchors.drawer.right
 //            anchors.right: parent.anchors.right
 
             contentItem: Text {
