@@ -3,34 +3,81 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
 import Calculator.Enums 1.0
+import QtQuick.Controls.Material 2.15
 
-Window {
+ApplicationWindow {
     id: window
-    width: 640
-    height: 480
+    width: 480
+    height: 640
     visible: true
-    contentOrientation: Qt.PortraitOrientation/*LandscapeOrientation*/
+    contentOrientation: Qt.PortraitOrientation //LandscapeOrientation
     flags: Qt.Window
     modality: Qt.ApplicationModal
     title: qsTr("Hello World")
+    Material.theme: control.position < 1 ? Material.Light : Material.Dark
 
     Drawer {
         id: drawer
-        width: 0.33 * window.width
+        width: 0.50 * window.width
         height: window.height
 
         Label {
             id: content
 
-            text: "Copyright © 2013 by Jarmo Vuorinen\n" /*All rights reserved.\n*/
+            text: "Copyright © 2023 by Jarmo Vuorinen\n" //All rights reserved.\n
             font.pixelSize: 12
             anchors.fill: parent
-            verticalAlignment: Label.AlignBottom/*AlignVCenter*/
+            verticalAlignment: Label.AlignBottom //AlignVCenter
             horizontalAlignment: Label.AlignHCenter
 
 //            transform: Translate {
-//                x: drawer.position * content.width * 0.33
+//            x: drawer.position * content.width * 0.33
 //            }
+        }
+
+        SwitchDelegate {
+            id: control;
+            text: qsTr("Dark Theme")
+            checked: false
+
+//            anchors.right: parent.anchors.right
+
+            contentItem: Text {
+                rightPadding: control.indicator.width + control.spacing
+                text: control.text
+                font: control.font
+                opacity: enabled ? 1.0 : 0.3
+                color: control.down ? "#17a81a" : "#21be2b"
+                elide: Text.ElideRight
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: SwitchDelegate.left
+            }
+
+            indicator: Rectangle {
+                implicitWidth: 48
+                implicitHeight: 26
+                x: control.width - width - control.rightPadding
+                y: parent.height / 2 - height / 2
+                radius: 13
+                color: control.checked ? "#17a81a" : "transparent"
+                border.color: control.checked ? "#17a81a" : "#cccccc"
+
+                Rectangle {
+                    x: control.checked ? parent.width - width : 0
+                    width: 26
+                    height: 26
+                    radius: 13
+                    color: control.down ? "#cccccc" : "#ffffff"
+                    border.color: control.checked ? (control.down ? "#17a81a" : "#21be2b") : "#999999"
+                }
+            }
+
+            background: Rectangle {
+                implicitWidth: 100
+                implicitHeight: 40
+                visible: control.down || control.highlighted
+                color: control.down ? "#bdbebf" : "#eeeeee"
+            }
         }
     }
 
