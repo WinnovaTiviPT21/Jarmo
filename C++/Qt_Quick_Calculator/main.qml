@@ -9,29 +9,28 @@ Window {
     width: 640
     height: 480
     visible: true
-    contentOrientation: Qt.LandscapeOrientation
+    contentOrientation: Qt.PortraitOrientation/*LandscapeOrientation*/
     flags: Qt.Window
     modality: Qt.ApplicationModal
-    property alias windowWidth: window.width
     title: qsTr("Hello World")
 
     Drawer {
         id: drawer
-        width: 0.66 * window.width
+        width: 0.33 * window.width
         height: window.height
 
         Label {
             id: content
 
-            text: "Hello World"
-            font.pixelSize: 96
+            text: "Copyright © 2013 by Jarmo Vuorinen\n" /*All rights reserved.\n*/
+            font.pixelSize: 12
             anchors.fill: parent
-            verticalAlignment: Label.AlignVCenter
+            verticalAlignment: Label.AlignBottom/*AlignVCenter*/
             horizontalAlignment: Label.AlignHCenter
 
-            transform: Translate {
-                x: drawer.position * content.width * 0.33
-            }
+//            transform: Translate {
+//                x: drawer.position * content.width * 0.33
+//            }
         }
     }
 
