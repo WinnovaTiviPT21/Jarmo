@@ -16,4 +16,19 @@ Button {
     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     Layout.rowSpan: 1
     Layout.fillHeight: true
+
+//    ScaleAnimator on scale {
+//            from: 0.5;
+//            to: 1;
+//            duration: 1000
+//    }
+
+//    transitions: [
+//            Transition {
+//                //...
+//            },
+//            Transition {
+//                //...
+//            }
+//        ]
 }

@@ -10,10 +10,10 @@ ApplicationWindow {
     width: 480
     height: 640
     visible: true
-    contentOrientation: Qt.PortraitOrientation //LandscapeOrientation
+    contentOrientation: Qt.PortraitOrientation
     flags: Qt.Window
     modality: Qt.ApplicationModal
-    title: qsTr("Hello World")
+    title: qsTr("Paska laskin")
     Material.theme: control.position < 1 ? Material.Light : Material.Dark
 
     Drawer {
@@ -23,61 +23,24 @@ ApplicationWindow {
 
         Label {
             id: content
-            text: "Copyright © 2023 by Jarmo Vuorinen\n" //All rights reserved.\n
+            text: "Copyright © 2023 by Jarmo Vuorinen" // \xa9 All rights reserved.\n
             font.pixelSize: 12
-            anchors.fill: parent
-            verticalAlignment: Label.AlignBottom //AlignVCenter
-            horizontalAlignment: Label.AlignHCenter
+            anchors.margins: 12
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
 
-//            transform: Translate {
-//            x: drawer.position * content.width * 0.33
-//            }
+            // transform: Translate {
+            // x: drawer.position * content.width * 0.33
+            // }
         }
 
-        SwitchDelegate {
-            id: control;
-            text: qsTr("Dark Theme")
+        Switch {
+            id: control
+            anchors.right: parent.right
+            anchors.top: parent.top
+            // anchors.margins: 10
+            text: "Dark theme"
             checked: false
-
-//            x: anchors.drawer.right
-//            anchors.right: parent.anchors.right
-
-            contentItem: Text {
-                rightPadding: control.indicator.width + control.spacing
-                text: control.text
-                font: control.font
-                opacity: enabled ? 1.0 : 0.3
-                color: control.down ? "#17a81a" : "#21be2b"
-                elide: Text.ElideRight
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: SwitchDelegate.left
-            }
-
-            indicator: Rectangle {
-                implicitWidth: 48
-                implicitHeight: 26
-                x: control.width - width - control.rightPadding
-                y: parent.height / 2 - height / 2
-                radius: 13
-                color: control.checked ? "#17a81a" : "transparent"
-                border.color: control.checked ? "#17a81a" : "#cccccc"
-
-                Rectangle {
-                    x: control.checked ? parent.width - width : 0
-                    width: 26
-                    height: 26
-                    radius: 13
-                    color: control.down ? "#cccccc" : "#ffffff"
-                    border.color: control.checked ? (control.down ? "#17a81a" : "#21be2b") : "#999999"
-                }
-            }
-
-            background: Rectangle {
-                implicitWidth: 100
-                implicitHeight: 40
-                visible: control.down || control.highlighted
-                color: control.down ? "#bdbebf" : "#eeeeee"
-            }
         }
     }
 
@@ -94,6 +57,7 @@ ApplicationWindow {
 
         TextField {
             id: textField
+            layer.enabled: false
             font.pointSize: 18
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.margins: 0
@@ -104,7 +68,7 @@ ApplicationWindow {
             Layout.rowSpan: 1
             Layout.fillHeight: true
             Layout.fillWidth: true
-            placeholderText: qsTr("Text Field")
+            placeholderText: qsTr("Hello World")
             text: calculator.display
         }
 
@@ -276,3 +240,9 @@ ApplicationWindow {
 
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/
