@@ -44,6 +44,17 @@ ApplicationWindow {
         }
     }
 
+//    Image{
+//        anchors.fill: parent
+//        source: "Tausta1.png"
+//        clip: false
+//    }
+//    background: Image {
+//        anchors.fill: parent
+//        source: "Tausta1.png"
+//        clip: true
+//    }
+
     GridLayout {
         id: gridLayout
         anchors.left: parent.left
@@ -58,7 +69,7 @@ ApplicationWindow {
         TextField {
             id: textField
             layer.enabled: false
-            font.pointSize: 18
+            font.pointSize: 36
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.margins: 0
             Layout.rightMargin: 5
@@ -66,7 +77,9 @@ ApplicationWindow {
             Layout.topMargin: 5
             Layout.columnSpan: 6
             Layout.rowSpan: 1
-            Layout.fillHeight: true
+            //Layout.fillHeight: true
+            //height: 100
+            Layout.minimumHeight: 50
             Layout.fillWidth: true
             placeholderText: qsTr("Hello World")
             text: calculator.display
@@ -236,8 +249,6 @@ ApplicationWindow {
             text: qsTr("=")
             onClicked: calculator.equalClicked()
         }
-
-
     }
 }
 

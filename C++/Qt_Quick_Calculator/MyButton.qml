@@ -18,6 +18,11 @@ Button {
     Layout.rowSpan: 1
     Layout.fillHeight: true
 
+    background: Image {
+        anchors.fill: parent
+        source: "Button.png"
+    }
+
     // näppäimien animaatio
     onClicked: {
         anim.running = true
@@ -39,4 +44,7 @@ Button {
             duration: 100
         }
     }
+
+
+
 }
