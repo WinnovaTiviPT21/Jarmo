@@ -18,12 +18,9 @@ Button {
     Layout.rowSpan: 1
     Layout.fillHeight: true
 
-    MouseArea {
-        id: myMouse
-        anchors.fill: button
-        onClicked: {
-            anim.running = true
-        }
+    // näppäimien animaatio
+    onClicked: {
+        anim.running = true
     }
     SequentialAnimation{
         id: anim
@@ -31,15 +28,15 @@ Button {
             target: button
             properties: "scale"
             from: 1.0
-            to: 1.2
-            duration: 200
+            to: 0.8
+            duration: 100
         }
         NumberAnimation {
             target: button
             properties: "scale"
-            from: 1.2
+            from: 0.8
             to: 1.0
-            duration: 200
+            duration: 100
         }
     }
 }
