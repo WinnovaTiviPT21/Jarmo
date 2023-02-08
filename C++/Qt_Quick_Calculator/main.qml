@@ -77,7 +77,7 @@ ApplicationWindow {
             text: qsTr("Backspace")
             Layout.columnSpan: 2
             onClicked: calculator.backspaceClicked()
-        }
+            }
 
         MyButton {
             id: clear

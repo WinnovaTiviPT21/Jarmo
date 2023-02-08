@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
 
 Button {
+    id: button
     visible: true
     highlighted: false
     font.bold: false
@@ -17,18 +18,28 @@ Button {
     Layout.rowSpan: 1
     Layout.fillHeight: true
 
-//    ScaleAnimator on scale {
-//            from: 0.5;
-//            to: 1;
-//            duration: 1000
-//    }
-
-//    transitions: [
-//            Transition {
-//                //...
-//            },
-//            Transition {
-//                //...
-//            }
-//        ]
+    MouseArea {
+        id: myMouse
+        anchors.fill: button
+        onClicked: {
+            anim.running = true
+        }
+    }
+    SequentialAnimation{
+        id: anim
+        NumberAnimation {
+            target: button
+            properties: "scale"
+            from: 1.0
+            to: 1.2
+            duration: 200
+        }
+        NumberAnimation {
+            target: button
+            properties: "scale"
+            from: 1.2
+            to: 1.0
+            duration: 200
+        }
+    }
 }
