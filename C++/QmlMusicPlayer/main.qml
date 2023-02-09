@@ -3,25 +3,14 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
 import QtQuick.Controls.Material 2.15
-import QtMultimedia 5.15
 
 /*Application*/Window {
     id: window
     width: 480
     height: 640
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Paska soitin")
     Material.theme: control.position < 1 ? Material.Light : Material.Dark
-
-    MediaPlayer {
-        id: mediaPlayer
-
-        function updateMetadata() {
-                   metadataInfo.clear();
-                   metadataInfo.read(mediaPlayer.metaData);
-                   metadataInfo.read(mediaPlayer.audioTracks[mediaPlayer.activeAudioTrack]);
-               }
-    }
 
     Drawer {
         id: drawer
@@ -70,6 +59,7 @@ import QtMultimedia 5.15
             Layout.columnSpan: 5
             Layout.rowSpan: 1
             placeholderText: qsTr("Hello World")
+            text: mediaplayer.display
         }
 
         ScrollView {
@@ -113,14 +103,15 @@ import QtMultimedia 5.15
         }
 
         RoundButton {
-            id: roundButton7
-            text: "+"
+            id: play
+            text: "Play"
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.fillWidth: false
             Layout.fillHeight: false
+            onClicked: mediaplayer.playClicked()
         }
 
-        RoundButton {
+               RoundButton {
             id: roundButton8
             text: "+"
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop

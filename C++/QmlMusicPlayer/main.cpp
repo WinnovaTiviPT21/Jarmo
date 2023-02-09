@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
+#include "mediaplayer.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,6 +21,10 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+
+    MediaPlayer mediaplayer;
+    qmlRegisterUncreatableType<MediaPlayer>("MediaPlayer.Enums", 1, 0, "MediaPlayer", "Cannot create type MediaPlayer in QML");
+    engine.rootContext()->setContextProperty("mediaplayer", &mediaplayer);
 
     return app.exec();
 }
