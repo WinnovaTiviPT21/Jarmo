@@ -66,6 +66,7 @@ ApplicationWindow {
         rows: 6
         columns: 6
 
+        // Näyttö
         TextField {
             id: textField
             layer.enabled: false
@@ -85,6 +86,7 @@ ApplicationWindow {
             text: calculator.display
         }
 
+        // Näppäimet
         MyButton {
             id: backspace
             text: qsTr("Backspace")

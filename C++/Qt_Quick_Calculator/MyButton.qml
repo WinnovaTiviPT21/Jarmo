@@ -18,6 +18,7 @@ Button {
     Layout.rowSpan: 1
     Layout.fillHeight: true
 
+    // Näppäin kuvake
     background: Image {
         anchors.fill: parent
         source: "Button.png"
@@ -44,7 +45,4 @@ Button {
             duration: 100
         }
     }
-
-
-
 }
