@@ -53,7 +53,6 @@
 #include <QtMath>
 
 
-
 Calculator::Calculator()
     : sumInMemory(0.0), sumSoFar(0.0)
     , factorSoFar(0.0), waitingForOperand(true)

@@ -3,36 +3,57 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
 import Calculator.Enums 1.0
+import QtQuick.Controls.Material 2.15
 
-Window {
+ApplicationWindow {
     id: window
-    width: 640
-    height: 480
+    width: 480
+    height: 640
     visible: true
-    contentOrientation: Qt.PortraitOrientation/*LandscapeOrientation*/
+    contentOrientation: Qt.PortraitOrientation
     flags: Qt.Window
     modality: Qt.ApplicationModal
-    title: qsTr("Hello World")
+    title: qsTr("Paska laskin")
+    Material.theme: control.position < 1 ? Material.Light : Material.Dark
 
     Drawer {
         id: drawer
-        width: 0.33 * window.width
+        width: 0.50 * window.width
         height: window.height
 
         Label {
             id: content
-
-            text: "Copyright © 2013 by Jarmo Vuorinen\n" /*All rights reserved.\n*/
+            text: "Copyright © 2023 by Jarmo Vuorinen" // \xa9 All rights reserved.\n
             font.pixelSize: 12
-            anchors.fill: parent
-            verticalAlignment: Label.AlignBottom/*AlignVCenter*/
-            horizontalAlignment: Label.AlignHCenter
+            anchors.margins: 12
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
 
-//            transform: Translate {
-//                x: drawer.position * content.width * 0.33
-//            }
+            // transform: Translate {
+            // x: drawer.position * content.width * 0.33
+            // }
+        }
+
+        Switch {
+            id: control
+            anchors.right: parent.right
+            anchors.top: parent.top
+            // anchors.margins: 10
+            text: "Dark theme"
+            checked: false
         }
     }
+
+//    Image{
+//        anchors.fill: parent
+//        source: "Tausta1.png"
+//        clip: false
+//    }
+//    background: Image {
+//        anchors.fill: parent
+//        source: "Tausta1.png"
+//        clip: true
+//    }
 
     GridLayout {
         id: gridLayout
@@ -45,9 +66,11 @@ Window {
         rows: 6
         columns: 6
 
+        // Näyttö
         TextField {
             id: textField
-            font.pointSize: 18
+            layer.enabled: false
+            font.pointSize: 48
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.margins: 0
             Layout.rightMargin: 5
@@ -55,18 +78,21 @@ Window {
             Layout.topMargin: 5
             Layout.columnSpan: 6
             Layout.rowSpan: 1
-            Layout.fillHeight: true
+            //Layout.fillHeight: true
+            //height: 100
+            Layout.minimumHeight: 150
             Layout.fillWidth: true
-            placeholderText: qsTr("Text Field")
+            placeholderText: qsTr("Hello World")
             text: calculator.display
         }
 
+        // Näppäimet
         MyButton {
             id: backspace
             text: qsTr("Backspace")
             Layout.columnSpan: 2
             onClicked: calculator.backspaceClicked()
-        }
+            }
 
         MyButton {
             id: clear
@@ -225,7 +251,7 @@ Window {
             text: qsTr("=")
             onClicked: calculator.equalClicked()
         }
-
-
     }
 }
+
+
