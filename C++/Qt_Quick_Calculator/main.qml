@@ -70,7 +70,7 @@ ApplicationWindow {
         TextField {
             id: textField
             layer.enabled: false
-            font.pointSize: 36
+            font.pointSize: 48
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.margins: 0
             Layout.rightMargin: 5
@@ -80,7 +80,7 @@ ApplicationWindow {
             Layout.rowSpan: 1
             //Layout.fillHeight: true
             //height: 100
-            Layout.minimumHeight: 50
+            Layout.minimumHeight: 150
             Layout.fillWidth: true
             placeholderText: qsTr("Hello World")
             text: calculator.display
