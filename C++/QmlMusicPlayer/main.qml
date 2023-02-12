@@ -35,6 +35,48 @@ import QtQuick.Controls.Material 2.15
         }
     }
 
+//    Slider {
+//        id: slider
+//        x: 62
+//        y: 311
+//        value: 0.5
+//    }
+    Slider {
+                id: slider
+                x: 140
+                y: 315
+                from: fromValue
+                to: toValue
+                stepSize: 0.01
+                Layout.minimumWidth: 200
+                Layout.fillWidth: true
+                background: Rectangle {
+                    x: slider.leftPadding
+                    y: slider.topPadding + slider.availableHeight / 2 - height / 2
+                    implicitWidth: 200
+                    implicitHeight: 2
+                    width: slider.availableWidth
+                    height: implicitHeight
+                    color: "#606060"
+                    Rectangle {
+                        width: slider.visualPosition * parent.width
+                        height: parent.height
+                        color: "#41cd52"
+                    }
+                }
+                handle: Rectangle {
+                    x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width)
+                    y: slider.topPadding + slider.availableHeight / 2 - height / 2
+                    implicitWidth: 14
+                    implicitHeight: 14
+                    radius: width/2
+                    color: slider.pressed ? "#ffffff" : "#d0d0d0"
+                    border.color: "#d0d0d0"
+                }
+            }
+
+
+
     GridLayout {
         id: gridLayout
         anchors.left: parent.left
@@ -95,11 +137,12 @@ import QtQuick.Controls.Material 2.15
         }
 
         RoundButton {
-            id: roundButton6
-            text: "+"
+            id: pause
+            text: "Pause"
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.fillWidth: false
             Layout.fillHeight: false
+            onClicked:  mediaplayer.pauseClicked()
         }
 
         RoundButton {
@@ -111,12 +154,13 @@ import QtQuick.Controls.Material 2.15
             onClicked: mediaplayer.playClicked()
         }
 
-               RoundButton {
-            id: roundButton8
-            text: "+"
+        RoundButton {
+            id: stop
+            text: "Stop"
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.fillWidth: false
             Layout.fillHeight: false
+            onClicked: mediaplayer.stopClicked()
         }
 
         RoundButton {
@@ -127,6 +171,7 @@ import QtQuick.Controls.Material 2.15
             Layout.fillHeight: false
         }
     }
+
 }
 
 

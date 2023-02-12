@@ -14,6 +14,7 @@ public:
 
     enum Enum_Operations {
         Error,
+        Flag,
         MediaStatus,
         State
     };
@@ -21,8 +22,8 @@ public:
 
 public slots:
     void playClicked();
-//    void pauseClicked();
-//    void stopClicked();
+    void pauseClicked();
+    void stopClicked();
 //    void nextClicked();
 //    void previousClicked();
 
@@ -33,7 +34,7 @@ signals:
      void displayChanged(QString);
 
 private:
-    QMediaPlayer m_mediaplayer;
+    QMediaPlayer m_player;
     QString m_display;
 };
 
