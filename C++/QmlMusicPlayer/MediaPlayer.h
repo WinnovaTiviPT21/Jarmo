@@ -24,11 +24,12 @@ public slots:
     void playClicked();
     void pauseClicked();
     void stopClicked();
-//    void nextClicked();
-//    void previousClicked();
+    //void nextClicked();
+    //void previousClicked();
+    void resumeClicked();
 
     QString display();
-    // QMediaPlayer& mediaplayer();
+    //QMediaPlayer& mediaplayer();
 
 signals:
      void displayChanged(QString);

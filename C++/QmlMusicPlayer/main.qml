@@ -41,6 +41,7 @@ import QtQuick.Controls.Material 2.15
 //        y: 311
 //        value: 0.5
 //    }
+
     Slider {
                 id: slider
                 x: 140
@@ -74,8 +75,6 @@ import QtQuick.Controls.Material 2.15
                     border.color: "#d0d0d0"
                 }
             }
-
-
 
     GridLayout {
         id: gridLayout
@@ -171,7 +170,6 @@ import QtQuick.Controls.Material 2.15
             Layout.fillHeight: false
         }
     }
-
 }
 
 
