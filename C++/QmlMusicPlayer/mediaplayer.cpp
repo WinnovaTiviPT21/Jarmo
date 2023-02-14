@@ -3,12 +3,33 @@
 
 bool paused;
 
-//std::string currentMedia();
-
 MediaPlayer::MediaPlayer() {}
 
-QString MediaPlayer::display() {
-    return m_display;
+QString MediaPlayer::getMedia() {
+    return m_media;
+}
+
+QString MediaPlayer::getDuration(){
+//    qint64 x = m_player.duration();
+//    m_duration = QString::number(x);
+    return m_duration;
+}
+
+float MediaPlayer::getPosition() {
+    return m_position;
+}
+
+float MediaPlayer::setPosition(float&) {
+    return m_position;
+}
+
+float MediaPlayer::getVolume() {
+    return m_volume;
+}
+
+float MediaPlayer::setVolume(float& volume) {
+    m_player.setVolume(volume);
+    return m_volume;
 }
 
 void MediaPlayer::playClicked() {
@@ -23,11 +44,13 @@ void MediaPlayer::playClicked() {
         paused = false;
     }
 
-    //m_player.setVolume(50);
+    m_player.setVolume(20);
 
-    //m_display += QString::number(digitValue);
+    m_player.currentMedia();
 
-    emit displayChanged(m_display);
+    qint64 x = m_player.duration();
+    m_duration = QString::number(x);
+    emit durationChanged(m_duration);
 }
 
 void MediaPlayer::pauseClicked() {
@@ -39,6 +62,5 @@ void MediaPlayer::pauseClicked() {
 
 void MediaPlayer::stopClicked() {
     m_player.stop();
-    paused = false;
+    paused = true;
 }
-

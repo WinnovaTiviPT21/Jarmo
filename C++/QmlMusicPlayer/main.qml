@@ -35,46 +35,39 @@ import QtQuick.Controls.Material 2.15
         }
     }
 
-//    Slider {
-//        id: slider
-//        x: 62
-//        y: 311
-//        value: 0.5
-//    }
-
-    Slider {
-                id: slider
-                x: 140
-                y: 315
-                from: fromValue
-                to: toValue
-                stepSize: 0.01
-                Layout.minimumWidth: 200
-                Layout.fillWidth: true
-                background: Rectangle {
-                    x: slider.leftPadding
-                    y: slider.topPadding + slider.availableHeight / 2 - height / 2
-                    implicitWidth: 200
-                    implicitHeight: 2
-                    width: slider.availableWidth
-                    height: implicitHeight
-                    color: "#606060"
-                    Rectangle {
-                        width: slider.visualPosition * parent.width
-                        height: parent.height
-                        color: "#41cd52"
-                    }
-                }
-                handle: Rectangle {
-                    x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width)
-                    y: slider.topPadding + slider.availableHeight / 2 - height / 2
-                    implicitWidth: 14
-                    implicitHeight: 14
-                    radius: width/2
-                    color: slider.pressed ? "#ffffff" : "#d0d0d0"
-                    border.color: "#d0d0d0"
-                }
-            }
+    //    Slider {
+    //        id: slider
+    //        x: 140
+    //        y: 315
+    //        from: fromValue
+    //        to: toValue
+    //        stepSize: 0.01
+    //        Layout.minimumWidth: 200
+    //        Layout.fillWidth: true
+    //        background: Rectangle {
+    //            x: slider.leftPadding
+    //            y: slider.topPadding + slider.availableHeight / 2 - height / 2
+    //            implicitWidth: 200
+    //            implicitHeight: 2
+    //            width: slider.availableWidth
+    //            height: implicitHeight
+    //            color: "#606060"
+    //            Rectangle {
+    //                width: slider.visualPosition * parent.width
+    //                height: parent.height
+    //                color: "#41cd52"
+    //            }
+    //        }
+    //        handle: Rectangle {
+    //            x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width)
+    //            y: slider.topPadding + slider.availableHeight / 2 - height / 2
+    //            implicitWidth: 14
+    //            implicitHeight: 14
+    //            radius: width/2
+    //            color: slider.pressed ? "#ffffff" : "#d0d0d0"
+    //            border.color: "#d0d0d0"
+    //        }
+    //    }
 
     GridLayout {
         id: gridLayout
@@ -82,55 +75,54 @@ import QtQuick.Controls.Material 2.15
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 10
-        anchors.topMargin: 0
-        anchors.rightMargin: 0
-        anchors.leftMargin: 0
-        columns: 5
-        rows: 5
+        columnSpacing: 5
+        anchors.bottomMargin: 20
+        anchors.topMargin: 20
+        anchors.rightMargin: 20
+        anchors.leftMargin: 20
+        columns: 9
+        rows: 4
 
         TextField {
             id: textField
             height: 40
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-            Layout.margins: 10
+            Layout.margins: 0
             Layout.fillHeight: false
             Layout.fillWidth: true
             Layout.minimumHeight: 100
-            Layout.columnSpan: 5
+            Layout.columnSpan: 9
             Layout.rowSpan: 1
             placeholderText: qsTr("Hello World")
-            text: mediaplayer.display
+            text: mediaplayer.media
         }
 
-        ScrollView {
-            id: scrollView
+
+        Item {
+            id: item3
             width: 200
             height: 200
-            Layout.bottomMargin: 0
-            Layout.topMargin: 0
-            Layout.margins: 10
+            transformOrigin: Item.Center
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.columnSpan: 5
+            Layout.columnSpan: 9
         }
 
-        ProgressBar {
-            id: progressBar
-            Layout.rightMargin: 25
-            Layout.leftMargin: 25
-            Layout.margins: 10
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            Layout.fillHeight: false
+        Item {
+            id: item1
+            width: 200
+            height: 200
+            Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
+            Layout.rowSpan: 1
+            Layout.columnSpan: 2
+            Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.columnSpan: 5
-            value: 0.5
         }
 
         RoundButton {
             id: roundButton5
-            text: "+"
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+            text: "<<"
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.fillWidth: false
             Layout.fillHeight: false
         }
@@ -138,7 +130,7 @@ import QtQuick.Controls.Material 2.15
         RoundButton {
             id: pause
             text: "Pause"
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.fillWidth: false
             Layout.fillHeight: false
             onClicked:  mediaplayer.pauseClicked()
@@ -147,7 +139,7 @@ import QtQuick.Controls.Material 2.15
         RoundButton {
             id: play
             text: "Play"
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.fillWidth: false
             Layout.fillHeight: false
             onClicked: mediaplayer.playClicked()
@@ -156,7 +148,7 @@ import QtQuick.Controls.Material 2.15
         RoundButton {
             id: stop
             text: "Stop"
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.fillWidth: false
             Layout.fillHeight: false
             onClicked: mediaplayer.stopClicked()
@@ -164,12 +156,59 @@ import QtQuick.Controls.Material 2.15
 
         RoundButton {
             id: roundButton9
-            text: "+"
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+            text: ">>"
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.fillWidth: false
             Layout.fillHeight: false
         }
+
+        Slider {
+            id: slider
+            width: 200
+            height: 66
+            bottomPadding: 5
+            padding: 0
+            Layout.leftMargin: 0
+            Layout.rightMargin: 0
+            Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
+            Layout.columnSpan: 2
+            smooth: false
+            antialiasing: false
+            to: 100
+            Layout.fillWidth: true
+            value: mediaplayer.volume
+
+            Connections {
+                target: slider
+                onMoved: {
+                    mediaplayer.volume = slider.value;
+                    console.log(slider.value);
+                }
+            }
+        }
+
+        ProgressBar {
+            id: progressBar
+            Layout.topMargin: 10
+            topPadding: 0
+            Layout.rowSpan: 1
+            Layout.rightMargin: 0
+            Layout.leftMargin: 0
+            Layout.margins: 0
+            Layout.alignment: Qt.AlignRight | Qt.AlignBottom
+            Layout.fillHeight: false
+            Layout.fillWidth: true
+            Layout.columnSpan: 9
+            //value: mediaplayer.duration
+        }
+    }
+
+    Label {
+        id: label
+        x: 60
+        y: 157
+        width: 234
+        height: 137
+        text: mediaplayer.duration
     }
 }
-
-
