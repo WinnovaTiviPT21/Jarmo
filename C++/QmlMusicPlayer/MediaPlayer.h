@@ -3,6 +3,8 @@
 
 #include <QMediaPlayer>
 #include <QObject>
+#include <QFileSelector>
+
 
 class MediaPlayer : public QObject
 {
@@ -13,50 +15,41 @@ class MediaPlayer : public QObject
     Q_PROPERTY(QString media READ getMedia NOTIFY mediaChanged)
     Q_PROPERTY(QString duration READ getDuration NOTIFY durationChanged)
     Q_PROPERTY(float position READ getPosition WRITE setPosition NOTIFY positionChanged)
-    Q_PROPERTY(float volume READ getVolume WRITE setVolume NOTIFY stateChanged)
+    Q_PROPERTY(float volume READ getVolume WRITE setVolume NOTIFY volumeChanged)
+
 
 public:
     MediaPlayer(); // standard Qt constructor with parent for memory management
 
 //    std::vector<QUrl>& getFiles();
 
-//    enum Enum_Operations {
-//        Error,
-//        Flag,
-//        MediaStatus,
-//        State
-//    };
-//    // enables enum introspections
-//    Q_ENUM(Enum_Operations)
+
 
 public slots: // slots can be connected to signals, or called
-    //void open();
-
     void playClicked();
     void pauseClicked();
     void stopClicked();
-    //void nextClicked();
-    //void previousClicked();
+    void openClicked();
 
     QString getState();
     QString getMedia();
     QString getDuration();
     float getPosition();
-    float setPosition(float&);
     float getVolume();
 
+    float setPosition(float&);
     float setVolume(float&);
 
-    //void selectFile();
-    //void updateState();
-    //QMediaPlayer& player();
+    void updateState();
+    void updateDuration(qint64);
+    void updatePosition(qint64);
 
 signals: // signals can be emitted
-    void stateChanged(QString);
-    void mediaChanged(QString);
-    void durationChanged(QString);
-    void positionChanged(float);
-    //void stateChanged(float);
+    void stateChanged();
+    void mediaChanged();
+    void durationChanged();
+    void positionChanged();
+    void volumeChanged();
 
 private:
     // data members
@@ -65,8 +58,8 @@ private:
     QString m_state;
     QString m_media;
     QString m_duration;
-    float m_position;
-    float m_volume;
+    float m_position = 0;
+    float m_volume = 50;
 };
 
 

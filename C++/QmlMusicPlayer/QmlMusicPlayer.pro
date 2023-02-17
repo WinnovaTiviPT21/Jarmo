@@ -1,6 +1,7 @@
 QT += quick \
       multimedia \
-      quickcontrols2
+      quickcontrols2 \
+      core
 #QT += quick
 #QT += multimedia
 #QT += quickcontrols2

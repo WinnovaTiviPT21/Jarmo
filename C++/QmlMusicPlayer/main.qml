@@ -84,22 +84,22 @@ import QtQuick.Controls.Material 2.15
         rows: 4
 
 
-//        MenuBar {
-//            id: menuBar
-//            anchors.left: parent.left
-//            anchors.right: parent.right
+        //        MenuBar {
+        //            id: menuBar
+        //            anchors.left: parent.left
+        //            anchors.right: parent.right
 
-//            Menu {
-//                title: qsTr("&File")
-//                Action {
-//                    text: qsTr("&Open")
-//                    onTriggered: fileDialog.open()
-//                }
-//                Action {
-//                    text: qsTr("&Url")
-//                }
-//            }
-//        }
+        //            Menu {
+        //                title: qsTr("&File")
+        //                Action {
+        //                    text: qsTr("&Open")
+        //                    onTriggered: fileDialog.open()
+        //                }
+        //                Action {
+        //                    text: qsTr("&Url")
+        //                }
+        //            }
+        //        }
 
 
         TextField {
@@ -167,6 +167,7 @@ import QtQuick.Controls.Material 2.15
             Layout.rowSpan: 1
             Layout.columnSpan: 1
             Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
+            onClicked: mediaplayer.openClicked()
         }
 
         Item {
@@ -218,27 +219,27 @@ import QtQuick.Controls.Material 2.15
         }
 
 
-//        State {
-//            name: "playing"
-//            when: mediaPlayerState == MediaPlayer.PlayingState
-//            PropertyChanges { target: pause; visible: true}
-//            PropertyChanges { target: play; visible: false}
-//            PropertyChanges { target: stop; visible: true}
-//        }
-//        State {
-//            name: "stopped"
-//            when: mediaPlayerState == MediaPlayer.StoppedState
-//            PropertyChanges { target: pause; visible: false}
-//            PropertyChanges { target: play; visible: true}
-//            PropertyChanges { target: stop; visible: false}
-//        }
-//        State {
-//            name: "paused"
-//            when: mediaPlayerState == MediaPlayer.PausedState
-//            PropertyChanges { target: pause; visible: false}
-//            PropertyChanges { target: play; visible: true}
-//            PropertyChanges { target: stop; visible: true}
-//        }
+        //        State {
+        //            name: "playing"
+        //            when: mediaPlayerState == MediaPlayer.PlayingState
+        //            PropertyChanges { target: pause; visible: true}
+        //            PropertyChanges { target: play; visible: false}
+        //            PropertyChanges { target: stop; visible: true}
+        //        }
+        //        State {
+        //            name: "stopped"
+        //            when: mediaPlayerState == MediaPlayer.StoppedState
+        //            PropertyChanges { target: pause; visible: false}
+        //            PropertyChanges { target: play; visible: true}
+        //            PropertyChanges { target: stop; visible: false}
+        //        }
+        //        State {
+        //            name: "paused"
+        //            when: mediaPlayerState == MediaPlayer.PausedState
+        //            PropertyChanges { target: pause; visible: false}
+        //            PropertyChanges { target: play; visible: true}
+        //            PropertyChanges { target: stop; visible: true}
+        //        }
 
 
         RoundButton {
@@ -315,6 +316,8 @@ import QtQuick.Controls.Material 2.15
         ProgressBar {
             id: progressBar
             width: 600
+            from: 0
+            to: 100
             Layout.topMargin: 5
             topPadding: 0
             Layout.rowSpan: 1
@@ -325,7 +328,7 @@ import QtQuick.Controls.Material 2.15
             Layout.fillHeight: false
             Layout.fillWidth: true
             Layout.columnSpan: 8
-            //value: mediaplayer.duration
+            value: mediaplayer.position
         }
 
         Item {
@@ -337,18 +340,22 @@ import QtQuick.Controls.Material 2.15
         }
     }
 
-//    Label {
-//        id: label
-//        x: 20
-//        y: 125
-//        width: 234
-//        height: 137
-//        text: mediaplayer.duration
-//    }
+    Loader {
+        id: loader
+        x: 278
+        y: 367
+        width: 62
+        height: 53
+    }
+
+    //    Label {
+    //        id: label
+    //        x: 20
+    //        y: 125
+    //        width: 234
+    //        height: 137
+    //        text: mediaplayer.duration
+    //    }
 }
 
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:1.33}
-}
-##^##*/
+
