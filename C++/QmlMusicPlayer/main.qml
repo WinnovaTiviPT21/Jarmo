@@ -4,13 +4,36 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
 import QtQuick.Controls.Material 2.15
 
+import QtQuick.Dialogs 1.3
+
+
 /*Application*/Window {
     id: window
     width: 480
     height: 640
     visible: true
+    modality: Qt.ApplicationModal
     title: qsTr("Paska soitin")
     Material.theme: control.position < 1 ? Material.Light : Material.Dark
+
+
+    FileDialog {
+        id: fileDialog
+        title: "Please choose a file"
+        nameFilters: ["MP3 files (*.mp3)"]
+        folder: shortcuts.music
+        onAccepted: {
+            console.log("You chose: " + fileDialog.fileUrls)
+            mediaplayer.m_media = fileDialog.fileUrls
+            //Qt.quit()
+        }
+        onRejected: {
+            console.log("Canceled")
+            //Qt.quit()
+        }
+        Component.onCompleted: visible = false
+    }
+
 
     Drawer {
         id: drawer
@@ -69,6 +92,7 @@ import QtQuick.Controls.Material 2.15
     //        }
     //    }
 
+
     GridLayout {
         id: gridLayout
         anchors.left: parent.left
@@ -84,24 +108,34 @@ import QtQuick.Controls.Material 2.15
         rows: 4
 
 
-        //        MenuBar {
-        //            id: menuBar
-        //            anchors.left: parent.left
-        //            anchors.right: parent.right
+        // Menu
+        MenuBar {
+            id: menuBar
+            //id: fileOpener
+            anchors.left: parent.left
+            anchors.right: parent.right
+            Layout.topMargin: -16
+            Layout.leftMargin: 0
+            anchors.rightMargin: -16
+            anchors.leftMargin: -16
+            Layout.columnSpan: 11
+            leftPadding: 0
+            Layout.fillWidth: true
 
-        //            Menu {
-        //                title: qsTr("&File")
-        //                Action {
-        //                    text: qsTr("&Open")
-        //                    onTriggered: fileDialog.open()
-        //                }
-        //                Action {
-        //                    text: qsTr("&Url")
-        //                }
-        //            }
-        //        }
+            Menu {
+                title: qsTr("&File")
+                Action {
+                    text: qsTr("&Open")
+                    onTriggered: fileDialog.open()
+                }
+                Action {
+                    text: qsTr("&Url")
+                }
+            }
+        }
 
 
+        // Näyttö
         TextField {
             id: display
             height: 40
@@ -128,7 +162,6 @@ import QtQuick.Controls.Material 2.15
             Layout.fillWidth: true
             Layout.columnSpan: 11
         }
-
         Item {
             id: item7
             width: 200
@@ -138,7 +171,6 @@ import QtQuick.Controls.Material 2.15
             Layout.fillHeight: true
             Layout.fillWidth: true
         }
-
         Item {
             id: item8
             width: 200
@@ -147,7 +179,6 @@ import QtQuick.Controls.Material 2.15
             Layout.fillWidth: true
             Layout.columnSpan: 11
         }
-
         Item {
             id: item9
             width: 200
@@ -157,39 +188,29 @@ import QtQuick.Controls.Material 2.15
             Layout.columnSpan: 11
             Layout.fillHeight: true
         }
-
-        RoundButton {
-            id: open
-            text: "open"
-            checked: false
+        Item {
+            id: item4
+            width: 200
+            height: 40
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.fillHeight: false
-            Layout.fillWidth: false
-            Layout.rowSpan: 1
             Layout.columnSpan: 1
-            Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
-            onClicked: mediaplayer.openClicked()
+            Layout.preferredWidth: -1
         }
-
         Item {
             id: item1
             width: 200
             height: 40
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            Layout.columnSpan: 2
+            Layout.columnSpan: 3
             Layout.preferredWidth: -1
             Layout.fillHeight: false
             Layout.fillWidth: true
         }
 
-        RoundButton {
-            id: previous
-            text: "<<"
-            Layout.columnSpan: 1
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            Layout.fillWidth: false
-            Layout.fillHeight: false
-        }
 
+        // Pause
         RoundButton {
             id: pause
             text: "Pause"
@@ -199,6 +220,7 @@ import QtQuick.Controls.Material 2.15
             onClicked:  mediaplayer.pauseClicked()
         }
 
+        // Play
         RoundButton {
             id: play
             text: "Play"
@@ -208,7 +230,7 @@ import QtQuick.Controls.Material 2.15
             onClicked: mediaplayer.playClicked()
         }
 
-
+        // Stop
         RoundButton {
             id: stop
             text: "Stop"
@@ -242,21 +264,15 @@ import QtQuick.Controls.Material 2.15
         //        }
 
 
-        RoundButton {
-            id: next
-            text: ">>"
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            Layout.fillWidth: false
-            Layout.fillHeight: false
-        }
-
         Item {
             id: item2
             width: 200
             height: 40
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            Layout.columnSpan: 1
             Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+            Layout.fillHeight: false
+            Layout.columnSpan: 3
+            Layout.preferredWidth: -1
         }
 
         //äänenvoimakkuus
@@ -297,25 +313,9 @@ import QtQuick.Controls.Material 2.15
             }
         }
 
-        Item {
-            id: item4
-            width: 200
-            height: 40
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            Layout.fillWidth: true
-            Layout.columnSpan: 1
-        }
-
-        Item {
-            id: item5
-            width: 200
-            height: 6
-            Layout.fillWidth: true
-        }
-
         ProgressBar {
             id: progressBar
-            width: 600
+            width: 700
             from: 0
             to: 100
             Layout.topMargin: 5
@@ -327,35 +327,11 @@ import QtQuick.Controls.Material 2.15
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.fillHeight: false
             Layout.fillWidth: true
-            Layout.columnSpan: 8
+            Layout.columnSpan: 11
             value: mediaplayer.position
         }
-
-        Item {
-            id: item6
-            width: 200
-            height: 6
-            Layout.fillHeight: false
-            Layout.fillWidth: true
-        }
     }
 
-    Loader {
-        id: loader
-        x: 278
-        y: 367
-        width: 62
-        height: 53
-    }
-
-    //    Label {
-    //        id: label
-    //        x: 20
-    //        y: 125
-    //        width: 234
-    //        height: 137
-    //        text: mediaplayer.duration
-    //    }
 }
 
 

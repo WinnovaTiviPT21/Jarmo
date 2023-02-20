@@ -1,10 +1,10 @@
 QT += quick \
       multimedia \
       quickcontrols2 \
-      core
-#QT += quick
-#QT += multimedia
-#QT += quickcontrols2
+      core \
+      quickwidgets \
+
+
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

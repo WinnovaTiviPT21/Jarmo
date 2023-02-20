@@ -3,7 +3,9 @@
 
 #include <QMediaPlayer>
 #include <QObject>
-#include <QFileSelector>
+
+//#include <QFileSelector>
+//#include <QFileDialog>
 
 
 class MediaPlayer : public QObject
@@ -23,13 +25,10 @@ public:
 
 //    std::vector<QUrl>& getFiles();
 
-
-
 public slots: // slots can be connected to signals, or called
     void playClicked();
     void pauseClicked();
     void stopClicked();
-    void openClicked();
 
     QString getState();
     QString getMedia();
@@ -55,11 +54,14 @@ private:
     // data members
     QMediaPlayer m_player;
 
+    QString m_file;
+
     QString m_state;
     QString m_media;
     QString m_duration;
     float m_position = 0;
     float m_volume = 50;
+    QUrl m_getFiles;
 };
 
 
