@@ -22,11 +22,19 @@ class MediaPlayer : public QObject
 
 public:
     MediaPlayer(); // standard Qt constructor with parent for memory management
-
+    QMediaPlayer player;
 //    std::vector<QUrl>& getFiles();
 
 public slots: // slots can be connected to signals, or called
-    void playClicked();
+//    void playFile(const QUrl& fileUrl) {
+//            player.setMedia(fileUrl);
+//            player.play();
+//        }
+//    };
+    void selectedFile(const QUrl&);
+
+    //void playClicked();
+    void playClicked(const QUrl&);
     void pauseClicked();
     void stopClicked();
 
@@ -61,7 +69,7 @@ private:
     QString m_duration;
     float m_position = 0;
     float m_volume = 50;
-    QUrl m_getFiles;
+    QUrl m_selectedFile;
 };
 
 

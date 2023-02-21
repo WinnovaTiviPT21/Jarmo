@@ -24,12 +24,11 @@ import QtQuick.Dialogs 1.3
         folder: shortcuts.music
         onAccepted: {
             console.log("You chose: " + fileDialog.fileUrls)
-            mediaplayer.m_media = fileDialog.fileUrls
-            //Qt.quit()
+            mediaplayer.selectedFile(fileDialog.fileUrls[0]) // Lähetetään valitun tiedoston URL-osoite C++:lle
+//            mediaplayer.playClicked(fileDialog.fileUrls[0]) // Lähetetään valitun tiedoston URL-osoite C++:lle
         }
         onRejected: {
             console.log("Canceled")
-            //Qt.quit()
         }
         Component.onCompleted: visible = false
     }
@@ -111,7 +110,6 @@ import QtQuick.Dialogs 1.3
         // Menu
         MenuBar {
             id: menuBar
-            //id: fileOpener
             anchors.left: parent.left
             anchors.right: parent.right
             Layout.topMargin: -16
@@ -123,7 +121,7 @@ import QtQuick.Dialogs 1.3
             Layout.fillWidth: true
 
             Menu {
-                title: qsTr("&File")
+                title: qsTr("File")
                 Action {
                     text: qsTr("&Open")
                     onTriggered: fileDialog.open()
@@ -227,7 +225,7 @@ import QtQuick.Dialogs 1.3
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.fillWidth: false
             Layout.fillHeight: false
-            onClicked: mediaplayer.playClicked()
+            onClicked: mediaplayer.playClicked(fileDialog.fileUrl)
         }
 
         // Stop
@@ -282,8 +280,9 @@ import QtQuick.Dialogs 1.3
             height: 66
 
             visible: true
+            value: 50
             Layout.bottomMargin: 10
-            stepSize: 2
+            stepSize: 1
             Layout.topMargin: 20
             Layout.alignment: Qt.AlignRight | Qt.AlignBottom
             orientation: Qt.Vertical
@@ -301,7 +300,6 @@ import QtQuick.Dialogs 1.3
             antialiasing: false
             to: 100
             Layout.fillWidth: false
-            value: mediaplayer.volume
             wheelEnabled: true
 
             Connections {

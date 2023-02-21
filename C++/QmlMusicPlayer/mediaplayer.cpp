@@ -1,15 +1,20 @@
 #include <QMediaPlayer>
+#include "mediaplayer.h"
 
 //#include <QStandardPaths>
 //#include <QFileSelector>
 
-#include "mediaplayer.h"
+//#include <filesystem>
+//#include <iostream>
 
 
 MediaPlayer::MediaPlayer() {
     connect(&m_player, &QMediaPlayer::stateChanged, this, &MediaPlayer::updateState);
     connect(&m_player, &QMediaPlayer::durationChanged, this, &MediaPlayer::updateDuration);
     connect(&m_player, &QMediaPlayer::positionChanged, this, &MediaPlayer::updatePosition);
+
+//    connect(&m_player, &QMediaPlayer::mediaChanged, this, &MediaPlayer::updateMedia);
+
 
 //#ifdef  Q_OS_ANDROID
 //    QStringList files = {"/storage/emulated/0/Music"};
@@ -64,15 +69,15 @@ float MediaPlayer::setVolume(float& volume) {
 
 
 // update
+void MediaPlayer::updateState() {
+    emit stateChanged();
+}
+
 void MediaPlayer::updatePosition(qint64 p) {
     if (m_player.duration() != 0) {
         m_position = 100 * p / m_player.duration();
         emit positionChanged();
     }
-}
-
-void MediaPlayer::updateState() {
-    emit stateChanged();
 }
 
 void MediaPlayer::updateDuration(qint64) {
@@ -87,20 +92,42 @@ void MediaPlayer::updateDuration(qint64) {
 }
 
 
-
-void MediaPlayer::playClicked() {
-    if (m_player.state() == QMediaPlayer::StoppedState) {
-//        m_player.setMedia(QUrl::fromLocalFile("D:/Maahantuoja/Documents/GitHub/Jarmo/C++/QmlMusicPlayer/music/Testi.mp3"));
-        m_player.setMedia(QUrl(m_media));
-        m_player.play();
-    }
-    else if (m_player.state() == QMediaPlayer::PlayingState) {
-        m_player.pause();
-    }
-    else if (m_player.state() == QMediaPlayer::PausedState) {
-        m_player.play();
-    }
+void MediaPlayer::selectedFile(const QUrl&) {
+////        player.setMedia(fileUrl);
+////        player.play();
+////        emit stateChanged();
 }
+
+
+//void MediaPlayer::playClicked() {
+//    if (m_player.state() == QMediaPlayer::StoppedState) {
+////        m_player.setMedia(QUrl::fromLocalFile("D:/Maahantuoja/Documents/GitHub/Jarmo/C++/QmlMusicPlayer/music/Testi.mp3"));
+//        m_player.setMedia(QUrl(m_playFile));
+//        m_player.play();
+//    }
+//    else if (m_player.state() == QMediaPlayer::PlayingState) {
+//        m_player.pause();
+//    }
+//    else if (m_player.state() == QMediaPlayer::PausedState) {
+//        m_player.play();
+//    }
+//}
+
+void MediaPlayer::playClicked(const QUrl& fileUrl) {
+        if (m_player.state() == QMediaPlayer::StoppedState) {
+//            playFile(fileUrl);
+            m_player.setMedia(fileUrl);
+            m_player.play();
+//            emit stateChanged();
+
+        }
+        else if (m_player.state() == QMediaPlayer::PlayingState) {
+            m_player.pause();
+        }
+        else if (m_player.state() == QMediaPlayer::PausedState) {
+            m_player.play();
+        }
+    }
 
 void MediaPlayer::pauseClicked() {
         m_player.pause();
