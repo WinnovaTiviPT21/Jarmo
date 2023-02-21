@@ -83,7 +83,6 @@ void MediaPlayer::updateDuration(qint64) {
 }
 
 
-
 void MediaPlayer::playClicked(const QUrl& fileUrl) {
         if (m_player.state() == QMediaPlayer::StoppedState) {
             m_player.setMedia(fileUrl);

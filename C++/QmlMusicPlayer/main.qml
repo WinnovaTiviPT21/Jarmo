@@ -1,13 +1,15 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.11
 import QtQuick.Controls.Material 2.15
+//import QtQuick.Controls.Styles 1.4
+import QtQuick.Layouts 1.11
+
 
 import QtQuick.Dialogs 1.3
 
 
-/*Application*/Window {
+ApplicationWindow {
     id: window
     width: 480
     height: 640
@@ -26,6 +28,9 @@ import QtQuick.Dialogs 1.3
             console.log("You chose: " + fileDialog.fileUrls)
             mediaplayer.stopClicked()
             mediaplayer.playClicked(fileDialog.fileUrls[0]) // Lähetetään valitun tiedoston URL-osoiteen C++:lle
+            play.visible = false
+            stop.visible = true
+            pause.visible = true
         }
         onRejected: {
             console.log("Canceled")
@@ -94,6 +99,10 @@ import QtQuick.Dialogs 1.3
                 }
                 Action {
                     text: qsTr("&Url")
+                }
+                Action {
+                    text: qsTr("&Quit")
+                    onTriggered: Qt.quit()
                 }
             }
         }
@@ -175,57 +184,111 @@ import QtQuick.Dialogs 1.3
 
 
         // Pause
-        RoundButton {
+        Button {
             id: pause
-            text: "Pause"
+            //text: "Pause"
+            visible: false
+            Layout.rightMargin: -5
+            rightPadding: 0
+            leftPadding: 0
+            scale: 0.7
+            Layout.leftMargin: 0
+            transformOrigin: Item.BottomRight
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            Layout.fillWidth: false
-            Layout.fillHeight: false
-            onClicked:  mediaplayer.pauseClicked()
+
+            background: Image {
+                anchors.fill: parent
+                source: {
+                    if (control.checked == true){
+                        source: "images/darkPause.png"
+                    }
+                    else {
+                        source: "images/lightPause.png"
+                    }
+                }
+            }
+
+            onClicked: {
+                mediaplayer.pauseClicked()
+                play.transformOrigin = Item.BottomRight
+                play.Layout.rightMargin = -5
+                play.visible = true
+                stop.visible = true
+                pause.visible = false
+            }
         }
 
+
         // Play
-        RoundButton {
+        /*RoundButton*/
+        Button {
             id: play
-            text: "Play"
+            //text: "Play"
+            visible: true
+            Layout.rightMargin: 0
+            rightPadding: 0
+            leftPadding: 0
+            scale: 0.7
+            Layout.leftMargin: 0
+            transformOrigin: Item.Bottom
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            Layout.fillWidth: false
-            Layout.fillHeight: false
-            onClicked: mediaplayer.playClicked(fileDialog.fileUrl)
+
+            background: Image {
+                anchors.fill: parent
+                source: {
+                    if (control.checked == true){
+                        source: "images/darkPlay.png"
+                    }
+                    else {
+                        source: "images/lightPlay.png"
+                    }
+                }
+            }
+
+            onClicked: {
+                mediaplayer.playClicked(fileDialog.fileUrl)
+                play.Layout.rightMargin = 0
+                play.visible = false
+                stop.visible = true
+                pause.visible = true
+            }
         }
 
         // Stop
-        RoundButton {
+        Button {
             id: stop
-            text: "Stop"
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+            //text: "Stop"
+            visible: false
+            rightPadding: 0
+            leftPadding: 0
+            scale: 0.7
+            Layout.rightMargin: 0
+            Layout.leftMargin: 0
             Layout.fillWidth: false
-            Layout.fillHeight: false
-            onClicked: mediaplayer.stopClicked()
+            transformOrigin: Item.Bottom
+            bottomPadding: 6
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+
+            background: Image {
+                anchors.fill: parent
+                source: {
+                    if (control.checked == true){
+                        source: "images/darkStop.png"
+                    }
+                    else {
+                        source: "images/lightStop.png"
+                    }
+                }
+            }
+
+            onClicked: {
+                mediaplayer.stopClicked()
+                play.transformOrigin = Item.Bottom
+                play.visible = true
+                stop.visible = false
+                pause.visible = false
+            }
         }
-
-
-        //        State {
-        //            name: "playing"
-        //            when: mediaPlayerState == MediaPlayer.PlayingState
-        //            PropertyChanges { target: pause; visible: true}
-        //            PropertyChanges { target: play; visible: false}
-        //            PropertyChanges { target: stop; visible: true}
-        //        }
-        //        State {
-        //            name: "stopped"
-        //            when: mediaPlayerState == MediaPlayer.StoppedState
-        //            PropertyChanges { target: pause; visible: false}
-        //            PropertyChanges { target: play; visible: true}
-        //            PropertyChanges { target: stop; visible: false}
-        //        }
-        //        State {
-        //            name: "paused"
-        //            when: mediaPlayerState == MediaPlayer.PausedState
-        //            PropertyChanges { target: pause; visible: false}
-        //            PropertyChanges { target: play; visible: true}
-        //            PropertyChanges { target: stop; visible: true}
-        //        }
 
 
         Item {
@@ -301,3 +364,9 @@ import QtQuick.Dialogs 1.3
 }
 
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:1.1}
+}
+##^##*/

@@ -1,5 +1,14 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>images/darkPause.png</file>
+        <file>images/darkPlay.png</file>
+        <file>images/darkStop.png</file>
+        <file>images/lightPause.png</file>
+        <file>images/lightPlay.png</file>
+        <file>images/lightStop.png</file>
+        <file>images/mediumPause.png</file>
+        <file>images/mediumPlay.png</file>
+        <file>images/mediumStop.png</file>
     </qresource>
 </RCC>
