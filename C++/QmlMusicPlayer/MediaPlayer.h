@@ -4,10 +4,6 @@
 #include <QMediaPlayer>
 #include <QObject>
 
-//#include <QFileSelector>
-//#include <QFileDialog>
-
-
 class MediaPlayer : public QObject
 {
     Q_OBJECT // enabled meta object abilities
@@ -19,21 +15,12 @@ class MediaPlayer : public QObject
     Q_PROPERTY(float position READ getPosition WRITE setPosition NOTIFY positionChanged)
     Q_PROPERTY(float volume READ getVolume WRITE setVolume NOTIFY volumeChanged)
 
-
 public:
     MediaPlayer(); // standard Qt constructor with parent for memory management
-    QMediaPlayer player;
-//    std::vector<QUrl>& getFiles();
+
+    //std::vector<QUrl>& getFiles();
 
 public slots: // slots can be connected to signals, or called
-//    void playFile(const QUrl& fileUrl) {
-//            player.setMedia(fileUrl);
-//            player.play();
-//        }
-//    };
-    void selectedFile(const QUrl&);
-
-    //void playClicked();
     void playClicked(const QUrl&);
     void pauseClicked();
     void stopClicked();
@@ -58,18 +45,15 @@ signals: // signals can be emitted
     void positionChanged();
     void volumeChanged();
 
-private:
-    // data members
+private: // data members
     QMediaPlayer m_player;
-
-    QString m_file;
+    QUrl m_selectedFile;
 
     QString m_state;
     QString m_media;
     QString m_duration;
     float m_position = 0;
     float m_volume = 50;
-    QUrl m_selectedFile;
 };
 
 

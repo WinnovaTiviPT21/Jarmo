@@ -1,20 +1,11 @@
 #include <QMediaPlayer>
 #include "mediaplayer.h"
 
-//#include <QStandardPaths>
-//#include <QFileSelector>
-
-//#include <filesystem>
-//#include <iostream>
-
 
 MediaPlayer::MediaPlayer() {
     connect(&m_player, &QMediaPlayer::stateChanged, this, &MediaPlayer::updateState);
     connect(&m_player, &QMediaPlayer::durationChanged, this, &MediaPlayer::updateDuration);
     connect(&m_player, &QMediaPlayer::positionChanged, this, &MediaPlayer::updatePosition);
-
-//    connect(&m_player, &QMediaPlayer::mediaChanged, this, &MediaPlayer::updateMedia);
-
 
 //#ifdef  Q_OS_ANDROID
 //    QStringList files = {"/storage/emulated/0/Music"};
@@ -81,45 +72,22 @@ void MediaPlayer::updatePosition(qint64 p) {
 }
 
 void MediaPlayer::updateDuration(qint64) {
-//    int d, min, sec;
-//    d = m_player.duration()/ 1000;
-//    min = d / 60;
-//    sec = d % 60;
-//    m_duration = QString::number(min) + "min " + QString::number(sec);
-//    qint64 x = m_player.duration();
-//    m_duration = QString::number(x);
+    //int d, min, sec;
+    //d = m_player.duration()/ 1000;
+    //min = d / 60;
+    //sec = d % 60;
+    //m_duration = QString::number(min) + "min " + QString::number(sec);
+    //qint64 x = m_player.duration();
+    //m_duration = QString::number(x);
     emit durationChanged();
 }
 
 
-void MediaPlayer::selectedFile(const QUrl&) {
-////        player.setMedia(fileUrl);
-////        player.play();
-////        emit stateChanged();
-}
-
-
-//void MediaPlayer::playClicked() {
-//    if (m_player.state() == QMediaPlayer::StoppedState) {
-////        m_player.setMedia(QUrl::fromLocalFile("D:/Maahantuoja/Documents/GitHub/Jarmo/C++/QmlMusicPlayer/music/Testi.mp3"));
-//        m_player.setMedia(QUrl(m_playFile));
-//        m_player.play();
-//    }
-//    else if (m_player.state() == QMediaPlayer::PlayingState) {
-//        m_player.pause();
-//    }
-//    else if (m_player.state() == QMediaPlayer::PausedState) {
-//        m_player.play();
-//    }
-//}
 
 void MediaPlayer::playClicked(const QUrl& fileUrl) {
         if (m_player.state() == QMediaPlayer::StoppedState) {
-//            playFile(fileUrl);
             m_player.setMedia(fileUrl);
             m_player.play();
-//            emit stateChanged();
-
         }
         else if (m_player.state() == QMediaPlayer::PlayingState) {
             m_player.pause();

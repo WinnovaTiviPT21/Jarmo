@@ -24,8 +24,8 @@ import QtQuick.Dialogs 1.3
         folder: shortcuts.music
         onAccepted: {
             console.log("You chose: " + fileDialog.fileUrls)
-            mediaplayer.selectedFile(fileDialog.fileUrls[0]) // Lähetetään valitun tiedoston URL-osoite C++:lle
-//            mediaplayer.playClicked(fileDialog.fileUrls[0]) // Lähetetään valitun tiedoston URL-osoite C++:lle
+            mediaplayer.stopClicked()
+            mediaplayer.playClicked(fileDialog.fileUrls[0]) // Lähetetään valitun tiedoston URL-osoiteen C++:lle
         }
         onRejected: {
             console.log("Canceled")
@@ -57,40 +57,6 @@ import QtQuick.Dialogs 1.3
         }
     }
 
-    //    Slider {
-    //        id: slider
-    //        x: 140
-    //        y: 315
-    //        from: fromValue
-    //        to: toValue
-    //        stepSize: 0.01
-    //        Layout.minimumWidth: 200
-    //        Layout.fillWidth: true
-    //        background: Rectangle {
-    //            x: slider.leftPadding
-    //            y: slider.topPadding + slider.availableHeight / 2 - height / 2
-    //            implicitWidth: 200
-    //            implicitHeight: 2
-    //            width: slider.availableWidth
-    //            height: implicitHeight
-    //            color: "#606060"
-    //            Rectangle {
-    //                width: slider.visualPosition * parent.width
-    //                height: parent.height
-    //                color: "#41cd52"
-    //            }
-    //        }
-    //        handle: Rectangle {
-    //            x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width)
-    //            y: slider.topPadding + slider.availableHeight / 2 - height / 2
-    //            implicitWidth: 14
-    //            implicitHeight: 14
-    //            radius: width/2
-    //            color: slider.pressed ? "#ffffff" : "#d0d0d0"
-    //            border.color: "#d0d0d0"
-    //        }
-    //    }
-
 
     GridLayout {
         id: gridLayout
@@ -112,10 +78,10 @@ import QtQuick.Dialogs 1.3
             id: menuBar
             anchors.left: parent.left
             anchors.right: parent.right
-            Layout.topMargin: -16
+            Layout.topMargin: -20
             Layout.leftMargin: 0
-            anchors.rightMargin: -16
-            anchors.leftMargin: -16
+            anchors.rightMargin: -20
+            anchors.leftMargin: -20
             Layout.columnSpan: 11
             leftPadding: 0
             Layout.fillWidth: true
@@ -145,7 +111,7 @@ import QtQuick.Dialogs 1.3
             Layout.columnSpan: 11
             Layout.rowSpan: 1
             placeholderText: qsTr("Hello World")
-            text: mediaplayer.duration
+            text: mediaPlayer.currentMedia()
             activeFocusOnPress: false
         }
 
@@ -280,6 +246,7 @@ import QtQuick.Dialogs 1.3
             height: 66
 
             visible: true
+            focus: false
             value: 50
             Layout.bottomMargin: 10
             stepSize: 1
@@ -314,13 +281,15 @@ import QtQuick.Dialogs 1.3
         ProgressBar {
             id: progressBar
             width: 700
+            rightPadding: 20
+            leftPadding: 0
             from: 0
             to: 100
             Layout.topMargin: 5
             topPadding: 0
             Layout.rowSpan: 1
-            Layout.rightMargin: 0
-            Layout.leftMargin: 0
+            Layout.rightMargin: 60
+            Layout.leftMargin: 60
             Layout.margins: 0
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.fillHeight: false
@@ -329,7 +298,6 @@ import QtQuick.Dialogs 1.3
             value: mediaplayer.position
         }
     }
-
 }
 
 

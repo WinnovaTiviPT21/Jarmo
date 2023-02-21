@@ -28,9 +28,6 @@ int main(int argc, char *argv[])
 
 
     QQmlApplicationEngine engine;
-//    MediaPlayer mediaPlayer;
-//        engine.rootContext()->setContextProperty("mediaPlayer", &mediaPlayer);
-//        engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     const QUrl url(QStringLiteral("qrc:/main.qml"));
 
 
