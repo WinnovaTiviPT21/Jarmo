@@ -2,10 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
-//import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.11
-
-
 import QtQuick.Dialogs 1.3
 
 
@@ -13,21 +10,27 @@ ApplicationWindow {
     id: window
     width: 480
     height: 640
+    // Puhelimen resoluutio
+    //width: 360
+    //height: 800
     visible: true
     modality: Qt.ApplicationModal
     title: qsTr("Paska soitin")
-    Material.theme: control.position < 1 ? Material.Light : Material.Dark
+    Material.theme: control.position < 1 ? Material.Light : Material.Dark // Teema
 
 
+    // Avaa tiedoston valintaikkunan
     FileDialog {
         id: fileDialog
         title: "Please choose a file"
         nameFilters: ["MP3 files (*.mp3)"]
         folder: shortcuts.music
-        onAccepted: {
-            console.log("You chose: " + fileDialog.fileUrls)
-            mediaplayer.stopClicked()
-            mediaplayer.playClicked(fileDialog.fileUrls[0]) // Lähetetään valitun tiedoston URL-osoiteen C++:lle
+        onAccepted: {                                        // Kun käyttäjä avaa tiedoston
+            console.log("You chose: " + fileDialog.fileUrls) // Kirjoittaa konsoliin valitun tiedoston polun
+            console.log("Current media: " + mediaplayer.display)
+            mediaplayer.stopClicked()                        // Pysäyttää edeltävän kappaleen toiston
+            mediaplayer.playClicked(fileDialog.fileUrls[0])  // Lähetetään valitun tiedoston URL-osoiteen C++:lle
+            // Muuttaa nappien näkyvyyden                    // ja aloittaa kappaleen soittamisen
             play.visible = false
             stop.visible = true
             pause.visible = true
@@ -35,10 +38,11 @@ ApplicationWindow {
         onRejected: {
             console.log("Canceled")
         }
-        Component.onCompleted: visible = false
+        Component.onCompleted: visible = false // Jos true fileDialogi aukeaa jo käynnistyksessä
     }
 
 
+    // Sivupaneeli
     Drawer {
         id: drawer
         width: 0.50 * window.width
@@ -53,6 +57,7 @@ ApplicationWindow {
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
+        // Teeman valintanappula
         Switch {
             id: control
             anchors.right: parent.right
@@ -78,7 +83,7 @@ ApplicationWindow {
         rows: 4
 
 
-        // Menu
+        // Menupalkki
         MenuBar {
             id: menuBar
             anchors.left: parent.left
@@ -95,14 +100,14 @@ ApplicationWindow {
                 title: qsTr("File")
                 Action {
                     text: qsTr("&Open")
-                    onTriggered: fileDialog.open()
+                    onTriggered: fileDialog.open() // Avaa fileDialogin
                 }
                 Action {
                     text: qsTr("&Url")
                 }
                 Action {
                     text: qsTr("&Quit")
-                    onTriggered: Qt.quit()
+                    onTriggered: Qt.quit() // Sulkee soittimen
                 }
             }
         }
@@ -120,11 +125,12 @@ ApplicationWindow {
             Layout.columnSpan: 11
             Layout.rowSpan: 1
             placeholderText: qsTr("Hello World")
-            text: mediaPlayer.currentMedia()
+            text: mediaplayer.display
             activeFocusOnPress: false
         }
 
 
+        // Fillereitä
         Item {
             id: item3
             width: 200
@@ -200,14 +206,15 @@ ApplicationWindow {
                 anchors.fill: parent
                 source: {
                     if (control.checked == true){
-                        source: "images/darkPause.png"
+                        source: "images/darkPause_1.png"
+                        //source: "images/darkPause_2.png"
+                        //source: "images/darkPause_3.png"
                     }
                     else {
                         source: "images/lightPause.png"
                     }
                 }
             }
-
             onClicked: {
                 mediaplayer.pauseClicked()
                 play.transformOrigin = Item.BottomRight
@@ -220,7 +227,6 @@ ApplicationWindow {
 
 
         // Play
-        /*RoundButton*/
         Button {
             id: play
             //text: "Play"
@@ -237,14 +243,15 @@ ApplicationWindow {
                 anchors.fill: parent
                 source: {
                     if (control.checked == true){
-                        source: "images/darkPlay.png"
+                        source: "images/darkPlay_1.png"
+                        //source: "images/darkPlay_2.png"
+                        //source: "images/darkPlay_3.png"
                     }
                     else {
                         source: "images/lightPlay.png"
                     }
                 }
             }
-
             onClicked: {
                 mediaplayer.playClicked(fileDialog.fileUrl)
                 play.Layout.rightMargin = 0
@@ -261,9 +268,9 @@ ApplicationWindow {
             visible: false
             rightPadding: 0
             leftPadding: 0
-            scale: 0.7
             Layout.rightMargin: 0
             Layout.leftMargin: 0
+            scale: 0.7
             Layout.fillWidth: false
             transformOrigin: Item.Bottom
             bottomPadding: 6
@@ -273,14 +280,15 @@ ApplicationWindow {
                 anchors.fill: parent
                 source: {
                     if (control.checked == true){
-                        source: "images/darkStop.png"
+                        source: "images/darkStop_1.png"
+                        //source: "images/darkStop_2.png"
+                        //source: "images/darkStop_3.png"
                     }
                     else {
                         source: "images/lightStop.png"
                     }
                 }
             }
-
             onClicked: {
                 mediaplayer.stopClicked()
                 play.transformOrigin = Item.Bottom
@@ -291,6 +299,7 @@ ApplicationWindow {
         }
 
 
+        // Filler
         Item {
             id: item2
             width: 200
@@ -307,7 +316,6 @@ ApplicationWindow {
             id: slider
             width: 200
             height: 66
-
             visible: true
             focus: false
             value: 50

@@ -15,6 +15,9 @@ class MediaPlayer : public QObject
     Q_PROPERTY(float position READ getPosition WRITE setPosition NOTIFY positionChanged)
     Q_PROPERTY(float volume READ getVolume WRITE setVolume NOTIFY volumeChanged)
 
+    //test
+    Q_PROPERTY(QString display READ display NOTIFY displayChanged)
+
 public:
     MediaPlayer(); // standard Qt constructor with parent for memory management
 
@@ -38,12 +41,18 @@ public slots: // slots can be connected to signals, or called
     void updateDuration(qint64);
     void updatePosition(qint64);
 
+    //test
+    QString display();
+
 signals: // signals can be emitted
     void stateChanged();
     void mediaChanged();
     void durationChanged();
     void positionChanged();
     void volumeChanged();
+
+    //test
+    void displayChanged();
 
 private: // data members
     QMediaPlayer m_player;
@@ -54,6 +63,9 @@ private: // data members
     QString m_duration;
     float m_position = 0;
     float m_volume = 50;
+
+    //test
+    QString m_display;
 };
 
 
