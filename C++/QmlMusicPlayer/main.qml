@@ -367,7 +367,16 @@ ApplicationWindow {
             Layout.fillHeight: false
             Layout.fillWidth: true
             Layout.columnSpan: 11
+            stepSize: 1
             value: mediaplayer.position
+
+            Connections {
+                target: progressBar
+                onMoved: {
+                    mediaplayer.position = progressBar.value;
+                    console.log(progressBar.value);
+                }
+            }
         }
     }
 }
