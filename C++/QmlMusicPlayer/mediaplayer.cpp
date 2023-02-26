@@ -12,8 +12,7 @@ MediaPlayer::MediaPlayer() {
 
     //test
     //m_display = m_player.metaData("Title").toString();
-    //connect(&m_player, &QMediaPlayer::stateChanged, this, &MediaPlayer::updateDisplay);
-    connect(&m_player, &QMediaPlayer::currentMediaChanged, this, &MediaPlayer::updateCurrentMedia);
+//    connect(&m_player, &QMediaPlayer::stateChanged, this, &MediaPlayer::updateDisplay);
 
 //#ifdef  Q_OS_ANDROID
 //    QStringList files = {"/storage/emulated/0/Music"};
@@ -37,33 +36,12 @@ QString MediaPlayer::display() {
 //    emit displayChanged();
     return m_display;
 }
-//QString MediaPlayer::getDisplay() {
-//    return m_display;
-//}
-//QString MediaPlayer::setDisplay(QString& display) {
-//    display = m_player.metaData("Title").toString();
-//    return m_display;
-//}
-//void MediaPlayer::updateDisplay() {
-//    emit displayChanged();
-//}
-QString MediaPlayer::getCurrentMedia() {
-    m_currentMedia = m_player.metaData("Title").toString();
-    return m_currentMedia;
-}
-
-void MediaPlayer::updateCurrentMedia() {
-    emit currentMediaChanged();
-}
 
 
 
+// get
 QString MediaPlayer::getState() {
     return m_state;
-}
-
-void MediaPlayer::updateState() {
-    emit stateChanged();
 }
 
 QString MediaPlayer::getMedia() {
@@ -72,6 +50,41 @@ QString MediaPlayer::getMedia() {
 
 QString MediaPlayer::getDuration() {
     return m_duration;
+}
+
+float MediaPlayer::getPosition() {
+    return m_position;
+}
+
+float MediaPlayer::getVolume() {
+    return m_volume;
+}
+
+
+
+// set
+float MediaPlayer::setPosition(float& position) {
+    m_player.setPosition(position);
+    return m_position;
+}
+
+float MediaPlayer::setVolume(float& volume) {
+    m_player.setVolume(volume);
+    return m_volume;
+}
+
+
+
+// update
+void MediaPlayer::updateState() {
+    emit stateChanged();
+}
+
+void MediaPlayer::updatePosition(qint64 position) {
+    if (m_player.duration() != 0) {
+        m_position = 100 * position / m_player.duration();
+        emit positionChanged();
+    }
 }
 
 void MediaPlayer::updateDuration(qint64) {
@@ -85,37 +98,12 @@ void MediaPlayer::updateDuration(qint64) {
     emit durationChanged();
 }
 
-float MediaPlayer::getPosition() {
-    return m_position;
-}
-
-float MediaPlayer::setPosition(float& position) {
-    m_player.setPosition(position);
-    return m_position;
-}
-
-void MediaPlayer::updatePosition(qint64 position) {
-    if (m_player.duration() != 0) {
-        m_position = 100 * position / m_player.duration();
-        emit positionChanged();
-    }
-}
-
-float MediaPlayer::getVolume() {
-    return m_volume;
-}
-
-float MediaPlayer::setVolume(float& volume) {
-    m_player.setVolume(volume);
-    return m_volume;
-}
-
-
-void MediaPlayer::playClicked(const QUrl& fileUrl) {
-//void MediaPlayer::playClicked(QUrl fileUrl) {
-    m_player.setMedia(fileUrl);
+//void MediaPlayer::playClicked(const QUrl& fileUrl) {
+void MediaPlayer::playClicked(QUrl fileUrl) {
     if (m_player.state() == QMediaPlayer::StoppedState) {
+        m_player.setMedia(fileUrl);
         m_player.play();
+
     }
     else if (m_player.state() == QMediaPlayer::PlayingState) {
         m_player.pause();
@@ -124,8 +112,7 @@ void MediaPlayer::playClicked(const QUrl& fileUrl) {
         m_player.play();
     }
     //m_display = m_player.metaData("Title").toString();
-    //emit displayChanged();
-    emit currentMediaChanged();
+    emit displayChanged();
 }
 
 void MediaPlayer::pauseClicked() {

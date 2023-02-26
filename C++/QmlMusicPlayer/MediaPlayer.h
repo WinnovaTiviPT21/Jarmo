@@ -18,7 +18,6 @@ class MediaPlayer : public QObject
     //test
     Q_PROPERTY(QString display READ display NOTIFY displayChanged)
 //    Q_PROPERTY(QString display READ getDisplay WRITE setDisplay NOTIFY displayChanged)
-    Q_PROPERTY(QString currentMedia READ getCurrentMedia NOTIFY currentMediaChanged)
 
 public:
     MediaPlayer(); // standard Qt constructor with parent for memory management
@@ -27,8 +26,7 @@ public:
 
 public slots: // slots can be connected to signals, or called
     //void playClicked(const QUrl&);
-//    void playClicked(QUrl);
-    void playClicked(const QUrl&);
+    void playClicked(QUrl);
     void pauseClicked();
     void stopClicked();
 
@@ -50,8 +48,6 @@ public slots: // slots can be connected to signals, or called
 //    QString getDisplay();
 //    QString setDisplay(QString&);
 //    void updateDisplay();
-    QString getCurrentMedia();
-    void updateCurrentMedia();
 
 
 signals: // signals can be emitted
@@ -63,7 +59,6 @@ signals: // signals can be emitted
 
     //test
     void displayChanged();
-    void currentMediaChanged();
 
 private: // data members
     QMediaPlayer m_player;
@@ -77,7 +72,6 @@ private: // data members
 
     //test
     QString m_display;
-    QString m_currentMedia;
 };
 
 

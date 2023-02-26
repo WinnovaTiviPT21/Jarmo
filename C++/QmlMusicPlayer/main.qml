@@ -25,12 +25,11 @@ ApplicationWindow {
         title: "Please choose a file"
         nameFilters: ["MP3 files (*.mp3)"]
         folder: shortcuts.music
-
         onAccepted: {                                            // Kun käyttäjä avaa tiedoston
-            mediaplayer.stopClicked                              // Pysäyttää edeltävän kappaleen toiston
+            mediaplayer.stopClicked()                            // Pysäyttää edeltävän kappaleen toiston
             mediaplayer.playClicked(fileDialog.fileUrls[0])      // Lähetetään valitun tiedoston URL-osoiteen C++:lle
             console.log("You chose: " + fileDialog.fileUrls)     // Kirjoittaa konsoliin valitun tiedoston polun
-            console.log("Current media: " + mediaplayer.currentMedia) // Kirjoittaa konsoliin valitun tiedoston nimen
+            console.log("Current media: " + mediaplayer.display) // Kirjoittaa konsoliin valitun tiedoston nimen
             // Muuttaa nappien näkyvyyden                        // ja aloittaa kappaleen soittamisen
             play.visible = false
             stop.visible = true
@@ -125,8 +124,7 @@ ApplicationWindow {
             Layout.columnSpan: 11
             Layout.rowSpan: 1
             placeholderText: qsTr("Hello World")
-            //text: mediaplayer.display
-            text: mediaplayer.currentMedia
+            text: mediaplayer.display
             activeFocusOnPress: false
         }
 
@@ -350,7 +348,7 @@ ApplicationWindow {
             }
         }
 
-        Slider /*ProgressBar*/ {
+        ProgressBar {
             id: progressBar
             width: 700
             rightPadding: 20
