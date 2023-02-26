@@ -199,7 +199,7 @@ ApplicationWindow {
             rightPadding: 0
             leftPadding: 0
             scale: 0.7
-            Layout.leftMargin: 0
+            Layout.leftMargin: -50
             transformOrigin: Item.BottomRight
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
 
@@ -236,7 +236,7 @@ ApplicationWindow {
             rightPadding: 0
             leftPadding: 0
             scale: 0.7
-            Layout.leftMargin: 0
+            Layout.leftMargin: -50
             transformOrigin: Item.Bottom
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
 
@@ -383,8 +383,4 @@ ApplicationWindow {
 
 
 
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:1.1}
-}
-##^##*/
+
