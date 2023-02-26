@@ -25,12 +25,13 @@ ApplicationWindow {
         title: "Please choose a file"
         nameFilters: ["MP3 files (*.mp3)"]
         folder: shortcuts.music
-        onAccepted: {                                            // Kun käyttäjä avaa tiedoston
-            mediaplayer.stopClicked()                            // Pysäyttää edeltävän kappaleen toiston
-            mediaplayer.playClicked(fileDialog.fileUrls[0])      // Lähetetään valitun tiedoston URL-osoiteen C++:lle
-            console.log("You chose: " + fileDialog.fileUrls)     // Kirjoittaa konsoliin valitun tiedoston polun
-            console.log("Current media: " + mediaplayer.display) // Kirjoittaa konsoliin valitun tiedoston nimen
-            // Muuttaa nappien näkyvyyden                        // ja aloittaa kappaleen soittamisen
+
+        onAccepted: {                                        // Kun käyttäjä avaa tiedoston
+            console.log("You chose: " + fileDialog.fileUrls) // Kirjoittaa konsoliin valitun tiedoston polun
+            console.log("Current media: " + mediaplayer.display)
+            mediaplayer.stopClicked()                        // Pysäyttää edeltävän kappaleen toiston
+            mediaplayer.playClicked(fileDialog.fileUrls[0])  // Lähetetään valitun tiedoston URL-osoiteen C++:lle
+            // Muuttaa nappien näkyvyyden                    // ja aloittaa kappaleen soittamisen
             play.visible = false
             stop.visible = true
             pause.visible = true
@@ -38,6 +39,7 @@ ApplicationWindow {
         onRejected: {
             console.log("Canceled")
         }
+        Component.onCompleted: visible = false // Jos true fileDialogi aukeaa jo käynnistyksessä
     }
 
 
@@ -348,7 +350,7 @@ ApplicationWindow {
             }
         }
 
-        ProgressBar {
+        Slider /*ProgressBar*/ {
             id: progressBar
             width: 700
             rightPadding: 20

@@ -2,8 +2,6 @@
 #include <QMediaContent>
 #include "mediaplayer.h"
 
-#include <QMediaMetaData>
-
 
 MediaPlayer::MediaPlayer() {
     connect(&m_player, &QMediaPlayer::stateChanged, this, &MediaPlayer::updateState);
@@ -12,7 +10,11 @@ MediaPlayer::MediaPlayer() {
 
     //test
     //m_display = m_player.metaData("Title").toString();
-//    connect(&m_player, &QMediaPlayer::stateChanged, this, &MediaPlayer::updateDisplay);
+
+    //connect(&m_player, &QMediaPlayer::displayChanged, this, &MediaPlayer::updateDisplay);
+    //QString currentMedia = m_player.metaData(QMediaMetaData::Title).toString();
+    //connect(&m_player, &QMediaPlayer::currentMediaChanged, this, &MediaPlayer::updateCurrentMedia);
+
 
 //#ifdef  Q_OS_ANDROID
 //    QStringList files = {"/storage/emulated/0/Music"};
@@ -33,9 +35,18 @@ MediaPlayer::MediaPlayer() {
 //test
 QString MediaPlayer::display() {
     m_display = m_player.metaData("Title").toString();
-//    emit displayChanged();
+    //emit displayChanged();
     return m_display;
 }
+
+//QString MediaPlayer::getCurrentMedia() {
+//    m_currentMedia = m_player.metaData("Title").toString();
+//    return m_currentMedia;
+//}
+
+//void MediaPlayer::updateCurrentMedia() {
+//    emit currentMediaChanged();
+//}
 
 
 
@@ -100,10 +111,10 @@ void MediaPlayer::updateDuration(qint64) {
 
 //void MediaPlayer::playClicked(const QUrl& fileUrl) {
 void MediaPlayer::playClicked(QUrl fileUrl) {
+    emit displayChanged();
     if (m_player.state() == QMediaPlayer::StoppedState) {
         m_player.setMedia(fileUrl);
         m_player.play();
-
     }
     else if (m_player.state() == QMediaPlayer::PlayingState) {
         m_player.pause();
