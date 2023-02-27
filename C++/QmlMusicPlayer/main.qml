@@ -8,11 +8,11 @@ import QtQuick.Dialogs 1.3
 
 ApplicationWindow {
     id: window
-    width: 480
-    height: 640
     // Puhelimen resoluutio
     //width: 360
     //height: 800
+    width: 480
+    height: 640
     visible: true
     modality: Qt.ApplicationModal
     title: qsTr("Paska soitin")
@@ -26,15 +26,15 @@ ApplicationWindow {
         nameFilters: ["MP3 files (*.mp3)"]
         folder: shortcuts.music
 
-        onAccepted: {                                        // Kun käyttäjä avaa tiedoston
-            console.log("You chose: " + fileDialog.fileUrls) // Kirjoittaa konsoliin valitun tiedoston polun
-            console.log("Current media: " + mediaplayer.display)
-            mediaplayer.stopClicked()                        // Pysäyttää edeltävän kappaleen toiston
-            mediaplayer.playClicked(fileDialog.fileUrls[0])  // Lähetetään valitun tiedoston URL-osoiteen C++:lle
-            // Muuttaa nappien näkyvyyden                    // ja aloittaa kappaleen soittamisen
+        onAccepted: {                                            // Kun käyttäjä avaa tiedoston
+            console.log("You chose: " + fileDialog.fileUrls)     // Kirjoittaa konsoliin valitun tiedoston polun
+            mediaplayer.stopClicked()                            // Pysäyttää edeltävän kappaleen toiston
+            mediaplayer.playClicked(fileDialog.fileUrl/*s[0]*/)      // Lähetetään valitun tiedoston URL-osoiteen C++:lle
+            // Muuttaa nappien näkyvyyden                        // ja aloittaa kappaleen soittamisen
             play.visible = false
             stop.visible = true
             pause.visible = true
+            console.log("Current media: " + mediaplayer.display) // test
         }
         onRejected: {
             console.log("Canceled")
