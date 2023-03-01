@@ -11,7 +11,8 @@ using namespace std;
 
 int main()
 {
-    // Laske sinisen alueen pinta-ala Monte-Carlo simulaatiolla. Alusta satunnaislukugeneraattori luvulla 42.
+    // Laske sinisen alueen pinta-ala Monte-Carlo simulaatiolla.
+    // Alusta satunnaislukugeneraattori luvulla 42.
 
     const float rSin = 20.0;
     const float rVal = 16.2;
@@ -23,10 +24,10 @@ int main()
     uniform_real_distribution<> disSin(-20, 20);
     uniform_real_distribution<> disVal(-16.2, 16.2);
 
-
     for (int i = 0; i <= piste; ++i) {
         float xSin = disSin(gen), ySin = disSin(gen);
         float xVal = disVal(gen), yVal = disVal(gen);
+
         if (xSin * xSin + ySin * ySin <= rSin * rSin) {
             sinisen_sisalla++;
         }
