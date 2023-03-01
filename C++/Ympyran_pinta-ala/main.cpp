@@ -16,7 +16,7 @@ int main()
     // Käytä luokkaa std::uniform_real_distribution. Alusta satunnaislukugeneraattori luvulla 42.
 
     const int r = 5;           // säde
-    const int piste = 10000000; // pisteiden määrä
+    const int piste = 1000000; // pisteiden määrä
     float ympyran_sisalla = 0; // laskee pisteet ympyrän sisällä
 
     mt19937 gen{ 42 };
