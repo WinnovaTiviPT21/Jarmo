@@ -14,6 +14,7 @@ int main()
 {
     // Simuloi satunnaisluvuilla kolikon heittoa (Monte Carlo simulation).
     // Mikä on todennäköisyys saada kymmenen klaavaa peräjälkeen?
+    // Tuloksen tarkka arvo on 0.5^10 = 0,0009765625. Kaksi merkitsevää numero oikein riittää.
 
     const int heitot = 1000000;     // heittojen määrä
     const int tavoite = 10;         // tavoite kuinka monta kertaa peräkkäin
@@ -39,7 +40,7 @@ int main()
 
     double todennakoisyys = tavoite_saavutettu / heitot;
 
-    cout << "Todennakoisyys kymmenen perattaisen klaavan heittamiseksi on: " << todennakoisyys << "\n\n";
+    cout << "Todennakoisyys kymmenen perattaisen klaavan heittamiseksi on: " << todennakoisyys << "\n\n"; // Antaa tuloksen: 0.000485
 
     return 0;
 }
