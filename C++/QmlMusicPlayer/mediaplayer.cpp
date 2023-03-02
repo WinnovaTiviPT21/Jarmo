@@ -7,9 +7,6 @@ MediaPlayer::MediaPlayer() {
     connect(&m_player, &QMediaPlayer::stateChanged, this, &MediaPlayer::updateState);
     connect(&m_player, &QMediaPlayer::durationChanged, this, &MediaPlayer::updateDuration);
     connect(&m_player, &QMediaPlayer::positionChanged, this, &MediaPlayer::updatePosition);
-
-    //test
-    //m_display = m_player.metaData("Title").toString();
     connect(&m_player, &QMediaPlayer::durationChanged, this, &MediaPlayer::updateDisplay);
 
     //#ifdef  Q_OS_ANDROID
@@ -26,20 +23,9 @@ MediaPlayer::MediaPlayer() {
 
 }
 
-//test
-//QString MediaPlayer::display() {
-//    m_display = m_player.metaData("Title").toString();
-//    //emit displayChanged();
-//    return m_display;
-//}
-
 QString MediaPlayer::getDisplay() {
     return m_display;
 }
-
-//QString MediaPlayer::setDisplay(QString& display) {
-//    return 0;
-//}
 
 void MediaPlayer::updateDisplay() {
     m_display = m_player.metaData("Title").toString();
@@ -106,7 +92,6 @@ float MediaPlayer::setVolume(float& volume) {
 void MediaPlayer::playClicked(QUrl fileUrl) {
     if (m_player.state() == QMediaPlayer::StoppedState) {
         m_player.setMedia(fileUrl);
-        //m_display = m_player.metaData("Title").toString();
         m_player.play();
     }
     else if (m_player.state() == QMediaPlayer::PlayingState) {
@@ -115,8 +100,6 @@ void MediaPlayer::playClicked(QUrl fileUrl) {
     else if (m_player.state() == QMediaPlayer::PausedState) {
         m_player.play();
     }
-    //m_display = m_player.metaData("Title").toString();
-    //emit displayChanged();
 }
 
 void MediaPlayer::pauseClicked() {
