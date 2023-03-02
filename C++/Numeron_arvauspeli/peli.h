@@ -6,7 +6,8 @@
 class Peli : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int rngNro READ getRngNro WRITE setRngNro NOTIFY rngNroChanged)
+//    Q_PROPERTY(int rngNro READ getRngNro WRITE setRngNro NOTIFY rngNroChanged)
+    Q_PROPERTY(int rngNro READ getRngNro NOTIFY rngNroChanged)
 
 public:
     Peli();
@@ -16,9 +17,11 @@ public:
 //    ~Peli();
 
 public slots:
-    int rngNro();
+//    int rngNro();
     int getRngNro();
-    int setRngNro();
+//    void setRngNro(int&);
+    void updateRngNro();
+    void startClicked();
 
 signals:
     void rngNroChanged();

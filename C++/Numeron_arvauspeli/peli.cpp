@@ -8,25 +8,37 @@ Peli::Peli()
 
 }
 
+//int Peli::rngNro()
+//{
+//    random_device rd;
+//    mt19937 gen(rd());
+//    uniform_int_distribution<> distrib(0, 100);
 
-
-int Peli::rngNro()
-{
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> distrib(0, 100);
-
-    m_rngNro = distrib(gen);
-    return m_rngNro;
-}
+//    m_rngNro = distrib(gen);
+//    return m_rngNro;
+//}
 
 int Peli::getRngNro()
 {
     return m_rngNro;
 }
 
-int Peli::setRngNro()
+//void Peli::setRngNro(int& rngNro)
+//{
+//    startClicked();
+
+//}
+
+void Peli::updateRngNro()
 {
-    setRngNro();
-    return m_rngNro;
+    emit rngNroChanged();
+}
+
+void Peli::startClicked()
+{
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> distrib(0, 100);
+
+    m_rngNro = distrib(gen);
 }

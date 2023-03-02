@@ -112,7 +112,7 @@ Window {
         }
 
         Button {
-            id: button1
+            id: start
             width: 117
             text: qsTr("Aloita")
             Layout.fillWidth: false
