@@ -116,7 +116,8 @@ ApplicationWindow {
         
         // Näyttö
         TextField {
-            id: display
+            //id: display
+            id: textField
             height: 40
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.margins: 0
@@ -254,7 +255,8 @@ ApplicationWindow {
                 }
             }
             onClicked: {
-                mediaplayer.playClicked(fileDialog.fileUrl)
+                //mediaplayer.display = fileDialog.fileUrls[0];
+                console.log(mediaplayer.display)
                 play.Layout.rightMargin = 0
                 play.visible = false
                 stop.visible = true

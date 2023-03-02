@@ -1,6 +1,6 @@
 #include <QMediaPlayer>
 #include <QMediaContent>
-#include "MediaPlayer.h"
+#include "mediaplayer.h"
 
 
 MediaPlayer::MediaPlayer() {
@@ -10,11 +10,7 @@ MediaPlayer::MediaPlayer() {
 
     //test
     //m_display = m_player.metaData("Title").toString();
-
-    //connect(&m_player, &QMediaPlayer::displayChanged, this, &MediaPlayer::updateDisplay);
-    //QString currentMedia = m_player.metaData(QMediaMetaData::Title).toString();
-    //connect(&m_player, &QMediaPlayer::currentMediaChanged, this, &MediaPlayer::updateCurrentMedia);
-
+    connect(&m_player, &QMediaPlayer::durationChanged, this, &MediaPlayer::updateDisplay);
 
     //#ifdef  Q_OS_ANDROID
     //    QStringList files = {"/storage/emulated/0/Music"};
@@ -30,24 +26,25 @@ MediaPlayer::MediaPlayer() {
 
 }
 
-
-
 //test
-QString MediaPlayer::display() {
-    m_display = m_player.metaData("Title").toString();
-    //emit displayChanged();
+//QString MediaPlayer::display() {
+//    m_display = m_player.metaData("Title").toString();
+//    //emit displayChanged();
+//    return m_display;
+//}
+
+QString MediaPlayer::getDisplay() {
     return m_display;
 }
 
-//QString MediaPlayer::getCurrentMedia() {
-//    m_currentMedia = m_player.metaData("Title").toString();
-//    return m_currentMedia;
+//QString MediaPlayer::setDisplay(QString& display) {
+//    return 0;
 //}
 
-//void MediaPlayer::updateCurrentMedia() {
-//    emit currentMediaChanged();
-//}
-
+void MediaPlayer::updateDisplay() {
+    m_display = m_player.metaData("Title").toString();
+    emit displayChanged();
+}
 
 QString MediaPlayer::getState() {
     return m_state;
@@ -107,9 +104,9 @@ float MediaPlayer::setVolume(float& volume) {
 
 //void MediaPlayer::playClicked(const QUrl& fileUrl) {
 void MediaPlayer::playClicked(QUrl fileUrl) {
-    emit displayChanged();
     if (m_player.state() == QMediaPlayer::StoppedState) {
         m_player.setMedia(fileUrl);
+        //m_display = m_player.metaData("Title").toString();
         m_player.play();
     }
     else if (m_player.state() == QMediaPlayer::PlayingState) {
@@ -119,7 +116,7 @@ void MediaPlayer::playClicked(QUrl fileUrl) {
         m_player.play();
     }
     //m_display = m_player.metaData("Title").toString();
-    emit displayChanged();
+    //emit displayChanged();
 }
 
 void MediaPlayer::pauseClicked() {

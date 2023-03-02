@@ -6,9 +6,8 @@
 
 class MediaPlayer : public QObject
 {
-    Q_OBJECT // enabled meta object abilities
+    Q_OBJECT
 
-    // property declarations required for QML
     Q_PROPERTY(QString state READ getState NOTIFY stateChanged)
     Q_PROPERTY(QString media READ getMedia NOTIFY mediaChanged)
     Q_PROPERTY(QString duration READ getDuration NOTIFY durationChanged)
@@ -16,16 +15,16 @@ class MediaPlayer : public QObject
     Q_PROPERTY(float volume READ getVolume WRITE setVolume NOTIFY volumeChanged)
 
     //test
-    Q_PROPERTY(QString display READ display NOTIFY displayChanged)
+    Q_PROPERTY(QString display READ getDisplay NOTIFY displayChanged)
     //Q_PROPERTY(QString display READ getDisplay WRITE setDisplay NOTIFY displayChanged)
-    //Q_PROPERTY(QString currentMedia READ getCurrentMedia NOTIFY currentMediaChanged)
 
 public:
-    MediaPlayer(); // standard Qt constructor with parent for memory management
+    MediaPlayer();
+    //MediaPlayer(QObject *parent = nullptr) : QObject(parent) {}
 
     //std::vector<QUrl>& getFiles();
 
-public slots: // slots can be connected to signals, or called
+public slots:
     //void playClicked(const QUrl&);
     void playClicked(QUrl);
     void pauseClicked();
@@ -35,9 +34,8 @@ public slots: // slots can be connected to signals, or called
     QString getMedia();
     QString getDuration();
     float getPosition();
-    float getVolume();
-
     float setPosition(float&);
+    float getVolume();
     float setVolume(float&);
 
     void updateState();
@@ -45,14 +43,9 @@ public slots: // slots can be connected to signals, or called
     void updatePosition(qint64);
 
     //test
-    QString display();
-//    QString getDisplay();
-//    QString setDisplay(QString&);
-//    void updateDisplay();
-
-//    QString getCurrentMedia();
-//    void updateCurrentMedia();
-
+    QString getDisplay();
+    //QString setDisplay(QString&);
+    void updateDisplay();
 
 signals: // signals can be emitted
     void stateChanged();
@@ -63,9 +56,9 @@ signals: // signals can be emitted
 
     //test
     void displayChanged();
-//    void currentMediaChanged();
+    //void currentMediaChanged();
 
-private: // data members
+private:
     QMediaPlayer m_player;
     QUrl m_selectedFile;
 
@@ -77,7 +70,6 @@ private: // data members
 
     //test
     QString m_display;
-//    QString m_currentMedia;
 };
 
 
