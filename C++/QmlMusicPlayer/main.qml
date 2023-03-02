@@ -17,38 +17,38 @@ ApplicationWindow {
     modality: Qt.ApplicationModal
     title: qsTr("Paska soitin")
     Material.theme: control.position < 1 ? Material.Light : Material.Dark // Teema
-
-
+    
+    
     // Avaa tiedoston valintaikkunan
     FileDialog {
         id: fileDialog
         title: "Please choose a file"
         nameFilters: ["MP3 files (*.mp3)"]
         folder: shortcuts.music
-
-        onAccepted: {                                            // Kun käyttäjä avaa tiedoston
-            console.log("You chose: " + fileDialog.fileUrls)     // Kirjoittaa konsoliin valitun tiedoston polun
-            mediaplayer.stopClicked()                            // Pysäyttää edeltävän kappaleen toiston
-            mediaplayer.playClicked(fileDialog.fileUrl/*s[0]*/)      // Lähetetään valitun tiedoston URL-osoiteen C++:lle
-            // Muuttaa nappien näkyvyyden                        // ja aloittaa kappaleen soittamisen
+        
+        onAccepted: {                                        // Kun käyttäjä avaa tiedoston
+            console.log("You chose: " + fileDialog.fileUrls) // Kirjoittaa konsoliin valitun tiedoston polun
+            mediaplayer.stopClicked()                        // Pysäyttää edeltävän kappaleen toiston
+            mediaplayer.playClicked(fileDialog.fileUrls[0])  // Lähetetään valitun tiedoston URL-osoiteen C++:lle
+            // Muuttaa nappien näkyvyyden                    // ja aloittaa kappaleen soittamisen
             play.visible = false
             stop.visible = true
             pause.visible = true
-            console.log("Current media: " + mediaplayer.display) // test
+            console.log("Current media: " + mediaplayer.display) // testi
         }
         onRejected: {
             console.log("Canceled")
         }
         Component.onCompleted: visible = false // Jos true fileDialogi aukeaa jo käynnistyksessä
     }
-
-
+    
+    
     // Sivupaneeli
     Drawer {
         id: drawer
         width: 0.50 * window.width
         height: window.height
-
+        
         Label {
             id: content
             text: "Copyright \xa9 2023 by Jarmo Vuorinen" // All rights reserved.\n
@@ -57,7 +57,7 @@ ApplicationWindow {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
         }
-
+        
         // Teeman valintanappula
         Switch {
             id: control
@@ -67,8 +67,8 @@ ApplicationWindow {
             checked: false
         }
     }
-
-
+    
+    
     GridLayout {
         id: gridLayout
         anchors.left: parent.left
@@ -82,8 +82,8 @@ ApplicationWindow {
         anchors.leftMargin: 20
         columns: 11
         rows: 4
-
-
+        
+        
         // Menupalkki
         MenuBar {
             id: menuBar
@@ -96,7 +96,7 @@ ApplicationWindow {
             Layout.columnSpan: 11
             leftPadding: 0
             Layout.fillWidth: true
-
+            
             Menu {
                 title: qsTr("File")
                 Action {
@@ -112,8 +112,8 @@ ApplicationWindow {
                 }
             }
         }
-
-
+        
+        
         // Näyttö
         TextField {
             id: display
@@ -129,8 +129,8 @@ ApplicationWindow {
             text: mediaplayer.display
             activeFocusOnPress: false
         }
-
-
+        
+        
         // Fillereitä
         Item {
             id: item3
@@ -188,8 +188,8 @@ ApplicationWindow {
             Layout.fillHeight: false
             Layout.fillWidth: true
         }
-
-
+        
+        
         // Pause
         Button {
             id: pause
@@ -202,7 +202,7 @@ ApplicationWindow {
             Layout.leftMargin: -50
             transformOrigin: Item.BottomRight
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-
+            
             background: Image {
                 anchors.fill: parent
                 source: {
@@ -225,8 +225,8 @@ ApplicationWindow {
                 pause.visible = false
             }
         }
-
-
+        
+        
         // Play
         Button {
             id: play
@@ -239,7 +239,7 @@ ApplicationWindow {
             Layout.leftMargin: -50
             transformOrigin: Item.Bottom
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-
+            
             background: Image {
                 anchors.fill: parent
                 source: {
@@ -261,7 +261,7 @@ ApplicationWindow {
                 pause.visible = true
             }
         }
-
+        
         // Stop
         Button {
             id: stop
@@ -276,7 +276,7 @@ ApplicationWindow {
             transformOrigin: Item.Bottom
             bottomPadding: 6
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-
+            
             background: Image {
                 anchors.fill: parent
                 source: {
@@ -298,8 +298,8 @@ ApplicationWindow {
                 pause.visible = false
             }
         }
-
-
+        
+        
         // Filler
         Item {
             id: item2
@@ -311,8 +311,8 @@ ApplicationWindow {
             Layout.columnSpan: 3
             Layout.preferredWidth: -1
         }
-
-        //äänenvoimakkuus
+        
+        // Äänenvoimakkuus
         Slider {
             id: slider
             width: 200
@@ -340,7 +340,7 @@ ApplicationWindow {
             to: 100
             Layout.fillWidth: false
             wheelEnabled: true
-
+            
             Connections {
                 target: slider
                 onMoved: {
@@ -349,7 +349,7 @@ ApplicationWindow {
                 }
             }
         }
-
+        
         Slider /*ProgressBar*/ {
             id: progressBar
             width: 700
@@ -369,7 +369,7 @@ ApplicationWindow {
             Layout.columnSpan: 11
             stepSize: 1
             value: mediaplayer.position
-
+            
             Connections {
                 target: progressBar
                 onMoved: {
@@ -380,7 +380,3 @@ ApplicationWindow {
         }
     }
 }
-
-
-
-
