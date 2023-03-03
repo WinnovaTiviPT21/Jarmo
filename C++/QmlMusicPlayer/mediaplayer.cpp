@@ -108,6 +108,4 @@ void MediaPlayer::pauseClicked() {
 
 void MediaPlayer::stopClicked() {
     m_player.stop();
-    m_player.setVolume(m_volume);
-    emit volumeChanged();
 }

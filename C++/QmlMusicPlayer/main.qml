@@ -34,7 +34,6 @@ ApplicationWindow {
             play.visible = false
             stop.visible = true
             pause.visible = true
-            console.log("Current media: " + mediaplayer.display) // testi
         }
         onRejected: {
             console.log("Canceled")
@@ -350,7 +349,8 @@ ApplicationWindow {
             }
         }
         
-        Slider /*ProgressBar*/ {
+        //ProgressBar {
+        Slider {
             id: progressBar
             width: 700
             rightPadding: 20
@@ -376,6 +376,7 @@ ApplicationWindow {
                     mediaplayer.position = progressBar.value;
                     console.log(progressBar.value);
                 }
+
             }
         }
     }
