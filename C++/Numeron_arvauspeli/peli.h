@@ -2,34 +2,34 @@
 #define PELI_H
 
 #include <QObject>
+#include <random>
 
 class Peli : public QObject
 {
     Q_OBJECT
-//    Q_PROPERTY(int rngNro READ getRngNro WRITE setRngNro NOTIFY rngNroChanged)
     Q_PROPERTY(int rngNro READ getRngNro NOTIFY rngNroChanged)
+    Q_PROPERTY(int display READ getDisplay WRITE setDisplay NOTIFY displayChanged)
+
+    int counter = 10;
 
 public:
     Peli();
-//    Peli(QObject *parent = nullptr) : QObject(parent) {}
-//    Peli(QObject *parent) : QObject(parent) {}
-//    Peli(QObject *parent = 0);
-//    ~Peli();
 
 public slots:
-//    int rngNro();
-    int getRngNro();
-//    void setRngNro(int&);
-    void updateRngNro();
     void startClicked();
+    void guessClicked();
+
+    int getRngNro();
+    int getDisplay();
+    int setDisplay(int&);
 
 signals:
     void rngNroChanged();
+    void displayChanged();
 
 private:
-    int m_rngNro;
+    int m_rngNro = 0;
+    int m_display = 0;
 };
-
-
 
 #endif // PELI_H

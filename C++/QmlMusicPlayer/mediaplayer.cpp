@@ -20,7 +20,6 @@ MediaPlayer::MediaPlayer() {
     //    defaultsPath = "data/android/defaults.conf";
     //#endif
     //    QFile defaults(defaultsPath);
-
 }
 
 QString MediaPlayer::getDisplay() {

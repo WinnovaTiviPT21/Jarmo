@@ -23,10 +23,11 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
-    engine.load(url);
 
     Peli peli;
     engine.rootContext()->setContextProperty("peli", &peli);
+
+    engine.load(url);
 
     return app.exec();
 }
