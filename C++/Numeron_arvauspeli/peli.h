@@ -9,8 +9,8 @@ class Peli : public QObject
     Q_OBJECT
     Q_PROPERTY(int rngNro READ getRngNro NOTIFY rngNroChanged)
     Q_PROPERTY(int display READ getDisplay WRITE setDisplay NOTIFY displayChanged)
-
-    int counter = 10;
+    Q_PROPERTY(int counter READ getCounter NOTIFY counterChanged)
+    Q_PROPERTY(QString guide READ getGuide NOTIFY guideChanged)
 
 public:
     Peli();
@@ -22,14 +22,20 @@ public slots:
     int getRngNro();
     int getDisplay();
     int setDisplay(int&);
+    int getCounter();
+    QString getGuide();
 
 signals:
     void rngNroChanged();
     void displayChanged();
+    void counterChanged();
+    void guideChanged();
 
 private:
     int m_rngNro = 0;
     int m_display = 0;
+    int m_counter = 0;
+    QString m_guide = "Arvaa luku 0 - 100 väliltä.";
 };
 
 #endif // PELI_H

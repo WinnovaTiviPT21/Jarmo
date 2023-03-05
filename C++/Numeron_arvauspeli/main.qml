@@ -1,15 +1,10 @@
-/*********************
-** Numeron arvauspeli
-** Jarmo Vuorinen
-** 02.03.2023
-*********************/
-
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Layouts 1.11
 import QtQuick.Controls 2.15
 
 Window {
+    id: window
     // Puhelimen resoluutio
     //width: 360
     //height: 800
@@ -18,183 +13,376 @@ Window {
     visible: true
     title: qsTr("Numeron arvauspeli")
 
-    GridLayout {
-        id: gridLayout1
-        visible: visible
+    CustomBackground {
+        id: customBackground
         anchors.fill: parent
-        anchors.bottomMargin: 250
-        anchors.topMargin: 250
-        rows: 2
-        columns: 1
+    }
+
+    GridLayout {
+        id: startWindow
+        visible: true
+        anchors.fill: parent
+        columns: 3
+        rows: 4
+
+        Item {
+            id: spacer1
+            height: 86
+            Layout.preferredWidth: 14
+            Layout.preferredHeight: 150
+            Layout.minimumHeight: 0
+            Layout.fillHeight: true
+            Layout.columnSpan: 3
+            Layout.rowSpan: 1
+            Layout.fillWidth: true
+        }
 
         Text {
-            id: text3
+            id: arvausPeli
             opacity: 1
             visible: true
             text: qsTr("Numeron arvauspeli")
             font.pixelSize: 22
             horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignTop
-            Layout.bottomMargin: 0
-            Layout.topMargin: 0
-            font.bold: false
-            Layout.fillWidth: true
-            Layout.fillHeight: false
+            verticalAlignment: Text.AlignVCenter
             font.family: "MS Shell Dlg 2"
+            Layout.maximumWidth: 200
+            Layout.columnSpan: 3
+            font.bold: false
+            Layout.fillHeight: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            transformOrigin: Item.Center
             clip: false
+            Layout.rowSpan: 1
+            Layout.fillWidth: true
+            Layout.maximumHeight: 30
+            Layout.bottomMargin: 0
         }
 
-        Button {
-            id: start
+        MyButton {
+            id: startGame
             width: 117
+            height: 47
+            visible: true
             text: qsTr("Aloita")
-            font.capitalization: Font.MixedCase
-            Layout.fillWidth: false
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            font.pointSize: 22
-
+            Layout.maximumWidth: 120
+            Layout.preferredHeight: -1
             onClicked: {
-                gridLayout2.visible = true
-                gridLayout1.visible = false
+                mainWindow.visible = true
+                startWindow.visible = false
                 peli.startClicked()
                 console.log("Nro on: " + peli.rngNro)
             }
+            Layout.columnSpan: 3
+            Layout.fillWidth: true
+            Layout.maximumHeight: 50
+            Layout.preferredWidth: -1
+            Layout.minimumHeight: 40
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            Layout.minimumWidth: 100
+        }
+
+        Item {
+            id: spacer2
+            height: 86
+            Layout.preferredWidth: 14
+            Layout.preferredHeight: 150
+            Layout.minimumHeight: 0
+            Layout.fillHeight: true
+            Layout.columnSpan: 3
+            Layout.rowSpan: 1
+            Layout.fillWidth: true
         }
     }
 
     GridLayout {
-        id: gridLayout2
+        id: mainWindow
         visible: false
         anchors.fill: parent
+        anchors.rightMargin: 0
+        anchors.bottomMargin: 0
+        anchors.leftMargin: 0
+        anchors.topMargin: 0
         Layout.fillWidth: false
         flow: GridLayout.TopToBottom
         Layout.fillHeight: false
         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-        rows: 4
+        rows: 7
         columns: 1
 
+        Item {
+            id: spacer3
+            height: 86
+            Layout.preferredWidth: 14
+            Layout.preferredHeight: 150
+            Layout.minimumHeight: 0
+            Layout.fillHeight: true
+            Layout.columnSpan: 1
+            Layout.rowSpan: 1
+            Layout.fillWidth: true
+        }
+
         Text {
-            id: text1
-            opacity: 1
+            id: guide
             visible: true
-            text: qsTr("Arvaa luku 0 - 100 väliltä.")
+            text: peli.guide
             font.capitalization: Font.MixedCase
-            //text: peli.rngNro
             font.pixelSize: 22
             horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignTop
-            transformOrigin: Item.Center
-            Layout.fillWidth: false
-            Layout.fillHeight: false
+            verticalAlignment: Text.AlignVCenter
+            Layout.minimumWidth: 0
+            Layout.minimumHeight: 5
+            Layout.preferredHeight: -1
+            Layout.preferredWidth: -1
+            clip: false
+            Layout.columnSpan: 1
+            Layout.fillWidth: true
+            Layout.fillHeight: true
             font.family: "MS Shell Dlg 2"
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            clip: false
         }
 
         Text {
             id: guessesLeft
-            text: qsTr("10 arvausta jäljellä.")
+            visible: true
+            text: "Arvauksia jäljellä: " + peli.counter
             font.capitalization: Font.MixedCase
             font.pixelSize: 22
             horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignTop
-            Layout.fillWidth: false
-            Layout.fillHeight: false
+            verticalAlignment: Text.AlignVCenter
+            Layout.minimumWidth: 0
+            Layout.minimumHeight: 25
+            clip: false
+            Layout.columnSpan: 1
+            Layout.fillWidth: true
+            Layout.fillHeight: true
             font.family: "MS Shell Dlg 2"
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
-        TextField {
-            id: display
-            color: "#000000"
-            horizontalAlignment: Text.AlignHCenter
-            Layout.fillWidth: false
-            hoverEnabled: true
-            placeholderText: qsTr("Arvaus")
-            //text: peli.display
-            font.pointSize: 22
-            Layout.fillHeight: false
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-
-            //background: Rectangle {
-            //implicitWidth: 200
-            //implicitHeight: 40
-            //color: textField.enabled ? "transparent" : "#353637"
-            //border.color: textField.enabled ? "#000000" : "transparent"
-            //radius: 15
-            //}
+        Item {
+            id: spacer4
+            height: 86
+            opacity: 0
+            visible: true
+            clip: false
+            Layout.preferredWidth: -1
+            Layout.preferredHeight: 10
+            Layout.minimumHeight: 0
+            Layout.fillHeight: true
+            Layout.columnSpan: 1
+            Layout.rowSpan: 1
+            Layout.fillWidth: true
         }
 
-        Button {
-            id: guess
-            width: 117
-            text: qsTr("Tarkista")
-            font.capitalization: Font.MixedCase
+        TextField {
+            id: display
+            visible: true
+            horizontalAlignment: Text.AlignHCenter
             font.pointSize: 22
+            Layout.minimumHeight: 52
+            placeholderTextColor: "#7f353637"
+            hoverEnabled: true
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.maximumHeight: 52
+            Layout.maximumWidth: 117
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            placeholderText: qsTr("Arvaus")
+            text: ""
+        }
+
+        MyButton {
+            id: guess
+            visible: true
+            text: qsTr("Tarkista")
+            Layout.topMargin: -10
+            highlighted: false
+            padding: 6
+            leftPadding: 6
+            rightPadding: 6
+            bottomPadding: 6
+            topPadding: 6
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.minimumHeight: 47
+            Layout.maximumHeight: 47
+            Layout.maximumWidth: 117
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
             onClicked: {
                 peli.display = display.text;
                 peli.guessClicked();
-                console.log("Nro on: " + peli.display);
                 if (peli.rngNro === peli.display) {
-                    gridLayout2.visible = false
-                    gridLayout3.visible = true
+                    mainWindow.visible = false
+                    winWindow.visible = true
+                }
+                if (peli.counter === 0) {
+                    mainWindow.visible = false
+                    loseWindow.visible = true
                 }
             }
+        }
+
+
+        Item {
+            id: spacer5
+            height: 86
+            Layout.preferredWidth: 14
+            Layout.preferredHeight: 150
+            Layout.minimumHeight: 0
+            Layout.fillHeight: true
+            Layout.columnSpan: 1
+            Layout.rowSpan: 1
+            Layout.fillWidth: true
         }
     }
 
     GridLayout {
-        id: gridLayout3
+        id: winWindow
         visible: false
         anchors.fill: parent
+        columns: 3
+        rows: 4
+        Item {
+            id: spacer6
+            height: 86
+            Layout.preferredWidth: 14
+            Layout.preferredHeight: 150
+            Layout.minimumHeight: 0
+            Layout.fillHeight: true
+            Layout.columnSpan: 3
+            Layout.rowSpan: 1
+            Layout.fillWidth: true
+        }
+
         Text {
-            id: text4
+            id: voititPelin
             opacity: 1
             visible: true
             text: qsTr("Voitit pelin!")
-            font.capitalization: Font.MixedCase
-            font.pixelSize: 22
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignTop
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            Layout.minimumHeight: 25
+            Layout.maximumHeight: 35
+            Layout.maximumWidth: 147
+            font.pointSize: 22
+            Layout.columnSpan: 3
             font.family: "MS Shell Dlg 2"
             Layout.topMargin: 0
-            Layout.bottomMargin: 0
-            font.bold: false
+            font.capitalization: Font.MixedCase
             Layout.fillWidth: true
-            Layout.fillHeight: false
             clip: false
+            font.bold: false
+            Layout.bottomMargin: 0
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
-        Button {
-            id: again
-            width: 117
+        MyButton {
+            id: playAgain
             text: qsTr("Pelaa uudestaan")
-            font.capitalization: Font.MixedCase
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            font.pointSize: 22
-            Layout.fillWidth: false
+            Layout.minimumWidth: 0
+            Layout.minimumHeight: 47
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumHeight: 47
+            Layout.maximumWidth: 225
+            Layout.columnSpan: 3
             onClicked: {
-                    gridLayout2.visible = true
-                    gridLayout3.visible = false
-                    peli.startClicked()
-                    console.log("Nro on: " + peli.rngNro)
-                }
+                mainWindow.visible = true
+                winWindow.visible = false
+                peli.startClicked()
+                display.text = ""
+                console.log("Nro on: " + peli.rngNro)
+            }
         }
-        anchors.topMargin: 250
-        anchors.bottomMargin: 250
-        columns: 1
-        rows: 2
+
+        Item {
+            id: spacer7
+            height: 86
+            Layout.preferredWidth: 14
+            Layout.preferredHeight: 150
+            Layout.minimumHeight: 0
+            Layout.fillHeight: true
+            Layout.columnSpan: 3
+            Layout.rowSpan: 1
+            Layout.fillWidth: true
+        }
+    }
+
+    GridLayout {
+        id: loseWindow
+        visible: false
+        anchors.fill: parent
+        columns: 3
+        rows: 4
+        Item {
+            id: spacer8
+            height: 86
+            Layout.preferredWidth: 14
+            Layout.preferredHeight: 150
+            Layout.minimumHeight: 0
+            Layout.fillHeight: true
+            Layout.columnSpan: 3
+            Layout.rowSpan: 1
+            Layout.fillWidth: true
+        }
+
+        Text {
+            id: havisitPelin
+            opacity: 1
+            visible: true
+            text: qsTr("Hävisit pelin.")
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignTop
+            Layout.minimumHeight: 25
+            Layout.maximumHeight: 35
+            Layout.maximumWidth: 165
+            font.pointSize: 22
+            Layout.columnSpan: 3
+            font.family: "MS Shell Dlg 2"
+            Layout.topMargin: 0
+            font.capitalization: Font.MixedCase
+            Layout.fillWidth: true
+            clip: false
+            font.bold: false
+            Layout.bottomMargin: 0
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+        }
+
+        MyButton {
+            id: tryAgain
+            text: qsTr("Yritä uudestaan")
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.minimumHeight: 47
+            Layout.maximumHeight: 47
+            Layout.maximumWidth: 216
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            Layout.columnSpan: 3
+            onClicked: {
+                mainWindow.visible = true
+                loseWindow.visible = false
+                peli.startClicked()
+                display.text = ""
+                console.log("Nro on: " + peli.rngNro)
+            }
+        }
+
+        Item {
+            id: spacer9
+            height: 86
+            Layout.preferredWidth: 14
+            Layout.preferredHeight: 150
+            Layout.minimumHeight: 0
+            Layout.fillHeight: true
+            Layout.columnSpan: 3
+            Layout.rowSpan: 1
+            Layout.fillWidth: true
+        }
     }
 }
-
-
-
-/*##^##
-Designer {
-    D{i:0}D{i:9}D{i:0;invisible:true}
-}
-##^##*/

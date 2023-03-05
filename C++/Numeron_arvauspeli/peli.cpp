@@ -27,6 +27,16 @@ int Peli::setDisplay(int& display)
     return m_display;
 }
 
+int Peli::getCounter()
+{
+    return m_counter;
+}
+
+QString Peli::getGuide()
+{
+    return m_guide;
+}
+
 void Peli::startClicked()
 {
     // std::random_device ei toiminut jostain syystä
@@ -37,14 +47,30 @@ void Peli::startClicked()
                 };
 
     m_rngNro = distr(gen);
+    m_counter = 10;
+    m_guide = "Arvaa luku 0 - 100 väliltä.";
+
     cout << "Arvottu nro on: " << m_rngNro << endl;
+    cout << "Laskuri on: " << m_counter << endl;
+
+    emit guideChanged();
+    emit counterChanged();
 }
 
 void Peli::guessClicked()
 {
-    cout << "Annoit nron: " << m_display << endl;
-    if (m_display == m_rngNro) {
-        cout << "Voitit pelin" << endl;
+    if (m_display < m_rngNro)
+    {
+        m_guide = "Oikea numero on enemmän";
+        m_counter--;
     }
+    if (m_display > m_rngNro)
+    {
+        m_guide = "Oikea numero on vähemmän";
+        m_counter--;
+    }
+
+    emit guideChanged();
+    emit counterChanged();
 }
 
