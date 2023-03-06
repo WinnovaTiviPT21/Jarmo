@@ -1,6 +1,6 @@
 #include <QMediaPlayer>
 #include <QMediaContent>
-#include "mediaplayer.h"
+#include "MediaPlayer.h"
 
 
 MediaPlayer::MediaPlayer() {
@@ -9,17 +9,17 @@ MediaPlayer::MediaPlayer() {
     connect(&m_player, &QMediaPlayer::positionChanged, this, &MediaPlayer::updatePosition);
     connect(&m_player, &QMediaPlayer::durationChanged, this, &MediaPlayer::updateDisplay);
 
-    //#ifdef  Q_OS_ANDROID
-    //    QStringList files = {"/storage/emulated/0/Music"};
-    //#else
-    //    QStringList files = QStandardPaths::standardLocations(QStandardPaths::MusicLocation);
-    //#endif
+//    #ifdef  Q_OS_ANDROID
+//        QStringList files = {"/storage/emulated/0/Music"};
+//    #else
+//        QStringList files = QStandardPaths::standardLocations(QStandardPaths::MusicLocation);
+//    #endif
 
-    //    QString defaultsPath = "data/defaults.conf";
-    //#if defined(Q_OS_ANDROID)
-    //    defaultsPath = "data/android/defaults.conf";
-    //#endif
-    //    QFile defaults(defaultsPath);
+//        QString defaultsPath = "data/defaults.conf";
+//    #if defined(Q_OS_ANDROID)
+//        defaultsPath = "data/android/defaults.conf";
+//    #endif
+//        QFile defaults(defaultsPath);
 }
 
 QString MediaPlayer::getDisplay() {
