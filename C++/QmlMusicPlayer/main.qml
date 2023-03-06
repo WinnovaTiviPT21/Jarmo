@@ -21,6 +21,9 @@ ApplicationWindow {
     
     // Avaa tiedoston valintaikkunan
     // https://stackoverflow.com/questions/15079406/qt-necessitas-reasonable-qfiledialog-replacement-skin
+    // You could easily build your own file dialog either with QtWidgets or QML,
+    // by using the out-of-the-box QFileSystemModel class or the FolderListModel element.
+    // https://doc.qt.io/qt-5/qml-qt-labs-folderlistmodel-folderlistmodel.html
     FileDialog {
         id: fileDialog
         title: "Please choose a file"
