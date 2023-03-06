@@ -16,15 +16,15 @@ int main()
     // Mikä on todennäköisyys saada kymmenen klaavaa peräjälkeen?
     // Tuloksen tarkka arvo on 0.5^10 = 0,0009765625. Kaksi merkitsevää numero oikein riittää.
 
-    const int heitot = 1000000;     // heittojen määrä
-    const int tavoite = 10;         // tavoite kuinka monta kertaa peräkkäin
+    const int heitot = 10000000;    // heittojen määrä
+    const int tavoite = 9;          // tavoite kuinka monta kertaa peräkkäin
     double perakkaiset_klaavat = 0; // laskee peräkkäiset klaavat
     double tavoite_saavutettu = 0;  // laskee kuinka monta kertaa tavoite saavutettu
 
     mt19937 generator{ 42 }; // näennäisrandom generaattori jonka seed on 42
     uniform_int_distribution<int> distribution(0, 1); // rajaa luvut 0:n ja 1:n (kruuna ja klaava)
 
-    for (int i = 0; i <= heitot; i++) {
+    for (int i = 0; i < heitot; i++) {
         int tulos = distribution(generator);      // apumuuttuja johon tallennetaan heiton tulos
         if (tulos == 1) {                         // jos tulos on klaava
             perakkaiset_klaavat++;                // lisätään perättäistä klaavojen laskuriin 1
