@@ -187,7 +187,7 @@ ApplicationWindow {
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 22
             Layout.minimumHeight: 52
-//            placeholderTextColor: "#7f353637"
+            //placeholderTextColor: "#7f353637"
             hoverEnabled: true
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -196,7 +196,6 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             placeholderText: qsTr("Arvaus")
             text: ""
-
 
             onPressed: {
                 display.placeholderText = ""
