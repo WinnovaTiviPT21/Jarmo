@@ -7,10 +7,15 @@ import QtQuick.Layouts 1.11
         height: 640
         clip: true
         //visible: true
+
         visible: {
             if (control.checked == true)
             {
-                myBackground.visible = false
+                MyBackground.visible = false
+            }
+            else
+            {
+                MyBackground.visible = true
             }
         }
 
