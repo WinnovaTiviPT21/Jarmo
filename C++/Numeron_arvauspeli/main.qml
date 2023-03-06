@@ -6,9 +6,6 @@ import QtQuick.Controls.Material 2.15
 
 ApplicationWindow {
     id: window
-    // Puhelimen resoluutio
-    //width: 360
-    //height: 800
     width: 480
     height: 640
     visible: true
@@ -190,7 +187,7 @@ ApplicationWindow {
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 22
             Layout.minimumHeight: 52
-            placeholderTextColor: "#7f353637"
+//            placeholderTextColor: "#7f353637"
             hoverEnabled: true
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -199,6 +196,7 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             placeholderText: qsTr("Arvaus")
             text: ""
+
 
             onPressed: {
                 display.placeholderText = ""
@@ -301,6 +299,7 @@ ApplicationWindow {
                 winWindow.visible = false
                 peli.startClicked()
                 display.text = ""
+                display.placeholderText = qsTr("Arvaus")
                 console.log("Arvottu nro on: " + peli.rngNro)
             }
         }
@@ -366,6 +365,7 @@ ApplicationWindow {
                 loseWindow.visible = false
                 peli.startClicked()
                 display.text = ""
+                display.placeholderText = qsTr("Arvaus")
                 console.log("Arvottu nro on: " + peli.rngNro)
             }
         }

@@ -7,6 +7,8 @@ Button {
     id: button
     width: 117
     height: 47
+    highlighted: false
+    flat: false
     Layout.columnSpan: 1
     Layout.fillHeight: false
     topPadding: 6
@@ -14,5 +16,5 @@ Button {
     font.capitalization: Font.MixedCase
     Layout.fillWidth: false
     Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-    font.pointSize: 22
+    font.pointSize: 22    
 }

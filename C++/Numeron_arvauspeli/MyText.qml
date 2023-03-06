@@ -14,4 +14,22 @@ Text {
     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     transformOrigin: Item.Center
     clip: false
+
+    color: {
+        if (control.checked == true)
+        {
+            MyText.color = "#ffffff"
+        }
+        else
+        {
+            MyText.color = "#000000"
+
+        }
+    }
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/
