@@ -56,7 +56,6 @@ int main()
         }
     }
 
-    // Antaa tuloksen: 0.000485, se kerrottuna 2:lla on 0,00097
     double todennakoisyys = tavoite_saavutettu / heitot;
 
     cout << "Todennakoisyys kymmenen perattaisen klaavan heittamiseksi on: " << todennakoisyys << "\n\n";
