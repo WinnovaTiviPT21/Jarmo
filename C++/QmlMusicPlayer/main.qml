@@ -20,6 +20,7 @@ ApplicationWindow {
     
     
     // Avaa tiedoston valintaikkunan
+    // https://stackoverflow.com/questions/15079406/qt-necessitas-reasonable-qfiledialog-replacement-skin
     FileDialog {
         id: fileDialog
         title: "Please choose a file"
