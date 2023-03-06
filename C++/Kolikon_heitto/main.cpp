@@ -16,6 +16,24 @@ int main()
     // Mikä on todennäköisyys saada kymmenen klaavaa peräjälkeen?
     // Tuloksen tarkka arvo on 0.5^10 = 0,0009765625. Kaksi merkitsevää numero oikein riittää.
 
+    /*
+    ** Opettajan ratkaisu
+    **
+    ** mt19937 generator(42);
+    ** uniform_int_distribution<int> flip(0, 1);
+    ** float wins = 0;
+    **
+    ** int samples = 10000000
+    ** for (int n = 0; n < samples; n++) {
+    **     int sum = 0;
+    **     for (int i = 0; i < 10; i++) {
+    **         sum = sum + flip(generator);
+    **     }
+    **     if (sum == 10) {
+    **         wins++;
+    **     }
+    ** }
+    */
     const int heitot = 10000000;    // heittojen määrä
     const int tavoite = 9;          // tavoite kuinka monta kertaa peräkkäin
     double perakkaiset_klaavat = 0; // laskee peräkkäiset klaavat
