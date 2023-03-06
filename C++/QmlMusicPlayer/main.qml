@@ -16,7 +16,7 @@ ApplicationWindow {
     visible: true
     modality: Qt.ApplicationModal
     title: qsTr("Paska soitin")
-    Material.theme: control.position < 1 ? Material.Light : Material.Dark // Teema
+    Material.theme: control.position < 1 ? Material.Light : Material.Dark
     
     
     // Avaa tiedoston valintaikkunan

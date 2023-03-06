@@ -2,8 +2,9 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Layouts 1.11
 import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 
-Window {
+ApplicationWindow {
     id: window
     // Puhelimen resoluutio
     //width: 360
@@ -12,10 +13,38 @@ Window {
     height: 640
     visible: true
     title: qsTr("Numeron arvauspeli")
+    Material.theme: control.position < 1 ? Material.Light : Material.Dark
 
-    CustomBackground {
-        id: customBackground
+    MyBackground {
+        //id: myBackground
         anchors.fill: parent
+    }
+
+    Drawer {
+        id: drawer
+        width: 0.50 * window.width
+        height: window.height
+
+        MyBackground {
+            anchors.fill: parent
+        }
+
+        Label {
+            id: content
+            text: "Copyright \xa9 2023 by Jarmo Vuorinen" // All rights reserved.\n
+            font.pixelSize: 12
+            anchors.margins: 12
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Switch {
+            id: control
+            anchors.right: parent.right
+            anchors.top: parent.top
+            text: "Dark theme"
+            checked: false
+        }
     }
 
     GridLayout {
@@ -37,22 +66,12 @@ Window {
             Layout.fillWidth: true
         }
 
-        Text {
+        MyText {
             id: arvausPeli
-            opacity: 1
-            visible: true
             text: qsTr("Numeron arvauspeli")
-            font.pixelSize: 22
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.family: "MS Shell Dlg 2"
             Layout.maximumWidth: 200
             Layout.columnSpan: 3
-            font.bold: false
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            transformOrigin: Item.Center
-            clip: false
             Layout.rowSpan: 1
             Layout.fillWidth: true
             Layout.maximumHeight: 30
@@ -67,12 +86,6 @@ Window {
             text: qsTr("Aloita")
             Layout.maximumWidth: 120
             Layout.preferredHeight: -1
-            onClicked: {
-                mainWindow.visible = true
-                startWindow.visible = false
-                peli.startClicked()
-                console.log("Nro on: " + peli.rngNro)
-            }
             Layout.columnSpan: 3
             Layout.fillWidth: true
             Layout.maximumHeight: 50
@@ -81,6 +94,17 @@ Window {
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             Layout.minimumWidth: 100
+
+            /*
+            ** mietein olisiko koodin sieventämiseksi voinut käyttää (Connections {}) ydistämään uudet pelit tähän,
+            ** nopealla yrityksellä näyttäisi onnistuvan, mutta vaatisi funtioiden uudelleen suunnittelemista.
+            */
+            onClicked: {
+                mainWindow.visible = true
+                startWindow.visible = false
+                peli.startClicked()
+                console.log("Arvottu nro on: " + peli.rngNro)
+            }
         }
 
         Item {
@@ -123,42 +147,26 @@ Window {
             Layout.fillWidth: true
         }
 
-        Text {
+        MyText {
             id: guide
-            visible: true
             text: peli.guide
-            font.capitalization: Font.MixedCase
-            font.pixelSize: 22
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
             Layout.minimumWidth: 0
             Layout.minimumHeight: 5
             Layout.preferredHeight: -1
             Layout.preferredWidth: -1
-            clip: false
             Layout.columnSpan: 1
             Layout.fillWidth: true
             Layout.fillHeight: true
-            font.family: "MS Shell Dlg 2"
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
-        Text {
+        MyText {
             id: guessesLeft
-            visible: true
             text: "Arvauksia jäljellä: " + peli.counter
-            font.capitalization: Font.MixedCase
-            font.pixelSize: 22
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
             Layout.minimumWidth: 0
             Layout.minimumHeight: 25
-            clip: false
             Layout.columnSpan: 1
             Layout.fillWidth: true
             Layout.fillHeight: true
-            font.family: "MS Shell Dlg 2"
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
         Item {
@@ -191,6 +199,11 @@ Window {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             placeholderText: qsTr("Arvaus")
             text: ""
+
+            onPressed: {
+                display.placeholderText = ""
+                display.text = ""
+            }
         }
 
         MyButton {
@@ -245,6 +258,7 @@ Window {
         anchors.fill: parent
         columns: 3
         rows: 4
+
         Item {
             id: spacer6
             height: 86
@@ -257,27 +271,17 @@ Window {
             Layout.fillWidth: true
         }
 
-        Text {
+        MyText {
             id: voititPelin
-            opacity: 1
-            visible: true
             text: qsTr("Voitit pelin!")
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignTop
             Layout.minimumHeight: 25
             Layout.maximumHeight: 35
             Layout.maximumWidth: 147
-            font.pointSize: 22
             Layout.columnSpan: 3
-            font.family: "MS Shell Dlg 2"
             Layout.topMargin: 0
-            font.capitalization: Font.MixedCase
             Layout.fillWidth: true
-            clip: false
-            font.bold: false
             Layout.bottomMargin: 0
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
         MyButton {
@@ -291,12 +295,13 @@ Window {
             Layout.maximumHeight: 47
             Layout.maximumWidth: 225
             Layout.columnSpan: 3
+
             onClicked: {
                 mainWindow.visible = true
                 winWindow.visible = false
                 peli.startClicked()
                 display.text = ""
-                console.log("Nro on: " + peli.rngNro)
+                console.log("Arvottu nro on: " + peli.rngNro)
             }
         }
 
@@ -319,6 +324,7 @@ Window {
         anchors.fill: parent
         columns: 3
         rows: 4
+
         Item {
             id: spacer8
             height: 86
@@ -331,27 +337,17 @@ Window {
             Layout.fillWidth: true
         }
 
-        Text {
+        MyText {
             id: havisitPelin
-            opacity: 1
-            visible: true
             text: qsTr("Hävisit pelin.")
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignTop
             Layout.minimumHeight: 25
             Layout.maximumHeight: 35
             Layout.maximumWidth: 165
-            font.pointSize: 22
             Layout.columnSpan: 3
-            font.family: "MS Shell Dlg 2"
             Layout.topMargin: 0
-            font.capitalization: Font.MixedCase
             Layout.fillWidth: true
-            clip: false
-            font.bold: false
             Layout.bottomMargin: 0
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
         MyButton {
@@ -364,12 +360,13 @@ Window {
             Layout.maximumWidth: 216
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             Layout.columnSpan: 3
+
             onClicked: {
                 mainWindow.visible = true
                 loseWindow.visible = false
                 peli.startClicked()
                 display.text = ""
-                console.log("Nro on: " + peli.rngNro)
+                console.log("Arvottu nro on: " + peli.rngNro)
             }
         }
 

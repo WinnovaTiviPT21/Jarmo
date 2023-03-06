@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MyButton.qml</file>
-        <file>CustomBackground.qml</file>
+        <file>MyBackground.qml</file>
+        <file>MyText.qml</file>
     </qresource>
 </RCC>

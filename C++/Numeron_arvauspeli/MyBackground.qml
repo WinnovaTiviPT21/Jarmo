@@ -2,8 +2,18 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.11
 
     Rectangle {
+        id: myBackground
         width: 480
         height: 640
+        clip: true
+        //visible: true
+        visible: {
+            if (control.checked == true)
+            {
+                myBackground.visible = false
+            }
+        }
+
         gradient: Gradient {
             GradientStop {
                 position: 0
@@ -16,7 +26,6 @@ import QtQuick.Layouts 1.11
             }
             orientation: Gradient.Vertical
         }
-        clip: true
     }
 
 
