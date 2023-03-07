@@ -4,5 +4,6 @@
         <file>MyButton.qml</file>
         <file>MyBackground.qml</file>
         <file>MyText.qml</file>
+        <file>MyDarkBackground.qml</file>
     </qresource>
 </RCC>

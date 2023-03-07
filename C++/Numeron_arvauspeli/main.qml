@@ -17,12 +17,21 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
+    MyDarkBackground {
+        //id: myDarkBackground
+        anchors.fill: parent
+    }
+
     Drawer {
         id: drawer
         width: 0.50 * window.width
         height: window.height
 
         MyBackground {
+            anchors.fill: parent
+        }
+
+        MyDarkBackground {
             anchors.fill: parent
         }
 

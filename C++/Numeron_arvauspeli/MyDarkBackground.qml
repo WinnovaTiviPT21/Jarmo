@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.11
 
 Rectangle {
-    id: myBackground
+    id: myDarkBackground
     width: 480
     height: 640
     clip: true
@@ -10,32 +10,25 @@ Rectangle {
     visible: {
         if (control.checked === true)
         {
-            MyBackground.visible = false
+            MyDarkBackground.visible = true
         }
         else
         {
-            MyBackground.visible = true
+            MyDarkBackground.visible = false
         }
     }
 
-    // New York
+    // Premium Dark
     gradient: Gradient {
         GradientStop {
             position: 0
-            color: "#fff1eb"
+            color: "#434343"
         }
 
         GradientStop {
             position: 1
-            color: "#98ddff"
+            color: "#000000"
         }
         orientation: Gradient.Vertical
     }
 }
-
-
-/*##^##
-Designer {
-    D{i:0;height:640;width:480}
-}
-##^##*/
