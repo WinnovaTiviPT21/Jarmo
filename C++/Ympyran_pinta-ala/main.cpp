@@ -11,6 +11,8 @@ using namespace std;
 
 // Opettajan ratkaisu
 /*
+** Opettajan ratkaisu
+**
 ** class Circle {
 ** public:
 **   float m_x;
@@ -49,9 +51,10 @@ using namespace std;
 ** return 0;
 */
 
-// Ylemmässä oli tullut virheitä kopioidessa,
-// tämän pitäisi olla toimiva versio.
 /*
+** Ylemmässä oli tullut virheitä kopioidessa,
+** tämän pitäisi olla toimiva versio.
+**
 ** class Circle {
 ** public:
 **     float m_x;
