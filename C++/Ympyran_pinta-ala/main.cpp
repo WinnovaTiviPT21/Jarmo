@@ -9,52 +9,98 @@
 
 using namespace std;
 
+// Opettajan ratkaisu
+/*
+** class Circle {
+** public:
+**   float m_x;
+**   float m_y;
+**   float m_radius;
+**
+**   bool isInside(float x, float y);
+** }
+**
+** bool Circle::isInside(float x, float y) {
+**   float local_x = x - m_x;
+**   float local_y = y - m_y;
+**
+**   return local_x * local_x + local_y * local_y <= m_radius * m_radius;
+**
+** int side = 20;
+** mt19937 gen{ 42 };
+** uniform_real_distribution<> dist(0, 10);
+**
+** float isInside = 0;
+** int samples = 10000000
+**
+** Circle c{15.0, 10.0, 5.0}
+** for(int i = 0; i < samples; i++) {
+**   float x = dist(generator)
+**   float y = dist(generator)
+**
+**   if (c.isInside(x,y)) {
+**      isInside++;
+**   }
+** }
+**
+** float aseaOfSquare = side * side;
+** float areaOfCircle = isInside/samples * areaOfSquare;
+** cout << "Ympyrän pinta-ala " << areaOfCiscle << endl;
+** return 0;
+*/
+
+// Ylemmässä oli tullut virheitä kopioidessa,
+// tämän pitäisi olla toimiva versio.
+/*
+** class Circle {
+** public:
+**     float m_x;
+**     float m_y;
+**     float m_radius;
+**
+**     bool isInside(float x, float y);
+** };
+**
+** bool Circle::isInside(float x, float y) {
+**     float local_x = x - m_x;
+**     float local_y = y - m_y;
+**
+**     return local_x * local_x + local_y * local_y <= m_radius * m_radius;
+** }
+**
+** int main()
+** {
+**     // Opettajan ratkaisu
+**     int side = 20;
+**     mt19937 gen{ 42 };
+**     uniform_real_distribution<> dist(0, 10);
+**
+**     float isInside = 0;
+**     int samples = 10000000;
+**
+**     Circle c{10.0, 10.0, 5.0};
+**     for(int i = 0; i < samples; i++) {
+**         float x = dist(gen);
+**         float y = dist(gen);
+**
+**         if (c.isInside(x,y)) {
+**             isInside++;
+**         }
+**     }
+**
+**     float areaOfSquare = side * side;
+**     float areaOfCircle = isInside/samples * areaOfSquare;
+**     cout << "Ympyran pinta-ala " << areaOfCircle << endl;
+**     return 0;
+** }
+*/
+
 int main()
 {
     // Laske Monte Carlo simulaatiolla oheisen ympyrän pinta-ala. Eli arvot satunnaisesti pisteen neliön
     // sisälle ja testaat, onko piste ympyrän sisällä vai ei. Testaaminen onnistuu Pythagoraan lauseella.
     // Käytä luokkaa std::uniform_real_distribution. Alusta satunnaislukugeneraattori luvulla 42.
-
-    /*
-    ** Opettajan ratkaisu
-    **
-    ** class Circle {
-    ** publec:
-    **   float m_x;
-    **   float m_y;
-    **   float m_radius;
-    **
-    **   bool isInside(float x, float y);
-    ** }
-    **
-    ** bool Circle::isInside(float x, float y) {
-    **   float local_x = x - m_x;
-    **   float local_y = y - m_y;
-    **
-    **   return local_x * local_x + local_y * local_y <= m_radius * m_radius;
-    **
-    ** int side = 20;
-    ** mt19937 gen{ 42 };
-    ** uniform_real_distribution<> dist(0, 10);
-    **
-    ** float isInside = 0;
-    ** int samples = 10000000
-    **
-    ** Circle c{15.0, 10.0, 5.0}
-    ** for(int i = 0; i < samples; i++) {
-    **   float x = dist(generator)
-    **   float y = dist(generator)
-    **
-    **   if (c.isInside(x,y)) {
-    **      isInside++;
-    **   }
-    ** }
-    **
-    ** float aseaOfSquare = side * side;
-    ** float areaOfCircle = isInside/samples * areaOfSquare;
-    ** cout << "Ympyrän pinta-ala " << areaOfCiscle << endl;
-    ** return 0;
-    */
+    // Ympyrän säde on 5 m. Ympyrän pinta-alan kaava on pi * r^2
 
     const int r = 5;           // säde
     const int piste = 1000000; // pisteiden määrä
