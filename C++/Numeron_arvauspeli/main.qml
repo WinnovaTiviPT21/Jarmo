@@ -11,6 +11,7 @@ ApplicationWindow {
     visible: true
     title: qsTr("Numeron arvauspeli")
     Material.theme: control.position < 1 ? Material.Light : Material.Dark
+    //Material.accent: control.position < 1 ? Material.Light : Material.Dark
 
     MyBackground {
         //id: myBackground
@@ -90,6 +91,7 @@ ApplicationWindow {
             height: 47
             visible: true
             text: qsTr("Aloita")
+            //hoverEnabled: true
             Layout.maximumWidth: 120
             Layout.preferredHeight: -1
             Layout.columnSpan: 3
@@ -205,6 +207,7 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             placeholderText: qsTr("Arvaus")
             text: ""
+            //Material.accent: Material.DeepOrange
 
             onPressed: {
                 display.placeholderText = ""
@@ -217,7 +220,6 @@ ApplicationWindow {
             visible: true
             text: qsTr("Tarkista")
             Layout.topMargin: -10
-            highlighted: false
             padding: 6
             leftPadding: 6
             rightPadding: 6
