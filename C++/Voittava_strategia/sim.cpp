@@ -35,6 +35,7 @@ void Sim::run1() {
     cout << "Voittamisen todennakoisyys kun arvataan aina puolestavalista: " << prob << endl;
 }
 
+// Laskee voiton todennäköisyyden aina kun arvataan satunnainen luku.
 void Sim::run2() {
     Peli peli;
     float wins = 0;
