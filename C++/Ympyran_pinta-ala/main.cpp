@@ -3,7 +3,6 @@
 ** Jarmo Vuorinen
 ** 01.03.2023
 ********************/
-
 #include <iostream>
 #include <random>
 
@@ -96,14 +95,15 @@ using namespace std;
 ** }
 */
 
+
+/*
+** Laske Monte Carlo simulaatiolla oheisen ympyrän pinta-ala. Eli arvot satunnaisesti pisteen neliön
+** sisälle ja testaat, onko piste ympyrän sisällä vai ei. Testaaminen onnistuu Pythagoraan lauseella.
+** Käytä luokkaa std::uniform_real_distribution. Alusta satunnaislukugeneraattori luvulla 42.
+** Ympyrän säde on 5 m. Ympyrän pinta-alan kaava on pi * r^2
+*/
 int main()
 {
-    /*
-    ** Laske Monte Carlo simulaatiolla oheisen ympyrän pinta-ala. Eli arvot satunnaisesti pisteen neliön
-    ** sisälle ja testaat, onko piste ympyrän sisällä vai ei. Testaaminen onnistuu Pythagoraan lauseella.
-    ** Käytä luokkaa std::uniform_real_distribution. Alusta satunnaislukugeneraattori luvulla 42.
-    ** Ympyrän säde on 5 m. Ympyrän pinta-alan kaava on pi * r^2
-    */
     const int r = 5;           // säde
     const int piste = 1000000; // pisteiden määrä
     float ympyran_sisalla = 0; // laskee pisteet ympyrän sisällä

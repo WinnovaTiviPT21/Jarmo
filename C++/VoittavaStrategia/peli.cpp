@@ -39,8 +39,6 @@ string Peli::getGuide()
 
 void Peli::startClicked()
 {
-    // std::random_device ei toiminut jostain syystä
-    // niin piti sen sijaan käyttää system clockia.
     uniform_int_distribution<> distr(0, 100);
     mt19937 gen {static_cast<unsigned int>(
                     chrono::steady_clock::now().time_since_epoch().count())
@@ -50,8 +48,8 @@ void Peli::startClicked()
     m_counter = 10;
     m_guide = "Arvaa luku 0 - 100 väliltä.";
 
+    cout << "Arvottu nro on: " << m_rngNro << endl;
     cout << "Yrityksia jaljella : " << m_counter << endl;
-    //cout << "Arvottu nro on: " << m_rngNro << endl;
 }
 
 void Peli::guessClicked()

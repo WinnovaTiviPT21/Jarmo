@@ -14,7 +14,7 @@ using namespace std;
 
 int main()
 {
-    Peli::startClicked();
+    Peli startClicked;
 
     return 0;
 }

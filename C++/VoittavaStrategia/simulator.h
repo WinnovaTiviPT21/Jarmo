@@ -1,8 +1,10 @@
 #ifndef SIMULATOR_H
 #define SIMULATOR_H
 
+//#include "peli.h"
 
-class Simulator
+
+class Simulator /*: public Peli*/
 {
 public:
     Simulator();

@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Opettajan malli
 class Circle {
 public:
     float m_x;
