@@ -52,6 +52,9 @@ void Peli::startClicked()
 
     cout << "Yrityksia jaljella : " << m_counter << endl;
     //cout << "Arvottu nro on: " << m_rngNro << endl;
+
+    emit guideChanged();
+    emit counterChanged();
 }
 
 void Peli::guessClicked()
@@ -66,5 +69,8 @@ void Peli::guessClicked()
         m_guide = "Oikea numero on vähemmän";
         m_counter--;
     }
+
+    emit guideChanged();
+    emit counterChanged();
 }
 

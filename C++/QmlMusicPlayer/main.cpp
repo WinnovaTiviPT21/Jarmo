@@ -3,7 +3,7 @@
 #include <QQmlContext>
 #include <QQuickStyle>
 
-#include "MediaPlayer.h"
+#include "mediaplayer.h"
 
 
 #ifdef Q_OS_ANDROID

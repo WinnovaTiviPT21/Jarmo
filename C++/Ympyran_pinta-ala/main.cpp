@@ -72,7 +72,6 @@ using namespace std;
 **
 ** int main()
 ** {
-**     // Opettajan ratkaisu
 **     int side = 20;
 **     mt19937 gen{ 42 };
 **     uniform_real_distribution<> dist(0, 10);

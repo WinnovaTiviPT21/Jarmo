@@ -1,6 +1,6 @@
 #include <QMediaPlayer>
 #include <QMediaContent>
-#include "MediaPlayer.h"
+#include "mediaplayer.h"
 
 
 MediaPlayer::MediaPlayer() {
