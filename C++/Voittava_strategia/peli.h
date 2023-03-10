@@ -16,7 +16,7 @@ class Peli : public QObject
 public:
     Peli();
 
-//public slots:
+public slots:
     void startClicked();
     void guessClicked();
 
@@ -24,9 +24,9 @@ public:
     int getDisplay();
     int setDisplay(int&);
     int getCounter();
-    std::string getGuide();
+    QString getGuide();
 
-//signals:
+signals:
     void rngNroChanged();
     void displayChanged();
     void counterChanged();
@@ -36,7 +36,7 @@ private:
     int m_rngNro = 0;
     int m_display = 0;
     int m_counter = 0;
-    std::string m_guide = "Arvaa luku 0 - 100 väliltä.";
+    QString m_guide = "Arvaa luku 0 - 100 väliltä.";
 };
 
 #endif // PELI_H

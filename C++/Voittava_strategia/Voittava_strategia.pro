@@ -10,7 +10,7 @@ CONFIG -= app_bundle
 SOURCES += \
         main.cpp \
         peli.cpp \
-        simulator.cpp
+        sim.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -19,4 +19,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     peli.h \
-    simulator.h
+    sim.h

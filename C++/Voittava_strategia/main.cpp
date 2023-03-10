@@ -3,6 +3,7 @@
 #include <random>
 #include <chrono>
 #include "peli.h"
+#include "sim.h"
 using namespace std;
 
 //int main(int argc, char *argv[])
@@ -14,7 +15,10 @@ using namespace std;
 
 int main()
 {
-    Peli startClicked;
+    //Peli startClicked;
+    Sim sim;
+    sim.run();
 
+    cout << "" << endl;
     return 0;
 }
