@@ -2,7 +2,7 @@
 #include <random>
 #include <chrono>
 #include "peli.h"
-#include "simulator.h"
+#include "sim.h"
 using namespace std;
 
 /*
@@ -16,6 +16,15 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello World!" << endl;
+//    Peli strategia1;
+//    strategia1.startClicked();
+
+//    Sim strat1;
+//    strat1.startClicked();
+
+    Sim puolikas();
+
+
+    cout << "" << endl;
     return 0;
 }

@@ -6,8 +6,8 @@ CONFIG -= qt
 SOURCES += \
         main.cpp \
         peli.cpp \
-        simulator.cpp
+        sim.cpp
 
 HEADERS += \
     peli.h \
-    simulator.h
+    sim.h

@@ -49,7 +49,7 @@ void Peli::startClicked()
     m_guide = "Arvaa luku 0 - 100 väliltä.";
 
     cout << "Arvottu nro on: " << m_rngNro << endl;
-    cout << "Yrityksia jaljella : " << m_counter << endl;
+    cout << "Yrityksia jaljella: " << m_counter << endl;
 }
 
 void Peli::guessClicked()
