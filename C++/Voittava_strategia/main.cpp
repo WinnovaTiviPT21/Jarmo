@@ -2,7 +2,6 @@
 #include <iostream>
 #include <random>
 #include <chrono>
-#include "peli.h"
 #include "sim.h"
 using namespace std;
 
@@ -15,9 +14,10 @@ using namespace std;
 
 int main()
 {
-    //Peli startClicked;
     Sim sim;
-    sim.run();
+
+    sim.run1();
+    sim.run2();
 
     cout << "" << endl;
     return 0;

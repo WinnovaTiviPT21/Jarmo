@@ -1,15 +1,15 @@
 #ifndef SIM_H
 #define SIM_H
 
-
 class Sim
 {
 public:
-    Sim();
+    //float wins = 0;
+    float runs = 1e4;
 
-    int samp = 1000;
+    void run1();
+    void run2();
 
-    void run();
 };
 
 #endif // SIM_H

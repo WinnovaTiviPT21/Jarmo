@@ -50,8 +50,8 @@ void Peli::startClicked()
     m_counter = 10;
     m_guide = "Arvaa luku 0 - 100 väliltä.";
 
-    cout << "Arvottu nro on: " << m_rngNro << endl;
-    cout << "Yrityksia jaljella : " << m_counter << endl;
+    //cout << "Arvottu nro on: " << m_rngNro << endl;
+    //cout << "Yrityksia jaljella : " << m_counter << endl;
 
     emit guideChanged();
     emit counterChanged();

@@ -5,21 +5,17 @@
 
 using namespace std;
 
-Sim::Sim()
-{
-
-}
-
-void Sim::run() {
+// Laskee voiton todennäköisyyden aina kun arvaus on puolestavälistä.
+void Sim::run1() {
     Peli peli;
-    for (int i = 0; i < samp; i++) {
+    float wins = 0;
+
+    for (int i = 0; i < runs; i++) {
         peli.startClicked();
 
-        //int guess = 50;
-        int win = 0;
         int min = 0, max = 100;
         while (peli.getCounter() > 0) {
-            int guess = 0.5 * (min + max);
+            int guess = (min + max) / 2;
             peli.setDisplay(guess);
             peli.guessClicked();
             if (peli.getDisplay() > peli.getRngNro()) {
@@ -29,9 +25,46 @@ void Sim::run() {
                 min = guess;
             }
             if (peli.getDisplay() == peli.getRngNro()) {
-                win++;
+                wins++;
                 break;
             }
         }
     }
+
+    float prob = wins / runs;
+    cout << "Voittamisen todennakoisyys kun arvataan aina puolestavalista: " << prob << endl;
+}
+
+void Sim::run2() {
+    Peli peli;
+    float wins = 0;
+
+    for (int i = 0; i < runs; i++) {
+        peli.startClicked();
+
+        int min = 0, max = 100;
+        while (peli.getCounter() > 0) {
+            uniform_int_distribution<> distr(min, max);
+            mt19937 gen {static_cast<unsigned int>(
+                            chrono::steady_clock::now().time_since_epoch().count())
+                        };
+
+            int guess = distr(gen);
+            peli.setDisplay(guess);
+            peli.guessClicked();
+            if (peli.getDisplay() > peli.getRngNro()) {
+                max = guess;
+            }
+            if (peli.getDisplay() < peli.getRngNro()) {
+                min = guess;
+            }
+            if (peli.getDisplay() == peli.getRngNro()) {
+                wins++;
+                break;
+            }
+        }
+    }
+
+    float prob = wins / runs;
+    cout << "Voittamisen todennakoisyys kun arvataan aina satunnainen luku: " << prob << endl;
 }
