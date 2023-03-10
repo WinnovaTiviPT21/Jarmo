@@ -8,8 +8,8 @@ using namespace std;
 // Laskee voiton todennäköisyyden aina kun arvaus on puolestavälistä.
 void Sim::run1() {
     Peli peli;
-    float wins = 0;
 
+    float wins = 0;
     for (int i = 0; i < runs; i++) {
         peli.startClicked();
 
@@ -38,8 +38,8 @@ void Sim::run1() {
 // Laskee voiton todennäköisyyden aina kun arvataan satunnainen luku.
 void Sim::run2() {
     Peli peli;
-    float wins = 0;
 
+    float wins = 0;
     for (int i = 0; i < runs; i++) {
         peli.startClicked();
 
