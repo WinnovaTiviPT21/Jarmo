@@ -4,6 +4,17 @@
 
 using namespace std;
 
+//void Search::vctr() {
+//    mt19937 gen{ 42 };
+//    uniform_int_distribution<int> distr{ numeric_limits<int>::min(), numeric_limits<int>::max() };
+
+//    vector<int> numbers(N);
+//    numbers.resize(N);
+//    for (int i = 0; i < N; i++) {
+//        int randomNumber = distr(gen);
+//        numbers[i] = randomNumber;
+//    }
+//}
 
 void Search::search(int number) {
     bool found = false;
