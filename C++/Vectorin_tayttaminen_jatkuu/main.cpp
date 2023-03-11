@@ -8,7 +8,7 @@ int main()
     mt19937 gen(42);
     uniform_int_distribution<int> distr;
 
-    const int N = 1e11;
+    const int N = 1e9;
 
     vector<int> numbers(N); // Varaa N määrän elementtejä arvolla 0.
     numbers.resize(N);      // Asettaa kooksi N
