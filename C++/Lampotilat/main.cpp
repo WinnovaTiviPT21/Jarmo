@@ -11,7 +11,7 @@ int main()
     if (!inf)
     {
         // Print an error and exit
-        cerr << "Uh oh, test.csv could not be opened for reading!\n\n";
+        cerr << "Uh oh, Pori lentokentta.csv could not be opened for reading!\n\n";
         return 1;
     }
 
