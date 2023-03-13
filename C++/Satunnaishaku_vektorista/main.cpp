@@ -30,7 +30,6 @@ int main()
     Search mySearch;
 
     vector<int> numbers;
-
     mySearch.myVect(numbers);
 
     mySearch.search(-1245214370, numbers);
