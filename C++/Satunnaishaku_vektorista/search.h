@@ -2,18 +2,15 @@
 #define SEARCH_H
 
 #include <random>
+#include <vector>
 
 class Search
 {
 public:
     int N = 1e7;
 
-    void search(int);
-//    void vctr();
-
-//    std::mt19937 gen{ 42 };
-//    std::uniform_int_distribution<int> distr{ std::numeric_limits<int>::min(), std::numeric_limits<int>::max() };
-//    std::vector<int> numbers;
+    void myVect(std::vector<int> &numbers);
+    void search(int number, std::vector<int> &numbers);
 };
 
 #endif // SEARCH_H
