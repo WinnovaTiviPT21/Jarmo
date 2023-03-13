@@ -1,11 +1,8 @@
-#include <iostream>
-#include <random>
-#include <vector>
-#include "search.h"
-
-using namespace std;
-
 /*
+**
+** Jarmo Vuorinen
+** 13.3.2023
+** TiViPT21
 **
 ** Tehtävänanto
 **
@@ -25,17 +22,30 @@ using namespace std;
 ** Jos lukua ei löydy vektorista, tulosta: ei löydy.
 **
 */
+#include <iostream>
+#include <random>
+#include <vector>
+#include "search.h"
+
+using namespace std;
+
 int main()
 {
-    Search mySearch;
+    Search search;
 
     vector<int> numbers;
-    mySearch.myVect(numbers);
+    search.myVect(numbers);
 
-    mySearch.search(-1245214370, numbers);
-    mySearch.search(122460941, numbers);
-    mySearch.search(-122460941, numbers);
-    mySearch.search(1385283091, numbers);
+    /*
+    ** mySearch.search(-1245214370, numbers);
+    ** mySearch.search(122460941, numbers);
+    ** mySearch.search(-122460941, numbers);
+    ** mySearch.search(1385283091, numbers);
+    */
+    search.search(search.numA, numbers);
+    search.search(search.numB, numbers);
+    search.search(search.numC, numbers);
+    search.search(search.numD, numbers);
 
     return 0;
 }
