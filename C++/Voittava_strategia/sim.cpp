@@ -13,7 +13,7 @@ void Sim::run1() {
     for (int i = 0; i < runs; i++) {
         peli.startClicked();
 
-        int min = 0, max = 100;
+        int min = 0, max = 101;
         while (peli.getCounter() > 0) {
             int guess = (min + max) / 2;
             peli.setDisplay(guess);
