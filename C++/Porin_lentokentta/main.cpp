@@ -1,10 +1,8 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-
-using namespace std;
-
 /*
+**
+** Jarmo Vuorinen
+** 13.3.2023
+** TiViPT21
 **
 ** Tehtävänanto
 **
@@ -12,38 +10,53 @@ using namespace std;
 ** Ohjelman tulee edelleen tulostaa alin ja korkein lämpötila ja päivä, jolloin mittaus on tehty.
 **
 */
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <tuple>
+#include <vector>
+
+using namespace std;
+
 int main()
 {
+    int year, month, day, airMinYear, airMinMonth, airMinDay, airMaxYear, airMaxMonth, airMaxDay;
+    float air, airMin, airMax, airMinDeg, airMaxDeg;
+
+    vector<tuple<int, int, int, float, float, float>> data;
+
     ifstream inf{"Pori lentokentta.csv"};
-    // If we couldn't open the output file stream for reading
-    if (!inf)
+    if (!inf) //if (!inf.is_open())
     {
-        // Print an error and exit
         cerr << "Uh oh, Pori lentokentta.csv could not be opened for reading!\n\n";
         return 1;
     }
 
-    // Pitäisi toimia ilman airMin2, mutta koodi menee rikki jos
-    // yritän käyttää pelkästään ariMin ja airMin1
-    float airMinDeg, airMaxDeg;
-    int airMinYear, airMinMonth, airMinDay, airMaxYear, airMaxMonth, airMaxDay;
     string firstLine;
-
     getline(inf, firstLine);
     while(!inf.eof()){
-        int year, month, day;
-        float air, airMin, airMax;
 
         inf >> year >> month >> day >> air >> airMax >> airMin;
 
-        // Etsii matalimman lämpätilan ja mittaus pvm
+        data.push_back(make_tuple(year, month, day, air, airMax, airMin));
+    }
+
+    inf.close();
+
+    for (size_t i = 0; i < data.size(); ++i) {
+        year = get<0>(data.at(i));
+        month = get<1>(data.at(i));
+        day = get<2>(data.at(i));
+        airMax = get<4>(data.at(i));
+        airMin = get<5>(data.at(i));
+
         if(airMin < airMinDeg){
             airMinDeg = airMin;
             airMinYear = year;
             airMinMonth = month;
             airMinDay = day;
         }
-        // Etsii korkeimman lämpätilan ja mittaus pvm
         if(airMax > airMaxDeg){
             airMaxDeg = airMax;
             airMaxYear = year;
