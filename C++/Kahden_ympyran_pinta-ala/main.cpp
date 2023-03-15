@@ -2,46 +2,42 @@
 ** Kahden ympyrän pinta-ala
 ** Jarmo Vuorinen
 ** 01.03.2023
+**
+** Laske sinisen alueen pinta-ala Monte-Carlo simulaatiolla.
+** Alusta satunnaislukugeneraattori luvulla 42.
 ***************************/
 #include <iostream>
 #include <random>
+#include "circle.h"
 
 using namespace std;
 
-
 int main()
 {
-    // Laske sinisen alueen pinta-ala Monte-Carlo simulaatiolla.
-    // Alusta satunnaislukugeneraattori luvulla 42.
-
-    const float rSin = 20.0;
-    const float rVal = 16.2;
-    const int piste = 1000000;
-    float sinisen_sisalla = 0;
-    float valkoisen_sisalla = 0;
+    int side = 80;
+    //float side = 64.8;
+    float isInside = 0;
+    int samples = 10000000;
 
     mt19937 gen{ 42 };
-    uniform_real_distribution<> disSin(-20, 20);
-    uniform_real_distribution<> disVal(-16.2, 16.2);
+    uniform_real_distribution<> distA(0, 40);
+    uniform_real_distribution<> distB(0, 32.4);
 
-    for (int i = 0; i <= piste; ++i) {
-        float xSin = disSin(gen), ySin = disSin(gen);
-        float xVal = disVal(gen), yVal = disVal(gen);
+    Circle a{40.0, 40.0, 20.0};
+    Circle b{32.4, 32.4, 16.2};
+    for(int i = 0; i < samples; i++) {
+        float x = distA(gen);
+        float y = distA(gen);
 
-        if (xSin * xSin + ySin * ySin <= rSin * rSin) {
-            sinisen_sisalla++;
-        }
-        if (xVal * xVal + yVal * yVal <= rVal * rVal) {
-            valkoisen_sisalla++;
+        if (a.isInside(x,y)) {
+            isInside++;
         }
     }
 
-    float melkein_pi_sin = sinisen_sisalla / piste * 4;
-    float melkein_pi_val = valkoisen_sisalla / piste * 4;
+    float areaOfSquare = side * side;
+    float areaOfCircle = isInside/samples * areaOfSquare;
+    cout << "Ympyran pinta-ala " << areaOfCircle << endl;
 
-    cout << "Sinisen ympyran pinta-ala on arviolta noin: " << melkein_pi_sin * rSin * rSin << endl;
-    cout << "Valkoisen ympyran pinta-ala on arviolta noin: " << melkein_pi_val * rVal * rVal << endl;
-    cout << "\n";
-
+    cout << "" << endl;
     return 0;
 }

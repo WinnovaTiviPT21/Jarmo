@@ -4,4 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        circle.cpp \
         main.cpp
+
+HEADERS += \
+    circle.h
