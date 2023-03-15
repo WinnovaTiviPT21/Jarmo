@@ -36,6 +36,15 @@ int main()
         numbers[i] = randomNumber;
     }
 
+    numbers.erase(numbers.begin() + 123456, numbers.begin() + 123459);
+
+    for (int i = 123450; i < 123460; i++) {
+        vector<int>::iterator it = numbers.begin();
+        advance (it, i);
+        cout << *it << endl;
+    }
+
+    cout << "\nVektorin koko: " << numbers.size() << endl;
     cout << "" << endl;
     return 0;
 }

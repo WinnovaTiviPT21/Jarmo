@@ -44,7 +44,7 @@ int main()
     //numbers.insert (it, arr, arr + 5);
     numbers.insert(it, {99, 98, 97, 96, 95});
 
-    for (int i = 499990; i <= 500010; i++) {
+    for (int i = 499990; i < 500010; i++) {
         vector<int>::iterator it = numbers.begin();
         advance (it, i);
         cout << *it << endl;
