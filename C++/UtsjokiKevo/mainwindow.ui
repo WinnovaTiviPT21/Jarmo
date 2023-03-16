@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1102</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QChartView" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>9</y>
+      <width>911</width>
+      <height>541</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QSplitter" name="splitter">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>10</y>
+      <width>151</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <widget class="QCheckBox" name="checkBox_rain">
+     <property name="text">
+      <string>Rain</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_snow">
+     <property name="text">
+      <string>Snow</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_temperatureAir">
+     <property name="text">
+      <string>Temperature Air</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_temperatureGround">
+     <property name="text">
+      <string>Temperature Ground</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_temperatureMin">
+     <property name="text">
+      <string>Temperature Min</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_temperatureMax">
+     <property name="text">
+      <string>Temperatire Max</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1102</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QWidget</extends>
+   <header>QtCharts</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
