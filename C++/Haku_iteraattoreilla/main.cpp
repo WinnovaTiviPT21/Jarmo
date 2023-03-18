@@ -32,9 +32,8 @@ int main()
         numbers[i] = randomNumber;
     }
 
-    vector<int>::iterator it = numbers.begin();
-    for (int i = 123456; i <= 123460; i++) {
-        advance (it, i);
+    vector<int>::iterator it;
+    for (it = numbers.begin() + 123456; it <= numbers.begin() + 123460; it++) {
         cout << *it << endl;
     }
 
