@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
     sunSpots.close();
     */
+
     QFile kevo("UtsjokiKevo.csv");
     if (!kevo.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return;
