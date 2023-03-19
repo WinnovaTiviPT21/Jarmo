@@ -60,9 +60,10 @@ MainWindow::MainWindow(QWidget *parent)
         QString line = stream.readLine();
         if (line.startsWith("V"))
             continue;
-        QStringList values = line.split(QLatin1Char(','), Qt::SkipEmptyParts);
+        //QStringList values = line.split(QLatin1Char(','), Qt::SkipEmptyParts);
+        QStringList values = line.split(QLatin1Char(','));
         QDateTime momentInTime;
-        momentInTime.setDate(QDate(values[0].toInt(), values[1].toInt() , 15));
+        momentInTime.setDate(QDate(values[0].toInt(), values[1].toInt(), 15));
         series->append(momentInTime.toMSecsSinceEpoch(), values[2].toDouble());
     }
     kevo.close();
