@@ -1,3 +1,18 @@
+/*
+ *
+ * Utsjoki, Kevo
+ *
+ * Tehtävänanto 2 tiedosto(a)
+ *
+ * Tee sovellus, joka näyttää oheisen tiedoston mittaukset graafina. Oheinen zip-tiedosto sisältää projektin alun.
+ * Mittaustiedossa on puuttuvia mittauksia. Puuttuviin mittaustietoihin voidaan käyttää oletusarvoa 0.
+ *
+ * Kerro palautuksessa GitHub kansion nimi.
+ *
+ * Mittaustiedot ladattu Ilmatieteen laitoksen avoimen datan latauspalvelusta maaliskuussa 2022. Lisenssiehdot Creative Commons Nimeä 4.0.
+ *
+*/
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
