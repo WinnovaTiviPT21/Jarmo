@@ -25,11 +25,12 @@ Button {
     highlighted: false
     //Material.accent: Material.DeepOrange
     //Material.background: Material.DeepOrange
+    //Material.elevation: 3
 
+    /*
     Material.elevation: {
         mouseArea.containsMouse ? 3 : 1
     }
-
     MouseArea {
         id: mouseArea
         anchors.fill: parent
@@ -39,6 +40,7 @@ Button {
             button.clicked()
         }
     }
+    */
 }
 
 /*##^##

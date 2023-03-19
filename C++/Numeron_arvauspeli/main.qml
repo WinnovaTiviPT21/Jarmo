@@ -194,6 +194,8 @@ ApplicationWindow {
 
         TextField {
             id: display
+            text: ""
+            placeholderText: qsTr("Arvaus")
             visible: true
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 22
@@ -205,12 +207,15 @@ ApplicationWindow {
             Layout.maximumHeight: 52
             Layout.maximumWidth: 117
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            placeholderText: qsTr("Arvaus")
-            text: ""
             //Material.accent: Material.DeepOrange
 
             onPressed: {
                 display.placeholderText = ""
+                display.text = ""
+            }
+
+            onAccepted: {
+                guess.clicked()
                 display.text = ""
             }
         }
@@ -233,8 +238,8 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
             onClicked: {
-                peli.display = display.text;
-                peli.guessClicked();
+                peli.display = display.text
+                peli.guessClicked()
                 if (peli.rngNro === peli.display) {
                     mainWindow.visible = false
                     winWindow.visible = true
@@ -245,7 +250,6 @@ ApplicationWindow {
                 }
             }
         }
-
 
         Item {
             id: spacer5
