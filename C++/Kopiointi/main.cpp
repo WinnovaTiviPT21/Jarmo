@@ -38,7 +38,7 @@ int main()
         numbersA[i] = randomNumber;
     }
 
-    for (it = numbersA.begin() + 123450; it != numbersA.begin() + 123458; it++) {
+    for (it = numbersA.begin() + 123450; it != numbersA.begin() + 123459; it++) {
         int temp = 0;
         temp = *it;
         numbersB.push_back(temp);
