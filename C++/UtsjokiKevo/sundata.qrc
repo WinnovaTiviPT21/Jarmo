@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file alias="sun">sun_spots.txt</file>
+        <file>UtsjokiKevo.csv</file>
     </qresource>
 </RCC>
