@@ -1,5 +1,7 @@
 /*
  *
+ * Joukkojen leikkaus (set intersection)
+ *
  * Tehtävänanto
  *
  * Tee konsolisovellus, joka arpoo miljoona satunnaislukua ja lisää ne STL set:iin.
