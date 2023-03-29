@@ -41,17 +41,6 @@ int main()
 
     set<int> s_intersection;
 
-    /*
-    // example.contains(x) ei toimmi?
-    for(int x: s1)
-    {
-        set<int>::iterator it = s2.find(x);
-        if (it != s2.end())
-        {
-            cout << "found: " << *it << endl;
-        }
-    }
-    */
     set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(s_intersection, s_intersection.begin()));
 
     for (int i : s_intersection)
