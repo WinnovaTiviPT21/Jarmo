@@ -42,9 +42,7 @@ int main()
     }
 
     set<int> s_intersection;
-
     set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(s_intersection, s_intersection.begin()));
-
     for (int i : s_intersection)
     {
         cout << i << endl;
