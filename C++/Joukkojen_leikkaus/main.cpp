@@ -14,6 +14,7 @@
 */
 
 #include <iostream>
+#include <algorithm>
 #include <random>
 #include <set>
 
@@ -38,6 +39,9 @@ int main()
         s2.insert(distr(gen));
     }
 
+    set<int> s_intersection;
+
+    /*
     // example.contains(x) ei toimmi?
     for(int x: s1)
     {
@@ -46,6 +50,13 @@ int main()
         {
             cout << "found: " << *it << endl;
         }
+    }
+    */
+    set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(s_intersection, s_intersection.begin()));
+
+    for (int i : s_intersection)
+    {
+        cout << i << endl;
     }
 
     cout << "" << endl;
