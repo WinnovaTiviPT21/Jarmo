@@ -16,34 +16,15 @@ int main()
         return 1;
     }
 
+    set<string> itemList;
     multiset<string> things;
     multiset<multiset<string>> baskets;
+    vector<int> supCount;
 
-    /*
-    // Ei tulosta kaikkia tietoja, miksi?
-    // Loopilla
+    // Tavarat ja ostoskorit setteihin
     while(!inf.eof()){
         string strInput;
-        getline(inf, strInput);
-
-        string word = "";
-        for (auto x : strInput)
-        {
-            if (x == ',')
-            {
-                things.insert(word);
-                word = "";
-            }
-            else {
-                word = word + x;
-            }
-        }
-    }
-    */
-
-    // Setti
-    while(!inf.eof()){
-        string strInput;
+        multiset<string> temp;
         getline(inf, strInput);
 
         stringstream sstr(strInput);
@@ -51,38 +32,37 @@ int main()
         {
             string substr;
             getline(sstr, substr, ',');
+            itemList.insert(substr);
             things.insert(substr);
+            temp.insert(substr);
         }
-        baskets.insert(things);
+        baskets.insert(temp);
+        temp.erase(temp.begin(), temp.end());
     }
-
-//    // Vectori
-//    vector<string> v;
-//    while(!inf.eof()){
-//        string strInput;
-//        getline(inf, strInput);
-
-//        stringstream sstr(strInput);
-//        while(sstr.good())
-//        {
-//            string substr;
-//            getline(sstr, substr, ',');
-//            v.push_back(substr);
-//        }
-//    }
-
     inf.close();
 
-    // Loopin / Setin tulostus
-    for (set<string>::iterator it = things.begin(); it != things.end(); it++) {
-        cout << *it << endl;
+    /*
+    for (set<string>::iterator it2 = things.begin(); it2 != things.end(); it2++) {
+        if (*it1 == *it2) {
+            counter++;
+        }
+        else {
+            //cout << *it1 << ": " << counter << endl;
+            supCount.push_back(counter);
+            counter = 1;
+            it1++;
+        }
     }
-
-//    // Vectorin järjestely ja tulostus
-//    sort(v.begin(), v.end());
-//    for (auto x : v) {
-//        cout << x << endl;
-//    }
+    */
+    for (set<string>::iterator it = itemList.begin(); it != things.end(); it++) {
+        if (things.count(*it) < 30) {
+            cout << *it << " erased" << endl;
+            itemList.erase(it);
+        }
+        else {
+            supCount.push_back(things.count(*it));
+        }
+    }
 
     cout << "" << endl;
     return 0;
