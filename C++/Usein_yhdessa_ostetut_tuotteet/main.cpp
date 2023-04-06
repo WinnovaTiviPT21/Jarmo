@@ -9,6 +9,14 @@ using namespace std;
 
 int main()
 {
+    set<string> itemList;               // Set (lista) yksittäisistä nimikkeistä
+
+    multiset<string> temp;              // apu set / väli muisti
+    multiset<string> things;            // sisältää kaikki ostetut tavarat
+    multiset<multiset<string>> baskets; // ostoskoreista ja niiden sisällöstä
+
+    vector<int> supCount;               // Vektori support count
+
     ifstream inf{"Market_Basket_Optimisation.csv"};
     if (!inf)
     {
@@ -16,15 +24,9 @@ int main()
         return 1;
     }
 
-    set<string> itemList;
-    multiset<string> things;
-    multiset<multiset<string>> baskets;
-    vector<int> supCount;
-
-    // Tavarat ja ostoskorit setteihin
+    // Luetaan tiedostosta ostoskorit ja ostokset setteihin
     while(!inf.eof()){
         string strInput;
-        multiset<string> temp;
         getline(inf, strInput);
 
         stringstream sstr(strInput);
@@ -32,13 +34,14 @@ int main()
         {
             string substr;
             getline(sstr, substr, ',');
-            itemList.insert(substr);
-            things.insert(substr);
-            temp.insert(substr);
+            itemList.insert(substr); // Lajitellaan yksittäiset nimikkeet
+            things.insert(substr);   // Lajitellaan kaikki ostetut tavarat
+            temp.insert(substr);     // Tallennetaa välimuistiin ostoskoria varten
         }
-        baskets.insert(temp);
-        temp.erase(temp.begin(), temp.end());
+        baskets.insert(temp);        // Lajitellaan ostoskorit
+        temp.erase(temp.begin(), temp.end()); // tyhjennetään "välimuisti"
     }
+
     inf.close();
 
     /*
@@ -54,15 +57,22 @@ int main()
         }
     }
     */
+//    for (set<string>::iterator it = itemList.begin(); it != things.end(); it++) {
+//        if (things.count(*it) < 30) {
+//            cout << *it << " erased" << endl;
+//            itemList.erase(it);
+//        }
+//        else {
+//            supCount.push_back(things.count(*it));
+//        }
+//    }
+
+    // Lasketaan tavaroiden määrä ja tallennetaan vectoriin
     for (set<string>::iterator it = itemList.begin(); it != things.end(); it++) {
-        if (things.count(*it) < 30) {
-            cout << *it << " erased" << endl;
-            itemList.erase(it);
-        }
-        else {
             supCount.push_back(things.count(*it));
-        }
+            cout << *it << ": " << things.count(*it) << endl;
     }
+
 
     cout << "" << endl;
     return 0;
