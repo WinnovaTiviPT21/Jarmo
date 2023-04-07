@@ -83,15 +83,15 @@ int main()
         }
     }
 
-    // Kombinaatioiden generointi 2:lla tavaralla.
+    // Kombinaatioiden generointi 2:lla ostoksella.
     for (set<string>::iterator it1 = list.begin(); it1 != list.end(); it1++) {
         string eka = *it1;
         set<string>::iterator it2 = it1;
 
         for (it2 = ++it2; it2 != list.end(); it2++) {
             string toka = *it2;
-            cout << eka << endl;
-            cout << toka << endl;
+            //cout << eka << endl;
+            //cout << toka << endl;
             temp.insert(eka);
             temp.insert(toka);
             supBaskets.insert(temp);
@@ -99,12 +99,25 @@ int main()
         }
     }
 
-//    // testi vertailusta
-//    for (auto it = baskets.begin(); it != baskets.end(); it++) {
-//        if (baskets == baskets2) {
-//            cout << "Tööt" << endl;
+    // Korien vertailua supBaskets
+//    for (auto it1 = baskets.begin(); it1 != baskets.end(); it1++) {
+//        for (auto it2 = supBaskets.begin(); it2 != supBaskets.end(); it2++) {
+//            if (*it1 == *it2) {
+//                if (baskets.count(*it1) < 30) {
+//                    cout << baskets.count(*it1) << endl;
+//                    cout << "erased" << endl;
+//                    baskets.erase(*it1);
+//                }
+//            }
 //        }
 //    }
+
+    for (auto basket : baskets) {
+        for (auto item : basket) {
+            cout << item << " ";
+        }
+        cout << endl;
+    }
 
     cout << "" << endl;
     return 0;
