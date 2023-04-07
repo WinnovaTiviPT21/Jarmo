@@ -66,11 +66,13 @@ int main()
     // Lasketaan tavaroiden määrä ja tallennetaan vectoriin
     for (set<string>::iterator it = list.begin(); it != list.end(); it++) {
         thingsCount.push_back(things.count(*it));
+        if (things.count(*it) < 30) {
         cout << *it << ": " << things.count(*it) << endl;
+        }
     }
     */
+
     // Lasketaan tavaroiden määrä, tallennetaan vectoriin ja poistaa listalta kaikki < 30.
-    //cout << list.size() << endl;
     for (set<string>::iterator it = things.begin(); it != things.end(); it = things.upper_bound(*it)) {
         if (things.count(*it) < 30) {
             //cout << *it << ": " << "erased" << endl;
@@ -80,8 +82,8 @@ int main()
             thingsCount.push_back(things.count(*it)); // Turha?
         }
     }
-    //cout << list.size() << endl;
 
+    // Kombinaatioiden generointi 2:lla tavaralla.
     for (set<string>::iterator it1 = list.begin(); it1 != list.end(); it1++) {
         string eka = *it1;
         set<string>::iterator it2 = it1;
