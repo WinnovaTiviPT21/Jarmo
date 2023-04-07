@@ -82,29 +82,10 @@ int main()
     }
     //cout << list.size() << endl;
 
-//    set<string>::iterator it = list.begin();
-    //string eka = *list.begin();
-//    for (*it; it != list.end();) {
-
-//    for (set<string>::iterator it = ++list.begin(); it != list.end(); it++) {
-//        string eka = *list.begin();
-//        string toka = *it;
-//        cout << eka << endl;
-//        cout << toka << endl;
-//        temp.insert(eka);
-//        temp.insert(toka);
-//        supBaskets.insert(temp);
-//        temp.erase(temp.begin(), temp.end());
-//    }
-
-//    set<string>::iterator it1 = list.begin();
-//    while (!list.empty()) {
     for (set<string>::iterator it1 = list.begin(); it1 != list.end(); it1++) {
         string eka = *it1;
         set<string>::iterator it2 = it1;
-        //cout << *it << endl;
-//        set<string>::iterator it = list.begin();
-//        for (set<string>::iterator it = ++list.begin(); it != list.end(); it++) {
+
         for (it2 = ++it2; it2 != list.end(); it2++) {
             string toka = *it2;
             cout << eka << endl;
@@ -114,8 +95,8 @@ int main()
             supBaskets.insert(temp);
             temp.erase(temp.begin(), temp.end());
         }
-//        it1++;
     }
+
 //    // testi vertailusta
 //    for (auto it = baskets.begin(); it != baskets.end(); it++) {
 //        if (baskets == baskets2) {
