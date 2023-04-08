@@ -21,10 +21,14 @@
 using namespace std;
 
 void position(int x, set<int> &s) {
-    set<int>::iterator start, end;
+    set<int>::iterator start, pos;
     start = s.begin();
-    end = s.find(x);
-    cout << distance(start, end) << endl;
+    pos = s.find(x);
+    if (pos != s.end()) {
+        cout << "Element found at position: " << distance(start, pos) << endl;
+    } else {
+        cout << "Element not found\n";
+    }
 }
 
 int main()
@@ -35,24 +39,13 @@ int main()
     mt19937 gen{42};
     uniform_int_distribution<int> distr{numeric_limits<int>::min(), numeric_limits<int>::max()};
 
-    vector<int> numbers(N);
-    for (int i = 0; i < N; i++) {
-        int randomNumber = distr(gen);
-        numbers[i] = randomNumber;
-    }
-
     set<int> s;
 
     for (int i = 0; i < N; i++) {
-        s.insert(numbers[i]);
+        int randomNumber = distr(gen);
+        s.insert(randomNumber);
     }
 
-    /*
-    set<int>::iterator start, end;
-    start = s.begin();
-    end = s.find(numA);
-    cout << distance(start, end) << endl;
-    */
     position(numA, s);
     position(numB, s);
     position(numC, s);
