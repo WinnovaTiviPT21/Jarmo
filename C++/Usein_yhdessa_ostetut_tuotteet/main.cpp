@@ -26,14 +26,14 @@ using namespace std;
 
 int main()
 {
-    set<string> list;                       // Set (lista) yksittäisistä nimikkeistä
+    set<string> list;                    // Set (lista) yksittäisistä nimikkeistä
+    set<string> temp;                    // temp / apu set / väli muisti
 
-    multiset<string> temp;                  // temp / apu set / väli muisti
-    multiset<string> things;                // sisältää kaikki ostetut tavarat
-    multiset<multiset<string>> baskets;     // ostoskoreista ja niiden sisällöstä
-    multiset<multiset<string>> supBaskets;  // vertailu kori
+    multiset<string> things;             // sisältää kaikki ostetut tavarat
 
-    vector<int> thingsCount;                // Vektori support count (turha?)
+    multiset<set<string>> ogBaskets;     // ostoskoreista ja niiden sisällöstä
+    multiset<set<string>> compBaskets_2i; // vertailu kori (kahdella itemillä)
+    multiset<set<string>> compBaskets_3i; // vertailu kori (kolmella itemillä)
 
     ifstream inf{"Market_Basket_Optimisation.csv"};
     if (!inf)
@@ -52,34 +52,21 @@ int main()
         {
             string substr;
             getline(sstr, substr, ',');
-            list.insert(substr);   // Lajitellaan yksittäiset nimikkeet
-            things.insert(substr); // Lajitellaan kaikki ostetut tavarat
-            temp.insert(substr);   // Tallennetaa välimuistiin ostoskoria varten
+            list.insert(substr);              // Lajitellaan yksittäiset nimikkeet
+            things.insert(substr);            // Lajitellaan kaikki ostetut tavarat
+            temp.insert(substr);              // Tallennetaa välimuistiin ostoskoria varten
         }
-        baskets.insert(temp);      // Lajitellaan ostoskorit
+        ogBaskets.insert(temp);               // Lajitellaan ostoskorit
         temp.erase(temp.begin(), temp.end()); // tyhjennetään "välimuisti"
     }
 
     inf.close();
 
-    /*
-    // Lasketaan tavaroiden määrä ja tallennetaan vectoriin
-    for (set<string>::iterator it = list.begin(); it != list.end(); it++) {
-        thingsCount.push_back(things.count(*it));
-        if (things.count(*it) < 30) {
-        cout << *it << ": " << things.count(*it) << endl;
-        }
-    }
-    */
-
-    // Lasketaan tavaroiden määrä, tallennetaan vectoriin ja poistaa listalta kaikki < 30.
+    // Lasketaan tavaroiden määrä ja poistaan listalta kaikki < 30.
     for (set<string>::iterator it = things.begin(); it != things.end(); it = things.upper_bound(*it)) {
         if (things.count(*it) < 30) {
-            //cout << *it << ": " << "erased" << endl;
+            cout << *it << ": " << "erased" << endl;
             list.erase(*it);
-        }
-        else {
-            thingsCount.push_back(things.count(*it)); // Turha?
         }
     }
 
@@ -90,34 +77,64 @@ int main()
 
         for (it2 = ++it2; it2 != list.end(); it2++) {
             string toka = *it2;
-            //cout << eka << endl;
-            //cout << toka << endl;
             temp.insert(eka);
             temp.insert(toka);
-            supBaskets.insert(temp);
+            compBaskets_2i.insert(temp);
             temp.erase(temp.begin(), temp.end());
         }
     }
 
-    // Korien vertailua supBaskets
-//    for (auto it1 = baskets.begin(); it1 != baskets.end(); it1++) {
-//        for (auto it2 = supBaskets.begin(); it2 != supBaskets.end(); it2++) {
-//            if (*it1 == *it2) {
-//                if (baskets.count(*it1) < 30) {
-//                    cout << baskets.count(*it1) << endl;
-//                    cout << "erased" << endl;
-//                    baskets.erase(*it1);
-//                }
-//            }
-//        }
+    cout << "" << endl;
+
+    cout << compBaskets_2i.size() << endl;
+
+    // Korien vertailua
+    for (auto it1 = ogBaskets.begin(); it1 != ogBaskets.end(); it1++) {
+        for (auto it2 = compBaskets_2i.begin(); it2 != compBaskets_2i.end(); it2++) {
+            if (*it1 == *it2) {
+                if (ogBaskets.count(*it1) < 30) {
+                    cout << "erased: " << ogBaskets.count(*it1) << endl;
+                    it2 = compBaskets_2i.erase(it2);
+                }
+            }
+        }
+    }
+
+    cout << compBaskets_2i.size() << endl;
+
+    // Kombinaatioiden generointi 3:lla ostoksella.
+
+//    for (auto it = compBaskets_2i.begin(); it != compBaskets_2i.end(); it++) {
+//        auto basket = *it;
+//        basket.insert("testi");
+//        compBaskets_3i.insert(basket);
 //    }
 
-    for (auto basket : baskets) {
-        for (auto item : basket) {
-            cout << item << " ";
+    for (multiset<set<string>>::iterator it1 = compBaskets_2i.begin(); it1 != compBaskets_2i.end(); it1++) {
+        set<string> basket = *it1;
+        auto it2 = it1;
+        it2++;
+
+        while (compBaskets_2i.empty()) {
+
         }
-        cout << endl;
+
+        for (auto item : *it2) {
+            for (auto i : compBaskets_2i) {
+                basket.insert(item);
+            }
+        }
+        compBaskets_3i.insert(basket);
     }
+
+    for (auto basket : compBaskets_3i) {
+        for (auto fruit : basket) {
+            cout << fruit << " ";
+        }
+            cout << endl;
+        }
+
+
 
     cout << "" << endl;
     return 0;

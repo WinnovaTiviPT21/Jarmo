@@ -18,6 +18,10 @@ public:
 private slots:
     void on_textEdit_textChanged();
 
+    void on_listView_windowIconTextChanged(const QString &iconText);
+
+    void on_listWidget_currentTextChanged(const QString &currentText);
+
 private:
     Ui::MainWindow *ui;
 };
