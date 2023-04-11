@@ -109,6 +109,18 @@ int main()
             basket = *it1;
         }
     }
+    /*
+    for (auto it1 = products.begin(); it1 != std::prev(products.end(), 2); ++it1)
+    {
+        for (auto it2 = std::next(it1); it2 != std::prev(products.end(), 1); ++it2)
+        {
+            for (auto it3 = std::next(it2); it3 != products.end(); ++it3)
+            {
+                std::cout << *it1 << " + " << *it2 << " + " << *it3 << std::endl;
+            }
+        }
+    }
+    */
 
 //    for (auto basket : compBaskets_3i) {
 //        for (auto fruit : basket) {
