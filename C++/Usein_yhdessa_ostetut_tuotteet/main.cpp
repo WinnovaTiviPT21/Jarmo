@@ -96,12 +96,13 @@ int main()
     }
 
     // Kombinaatioiden generointi 3:lla ostoksella.
-    for (multiset<set<string>>::iterator it1 = compBaskets_2i.begin(); it1 != compBaskets_2i.end(); it1++) {
+    for (multiset<set<string>>::iterator it1 = compBaskets_2i.begin(); it1 != compBaskets_2i.end(); ++it1) {
         set<string> basket = *it1;
         auto it2 = it1;
 
-        for (it2 = ++it2; it2 != compBaskets_2i.end(); it2++) {
+        for (++it2; it2 != compBaskets_2i.end(); ++it2) {
             for (auto item : *it2) {
+                //basket = *it1;
                 basket.insert(item);
             }
             compBaskets_3i.insert(basket);
@@ -109,14 +110,12 @@ int main()
         }
     }
 
-    for (auto basket : compBaskets_3i) {
-        for (auto fruit : basket) {
-            cout << fruit << " ";
-        }
-            cout << endl;
-        }
-
-
+//    for (auto basket : compBaskets_3i) {
+//        for (auto fruit : basket) {
+//            cout << fruit << " ";
+//        }
+//            cout << endl;
+//        }
 
     cout << "" << endl;
     return 0;
