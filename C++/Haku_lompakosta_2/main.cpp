@@ -15,11 +15,13 @@ int main()
     lompakko1.find(s1);
     lompakko1.find(s2);
 
-
+    /*
     // Vaihtoehtonen menetelmä. Kumpi on parempi?
     cout << "20 cent on: " << lompakko1.find(s1)->second << " kpl" << endl;
     cout << "50 cent on: " << lompakko1.find(s2)->second << " kpl" << endl;
-
+    */
+    cout << "20 cent on: " << lompakko1[s1] << " kpl" << endl;
+    cout << "50 cent on: " << lompakko1[s2] << " kpl" << endl;
 
     cout << "" << endl;
     return 0;
