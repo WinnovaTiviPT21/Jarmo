@@ -65,7 +65,7 @@ int main()
     // Lasketaan tavaroiden määrä ja poistaan listalta kaikki < 30.
     for (set<string>::iterator it = things.begin(); it != things.end(); it = things.upper_bound(*it)) {
         if (things.count(*it) < 30) {
-            cout << *it << ": " << "erased" << endl;
+            //cout << *it << ": " << "erased" << endl;
             list.erase(*it);
         }
     }
@@ -84,47 +84,29 @@ int main()
         }
     }
 
-    cout << "" << endl;
-
-    cout << compBaskets_2i.size() << endl;
-
-    // Korien vertailua
+    // Korien vertailua ja poisto
     for (auto it1 = ogBaskets.begin(); it1 != ogBaskets.end(); it1++) {
         for (auto it2 = compBaskets_2i.begin(); it2 != compBaskets_2i.end(); it2++) {
             if (*it1 == *it2) {
                 if (ogBaskets.count(*it1) < 30) {
-                    cout << "erased: " << ogBaskets.count(*it1) << endl;
                     it2 = compBaskets_2i.erase(it2);
                 }
             }
         }
     }
 
-    cout << compBaskets_2i.size() << endl;
-
     // Kombinaatioiden generointi 3:lla ostoksella.
-
-//    for (auto it = compBaskets_2i.begin(); it != compBaskets_2i.end(); it++) {
-//        auto basket = *it;
-//        basket.insert("testi");
-//        compBaskets_3i.insert(basket);
-//    }
-
     for (multiset<set<string>>::iterator it1 = compBaskets_2i.begin(); it1 != compBaskets_2i.end(); it1++) {
         set<string> basket = *it1;
         auto it2 = it1;
-        it2++;
 
-        while (compBaskets_2i.empty()) {
-
-        }
-
-        for (auto item : *it2) {
-            for (auto i : compBaskets_2i) {
+        for (it2 = ++it2; it2 != compBaskets_2i.end(); it2++) {
+            for (auto item : *it2) {
                 basket.insert(item);
             }
+            compBaskets_3i.insert(basket);
+            basket = *it1;
         }
-        compBaskets_3i.insert(basket);
     }
 
     for (auto basket : compBaskets_3i) {
