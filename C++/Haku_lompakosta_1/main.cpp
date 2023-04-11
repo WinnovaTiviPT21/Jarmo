@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    string s1 = "20 e";
+    string s1 = "20 cent";
     string s2 = "50 cent";
 
     map<string, int> lompakko1 {{"1 cent", 5}, {"2 cent", 3}, {"5 cent", 5}, {"10 cent", 3},
@@ -17,10 +17,10 @@ int main()
 
     /*
     // Vaihtoehtonen menetelmä. Kumpi on parempi?
-    cout << "20 e on: " << lompakko1.find(s1)->second << " kpl" << endl;
+    cout << "20 cent on: " << lompakko1.find(s1)->second << " kpl" << endl;
     cout << "50 cent on: " << lompakko1.find(s2)->second << " kpl" << endl;
     */
-    cout << "20 e on: " << lompakko1[s1] << " kpl" << endl;
+    cout << "20 cent on: " << lompakko1[s1] << " kpl" << endl;
     cout << "50 cent on: " << lompakko1[s2] << " kpl" << endl;
 
     cout << "" << endl;
