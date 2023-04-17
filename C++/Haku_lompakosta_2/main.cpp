@@ -12,14 +12,6 @@ int main()
                                 {"50 cent", 7}, {"1 e", 5}, {"2 e", 3}, {"5 e", 5},
                                 {"10 e", 1}, {"20 e", 5}, {"50 e", 8}, {"100 e", 3}};
 
-    lompakko1.find(s1);
-    lompakko1.find(s2);
-
-    /*
-    // Vaihtoehtonen menetelmä. Kumpi on parempi?
-    cout << "20 cent on: " << lompakko1.find(s1)->second << " kpl" << endl;
-    cout << "50 cent on: " << lompakko1.find(s2)->second << " kpl" << endl;
-    */
     cout << "20 cent on: " << lompakko1[s1] << " kpl" << endl;
     cout << "50 cent on: " << lompakko1[s2] << " kpl" << endl;
 
