@@ -12,27 +12,21 @@ int main()
                                {"50 cent", 7}, {"1 e", 5}, {"2 e", 3}, {"5 e", 5},
                                {"10 e", 1}, {"20 e", 5}, {"50 e", 8}, {"100 e", 3}};
 
-    lompakko.find(s1);
-    lompakko.find(s2);
-
-//    cout << "20 cent on: " << lompakko.find(s1)->second << " kpl" << endl;
-//    cout << "50 cent on: " << lompakko.find(s2)->second << " kpl" << endl;
-
     cout << "Element " << s1;
+    // if the element is found before the end of the map
     if(lompakko.find(s1) != lompakko.end()) {
-        //if the element is found before the end of the map
-        cout << " : found : " << lompakko[s1] << " kpl" << endl;
-        //if the element is present then you can access it using the index
+        // if the element is present then you can access it using the index
+        cout << " : found : " << lompakko.find(s1)->second << " kpl" << endl;
+    } else {
+        cout << " : Not found" << endl;
     }
-    else cout << " : Not found" << endl;
 
     cout << "Element " << s2;
     if(lompakko.find(s2) != lompakko.end()) {
-        //if the element is found before the end of the map
-        cout << " : found : " << lompakko[s2] << " kpl" << endl;
-        //if the element is present then you can access it using the index
+        cout << " : found : " << lompakko.find(s2)->second << " kpl" << endl;
+    } else {
+        cout << " : Not found" << endl;
     }
-    else cout << " : Not found" << endl;
 
     cout << "" << endl;
     return 0;
