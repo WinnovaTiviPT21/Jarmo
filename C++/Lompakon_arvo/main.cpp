@@ -16,9 +16,13 @@ int main()
                                    {10.00, "10 e"}, {20.00, "20 e"}, {50.00, "50 e"}, {100.00, "100 e"}};
 
     for (map<double, string>::iterator it = lompakko2.begin(); it != lompakko2.end(); it++) {
-        //cout << it->first << " " << it->second << endl;
-        double x = it->first * lompakko1.at(it->second);
-        sum = sum + x;
+        try {
+            double x = it->first * lompakko1.at(it->second);
+            sum = sum + x;
+        }
+        catch (const out_of_range& oor) {
+            cerr << "Out of Range error: " << oor.what() << " " << it->second << ": not found" << endl;
+        }
     }
 
     cout << "Lompakon on rahaa: " << sum << " e" << endl;
