@@ -13,6 +13,8 @@
  * Selvitä neljän tuotteen kokoiset ryhmät, joiden support on suurempi kuin 30.
  * Suurempia ryhmiä ei tarvitse selvittää.
  *
+ * https://www.geeksforgeeks.org/set-of-vectors-in-c-stl-with-examples/
+ *
 */
 
 #include <iostream>
@@ -93,6 +95,22 @@ int main()
 //            }
 //        }
 //    }
+
+    int counter = 0;
+    for (auto it1 = ogBaskets.begin(); it1 != ogBaskets.end(); it1++) {
+        const set<string>& ogBasket = *it1;
+
+        for (auto it2 = compBaskets_2i.begin(); it2 != compBaskets_2i.end(); it2++) {
+            const set<string>& compBasket = *it2;
+            int foundProducts = 0;
+            for(auto it3 = compBasket.begin(); it3 != compBasket.end(); it3++) {
+                foundProducts = foundProducts + ogBasket.count(*it3);
+            }
+            if (foundProducts == 2) {
+                counter++;
+            }
+        }
+    }
 
 //    // Kombinaatioiden generointi 3:lla ostoksella.
 //    for (multiset<set<string>>::iterator it1 = compBaskets_2i.begin(); it1 != compBaskets_2i.end(); ++it1) {
