@@ -26,12 +26,12 @@ using namespace std;
 
 int main()
 {
-    set<string> list;                    // Set (lista) yksittäisistä nimikkeistä
-    set<string> temp;                    // temp / apu set / väli muisti
+    set<string> list;                     // Set (lista) yksittäisistä nimikkeistä
+    set<string> temp;                     // temp / apu set / väli muisti
 
-    multiset<string> things;             // sisältää kaikki ostetut tavarat
+    multiset<string> things;              // sisältää kaikki ostetut tavarat
 
-    multiset<set<string>> ogBaskets;     // ostoskoreista ja niiden sisällöstä
+    multiset<set<string>> ogBaskets;      // ostoskoreista ja niiden sisällöstä
     multiset<set<string>> compBaskets_2i; // vertailu kori (kahdella itemillä)
     multiset<set<string>> compBaskets_3i; // vertailu kori (kolmella itemillä)
 
@@ -65,7 +65,6 @@ int main()
     // Lasketaan tavaroiden määrä ja poistaan listalta kaikki < 30.
     for (set<string>::iterator it = things.begin(); it != things.end(); it = things.upper_bound(*it)) {
         if (things.count(*it) < 30) {
-            //cout << *it << ": " << "erased" << endl;
             list.erase(*it);
         }
     }
@@ -84,31 +83,32 @@ int main()
         }
     }
 
-    // Korien vertailua ja poisto
-    for (auto it1 = ogBaskets.begin(); it1 != ogBaskets.end(); it1++) {
-        for (auto it2 = compBaskets_2i.begin(); it2 != compBaskets_2i.end(); it2++) {
-            if (*it1 == *it2) {
-                if (ogBaskets.count(*it1) < 30) {
-                    it2 = compBaskets_2i.erase(it2);
-                }
-            }
-        }
-    }
+//    // Korien vertailua ja poisto
+//    for (auto it1 = ogBaskets.begin(); it1 != ogBaskets.end(); it1++) {
+//        for (auto it2 = compBaskets_2i.begin(); it2 != compBaskets_2i.end(); it2++) {
+//            if (*it1 == *it2) {
+//                if (ogBaskets.count(*it1) < 30) {
+//                    it2 = compBaskets_2i.erase(it2);
+//                }
+//            }
+//        }
+//    }
 
-    // Kombinaatioiden generointi 3:lla ostoksella.
-    for (multiset<set<string>>::iterator it1 = compBaskets_2i.begin(); it1 != compBaskets_2i.end(); ++it1) {
-        set<string> basket = *it1;
-        auto it2 = it1;
+//    // Kombinaatioiden generointi 3:lla ostoksella.
+//    for (multiset<set<string>>::iterator it1 = compBaskets_2i.begin(); it1 != compBaskets_2i.end(); ++it1) {
+//        set<string> basket = *it1;
+//        auto it2 = it1;
 
-        for (++it2; it2 != compBaskets_2i.end(); ++it2) {
-            for (auto item : *it2) {
-                //basket = *it1;
-                basket.insert(item);
-            }
-            compBaskets_3i.insert(basket);
-            basket = *it1;
-        }
-    }
+//        for (++it2; it2 != compBaskets_2i.end(); ++it2) {
+//            for (auto item : *it2) {
+//                //basket = *it1;
+//                basket.insert(item);
+//            }
+//            compBaskets_3i.insert(basket);
+//            basket = *it1;
+//        }
+//    }
+
     /*
     for (auto it1 = compBaskets_2i.begin(); it1 != prev(compBaskets_2i.end(), 2); ++it1)
     {
