@@ -97,10 +97,10 @@ int main()
 //    }
 
     int counter = 0;
-    for (auto it1 = ogBaskets.begin(); it1 != ogBaskets.end(); it1++) {
+    for (auto it1 = compBaskets_2i.begin(); it1 != compBaskets_2i.end(); it1++) {
         const set<string>& ogBasket = *it1;
 
-        for (auto it2 = compBaskets_2i.begin(); it2 != compBaskets_2i.end(); it2++) {
+        for (auto it2 = ogBaskets.begin(); it2 != ogBaskets.end(); it2++) {
             const set<string>& compBasket = *it2;
             int foundProducts = 0;
             for(auto it3 = compBasket.begin(); it3 != compBasket.end(); it3++) {
