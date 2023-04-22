@@ -85,17 +85,18 @@ int main()
         }
     }
 
-//    // Korien vertailua ja poisto
-//    for (auto it1 = ogBaskets.begin(); it1 != ogBaskets.end(); it1++) {
-//        for (auto it2 = compBaskets_2i.begin(); it2 != compBaskets_2i.end(); it2++) {
-//            if (*it1 == *it2) {
-//                if (ogBaskets.count(*it1) < 30) {
-//                    it2 = compBaskets_2i.erase(it2);
-//                }
-//            }
-//        }
-//    }
 
+    /*
+     * Korien vertailua ja poisto
+     *
+     * Opettajan esimerkissä oli käytetty vectoria (useampaakin vectoria),
+     * koska vectorissa on functio contains, joka tekee asiasta yksinkertaisempaa.
+     *
+     * Set:iin tulee contains funtio vasta C++ 20:ssa ja tämä on 17.
+     *
+     * Tässä halusin kuitenkin käyttää settiä, koska tämä kuului tehtäviin,
+     * joissa nimenomaan piti käyttää settiä.
+    */
     int counter = 0;
     for (auto it1 = compBaskets_2i.begin(); it1 != compBaskets_2i.end(); it1++) {
         const set<string>& ogBasket = *it1;
