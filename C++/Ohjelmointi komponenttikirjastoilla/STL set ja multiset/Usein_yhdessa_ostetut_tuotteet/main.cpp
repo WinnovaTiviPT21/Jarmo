@@ -54,8 +54,8 @@ int main()
         {
             string substr;
             getline(sstr, substr, ',');
-            productList.insert(substr);     // Lajitellaan yksittäiset nimikkeet
-            allItems.insert(substr);            // Lajitellaan kaikki ostetut tavarat
+            productList.insert(substr);       // Lajitellaan yksittäiset nimikkeet
+            allItems.insert(substr);          // Lajitellaan kaikki ostetut tavarat
             temp.insert(substr);              // Tallennetaa välimuistiin ostoskoria varten
         }
         ogBaskets.insert(temp);               // Lajitellaan ostoskorit
@@ -86,7 +86,7 @@ int main()
     }
 
     // Listan nollaus?
-    productList.erase(productList.begin(), productList.end());
+//    productList.erase(productList.begin(), productList.end());
 
     /*
      *
@@ -103,7 +103,9 @@ int main()
     */
     for (auto it1 = compBaskets.begin(); it1 != compBaskets.end(); it1++) {
         const set<string>& compBasket = *it1;
+
         int counter = 0;
+        int reguired = compBasket.size();
 
         for (auto it2 = ogBaskets.begin(); it2 != ogBaskets.end(); it2++) {
             const set<string>& ogBasket = *it2;
@@ -113,14 +115,15 @@ int main()
                 foundProducts = foundProducts + ogBasket.count(*it3);
             }
 
-            if (foundProducts == 2) {
+//            if (foundProducts == 2) {
+            if (foundProducts == reguired) {
                 counter++;
             }
 
             if (counter == 30) {
-                for (auto it4 = compBasket.begin(); it4 != compBasket.end(); it4++) {
-                    productList.insert(*it4); // TURHA?
-                }
+//                for (auto it4 = compBasket.begin(); it4 != compBasket.end(); it4++) {
+//                    productList.insert(*it4); // TURHA?
+//                }
 
                 multiTemp.insert(*it1);
                 break;
@@ -147,6 +150,40 @@ int main()
                 }
 
                 compBaskets.insert(compBasket);
+            }
+        }
+    }
+
+    multiTemp.erase(multiTemp.begin(), multiTemp.end());
+//    productList.erase(productList.begin(), productList.end());
+
+    // Korien vertailua ja plokkausta
+    for (auto it1 = compBaskets.begin(); it1 != compBaskets.end(); it1++) {
+        const set<string>& compBasket = *it1;
+
+        int counter = 0;
+        int reguired = compBasket.size();
+
+        for (auto it2 = ogBaskets.begin(); it2 != ogBaskets.end(); it2++) {
+            const set<string>& ogBasket = *it2;
+            int foundProducts = 0;
+
+            for(auto it3 = compBasket.begin(); it3 != compBasket.end(); it3++) {
+                foundProducts = foundProducts + ogBasket.count(*it3);
+            }
+
+//            if (foundProducts == 3) {
+            if (foundProducts == reguired) {
+                counter++;
+            }
+
+            if (counter == 30) {
+//                for (auto it4 = compBasket.begin(); it4 != compBasket.end(); it4++) {
+//                    productList.insert(*it4); // TURHA?
+//                }
+
+                multiTemp.insert(*it1);
+                break;
             }
         }
     }
