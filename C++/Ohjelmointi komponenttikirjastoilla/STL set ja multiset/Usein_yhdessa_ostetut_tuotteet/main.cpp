@@ -197,6 +197,45 @@ int main()
         }
     }
 
+    //multiTemp.erase(multiTemp.begin(), multiTemp.end());
+    multiset<set<string>> finalBaskets;
+
+    // Neljän ostoksen korien vertailua ja plokkausta
+    for (auto it1 = compBaskets.begin(); it1 != compBaskets.end(); it1++) {
+        const set<string>& compBasket = *it1;
+
+        int counter = 0;
+        int reguired = compBasket.size();
+
+        for (auto it2 = ogBaskets.begin(); it2 != ogBaskets.end(); it2++) {
+            const set<string>& ogBasket = *it2;
+            int foundProducts = 0;
+
+            for(auto it3 = compBasket.begin(); it3 != compBasket.end(); it3++) {
+                foundProducts = foundProducts + ogBasket.count(*it3);
+            }
+
+            if (foundProducts == reguired) {
+                counter++;
+            }
+
+            if (counter == 30) {
+                finalBaskets.insert(*it1);
+                break;
+            }
+        }
+    }
+
+    int nro = 1;
+    for (auto it = finalBaskets.begin(); it != finalBaskets.end(); it++) {
+        const set<string>& basket = *it;
+        set<string>::iterator it2 = basket.begin();
+
+        cout << "Group " << nro << ": " << *it2 << ", " << *++it2 << ", " << *++it2 << ", " << *++it2 << endl;
+
+        nro++;
+    }
+
     cout << "" << endl;
     return 0;
 }
