@@ -28,10 +28,10 @@ using namespace std;
 
 int main()
 {
-    set<string> productList;          // Set (lista) yksittäisistä nimikkeistä
+    set<string> productList;            // Set (lista) yksittäisistä nimikkeistä
     set<string> temp;                   // temp / apu set / väli muisti
 
-    multiset<string> allItems;            // sisältää kaikki ostetut tavarat
+    multiset<string> allItems;          // sisältää kaikki ostetut tavarat
 
     multiset<set<string>> ogBaskets;    // ostoskoreista ja niiden sisällöstä
     multiset<set<string>> compBaskets;  // vertailu kori (kahdella itemillä)
@@ -85,12 +85,9 @@ int main()
         }
     }
 
-    // Listan nollaus?
-//    productList.erase(productList.begin(), productList.end());
-
     /*
      *
-     * Korien vertailua ja plokkausta
+     * Kahden ostoksen korien vertailua ja plokkausta
      *
      * Opettajan esimerkissä oli käytetty vectoria (useampaakin vectoria),
      * koska vectorissa on functio contains, joka tekee asiasta yksinkertaisempaa.
@@ -115,16 +112,11 @@ int main()
                 foundProducts = foundProducts + ogBasket.count(*it3);
             }
 
-//            if (foundProducts == 2) {
             if (foundProducts == reguired) {
                 counter++;
             }
 
             if (counter == 30) {
-//                for (auto it4 = compBasket.begin(); it4 != compBasket.end(); it4++) {
-//                    productList.insert(*it4); // TURHA?
-//                }
-
                 multiTemp.insert(*it1);
                 break;
             }
@@ -155,9 +147,8 @@ int main()
     }
 
     multiTemp.erase(multiTemp.begin(), multiTemp.end());
-//    productList.erase(productList.begin(), productList.end());
 
-    // Korien vertailua ja plokkausta
+    // Kolmen ostoksen korien vertailua ja plokkausta
     for (auto it1 = compBaskets.begin(); it1 != compBaskets.end(); it1++) {
         const set<string>& compBasket = *it1;
 
@@ -172,18 +163,36 @@ int main()
                 foundProducts = foundProducts + ogBasket.count(*it3);
             }
 
-//            if (foundProducts == 3) {
             if (foundProducts == reguired) {
                 counter++;
             }
 
             if (counter == 30) {
-//                for (auto it4 = compBasket.begin(); it4 != compBasket.end(); it4++) {
-//                    productList.insert(*it4); // TURHA?
-//                }
-
                 multiTemp.insert(*it1);
                 break;
+            }
+        }
+    }
+
+    compBaskets.erase(compBaskets.begin(), compBaskets.end());
+
+    // Kombinaatioiden generointi 4:lla ostoksella.
+    for (auto it1 = multiTemp.begin(); it1 != multiTemp.end(); it1++) {
+        const set<string>& firstBasket = *it1;
+        auto it2 = it1;
+
+        for (it2 = ++it2; it2 != multiTemp.end(); it2++) {
+            const set<string>& secondBasket = *it2;
+            set<string>::iterator it3 = firstBasket.begin();
+            set<string>::iterator it4 = secondBasket.begin();
+
+            if (*it3 == *it4 && *++it3 == *++it4) {
+                set<string> compBasket = *it1;
+                for (auto it = secondBasket.begin(); it != secondBasket.end(); it++) {
+                    compBasket.insert(*it);
+                }
+
+                compBaskets.insert(compBasket);
             }
         }
     }
