@@ -5,7 +5,7 @@
         "-I",
         "C:\\Qt\\Qt5.15.10\\Tools\\QtCreator\\share\\qtcreator\\cplusplus\\wrappedMingwHeaders",
         "-I",
-        "C:\\Users\\Maaha\\AppData\\Local\\Temp\\QtCreator-ifFwNw\\clang-uiheader-rnbFJM",
+        "C:\\Users\\Oppilas\\AppData\\Local\\Temp\\QtCreator-OctrqJ\\clang-uiheader-diwktg",
         "-nostdinc",
         "-nostdinc++",
         "-g",
@@ -25,7 +25,7 @@
         "-DMINGW_HAS_SECURE_API",
         "-DQT_QML_DEBUG",
         "-I",
-        "D:\\Maahantuoja\\Documents\\GitHub\\Jarmo\\C++\\Ohjelmointi komponenttikirjastoilla\\STL set ja multiset\\Usein_yhdessa_ostetut_tuotteet",
+        "C:\\Users\\Oppilas\\Documents\\GitHub\\Jarmo\\C++\\Ohjelmointi komponenttikirjastoilla\\STL set ja multiset\\Usein_yhdessa_ostetut_tuotteet",
         "-I",
         "C:\\Qt\\Qt5.15.10\\5.15.10\\mingw81_64\\mkspecs\\win32-g++",
         "-isystem",
@@ -49,9 +49,9 @@
         "-Wno-unknown-warning-option",
         "-Wno-documentation-unknown-command",
         "-fno-delayed-template-parsing",
-        "D:\\Maahantuoja\\Documents\\GitHub\\Jarmo\\C++\\Ohjelmointi komponenttikirjastoilla\\STL set ja multiset\\Usein_yhdessa_ostetut_tuotteet\\main.cpp"
+        "C:\\Users\\Oppilas\\Documents\\GitHub\\Jarmo\\C++\\Ohjelmointi komponenttikirjastoilla\\STL set ja multiset\\Usein_yhdessa_ostetut_tuotteet\\main.cpp"
     ],
-    "directory": "D:/Maahantuoja/Documents/GitHub/Jarmo/C++/Ohjelmointi komponenttikirjastoilla/STL set ja multiset/Usein_yhdessa_ostetut_tuotteet/.qtc_clangd",
-    "file": "D:/Maahantuoja/Documents/GitHub/Jarmo/C++/Ohjelmointi komponenttikirjastoilla/STL set ja multiset/Usein_yhdessa_ostetut_tuotteet/main.cpp"
+    "directory": "C:/Users/Oppilas/Documents/GitHub/Jarmo/C++/Ohjelmointi komponenttikirjastoilla/STL set ja multiset/Usein_yhdessa_ostetut_tuotteet/.qtc_clangd",
+    "file": "C:/Users/Oppilas/Documents/GitHub/Jarmo/C++/Ohjelmointi komponenttikirjastoilla/STL set ja multiset/Usein_yhdessa_ostetut_tuotteet/main.cpp"
 }
 ]
