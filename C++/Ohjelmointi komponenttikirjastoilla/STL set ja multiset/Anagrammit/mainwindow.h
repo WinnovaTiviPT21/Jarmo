@@ -17,7 +17,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    std::map<QString, QString> mymap;
+    std::map<QString, QVariant> mymap;
+
 private slots:
     void on_textEdit_textChanged();
 

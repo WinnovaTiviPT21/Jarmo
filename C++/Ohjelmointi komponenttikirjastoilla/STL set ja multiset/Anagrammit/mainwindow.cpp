@@ -17,22 +17,24 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-//    QFile json("dictionary.json");
-//    if (!json.open(QIODevice::ReadOnly | QIODevice::Text)) {
-//        return;
-//    }
+    /*
+    QFile json("dictionary.json");
+    if (!json.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return;
+    }
 
-//    QTextStream stream(&json);
-//    while (!stream.atEnd()) {
-//        QString line = stream.readLine();
-//        if (line.startsWith("{") || line.startsWith("}")) {
-//            continue;
-//        }
-//        QStringList values = line.split(QLatin1Char(':'));
-//        mymap.insert({values[0], values[1]});
-//        ui->listWidget->addItem(values[0]);
-//    }
-//    json.close();
+    QTextStream stream(&json);
+    while (!stream.atEnd()) {
+        QString line = stream.readLine();
+        if (line.startsWith("{") || line.startsWith("}")) {
+            continue;
+        }
+        QStringList values = line.split(QLatin1Char(':'));
+        mymap.insert({values[0], values[1]});
+        ui->listWidget->addItem(values[0]);
+    }
+    json.close();
+    */
 
     QFile file_obj("dictionary.json");
     if(!file_obj.open(QIODevice::ReadOnly)){
@@ -66,9 +68,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     QVariantMap json_map = json_obj.toVariantMap();
 
-    qDebug() << json_map[0].toString();
-    qDebug() << json_map["name"].toString();
-    qDebug() << json_map["enemy"].toString();
+    for (QVariantMap::Iterator it = json_map.begin(); it != json_map.end(); it++) {
+        //qDebug() << it.key();
+        //qDebug() << it.value();
+        mymap.insert({it.key(), it.value()});
+    }
+
+    for (map<QString, QVariant>::iterator it = mymap.begin(); it != mymap.end(); it++){
+        ui->listWidget->addItem(it->first);
+    }
+
 
 }
 
@@ -76,7 +85,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 void MainWindow::on_textEdit_textChanged()
 {
@@ -86,5 +94,11 @@ void MainWindow::on_textEdit_textChanged()
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
 
+    map<QString, QVariant>::iterator it;
+
+    it = mymap.find(item->text());
+    if (it != mymap.end()){
+        qDebug() << *it;
+    }
 }
 
