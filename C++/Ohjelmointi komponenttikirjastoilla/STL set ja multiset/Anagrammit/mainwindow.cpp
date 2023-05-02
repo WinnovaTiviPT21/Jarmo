@@ -59,8 +59,6 @@ MainWindow::MainWindow(QWidget *parent)
     for (map<QString, QVariant>::iterator it = mymap.begin(); it != mymap.end(); it++){
         ui->listWidget->addItem(it->first);
     }
-
-
 }
 
 MainWindow::~MainWindow()
@@ -70,33 +68,53 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_textEdit_textChanged()
 {
-    ui->listWidget->clear();
-    ui->listWidget_2->clear();
-    ui->label_2->clear();
+//    ui->listWidget->clear();
+//    ui->listWidget_2->clear();
+//    ui->label_2->clear();
 
-    QString input_txt = ui->textEdit->toPlainText();
+    QString input_txt = "te"/*ui->textEdit->toPlainText()*/;
 
-    bool notfound = true;
-    for (map<QString, QVariant>::iterator it = mymap.begin(); it != mymap.end(); it++){
-        int charsfound = 0;
 
-        for (int i = 0; i < input_txt.length(); i++) {
-            if (input_txt[i] == it->first[i] && it->first.length() >= input_txt.length()) {
-                charsfound++;
-            } else {
-                break;
-            }
-        }
 
-        if (charsfound == input_txt.length()) {
-            ui->listWidget->addItem(it->first);
-            notfound = false;
+    map<QString, QVariant>::iterator it = mymap.find(input_txt);
+
+    for (map<QString, QVariant>::iterator it2 = mymap.begin(); it2 != mymap.end(); it2++){
+        QString str = "testi" /*it2->first*/;
+        QString comp = str.left(input_txt.length());
+
+        if (input_txt == comp) {
+            qDebug("onnistui");
         }
     }
 
-    if (notfound == true) {
-        ui->listWidget->clear();
+    if (it != mymap.end()){
+        ui->listWidget_2->selectedItems();
+        //ui->listWidget_2->scrollToItem();
     }
+
+
+
+//    bool notfound = true;
+//    for (map<QString, QVariant>::iterator it = mymap.begin(); it != mymap.end(); it++){
+//        int charsfound = 0;
+
+//        for (int i = 0; i < input_txt.length(); i++) {
+//            if (input_txt[i] == it->first[i] && it->first.length() >= input_txt.length()) {
+//                charsfound++;
+//            } else {
+//                break;
+//            }
+//        }
+
+//        if (charsfound == input_txt.length()) {
+//            ui->listWidget->addItem(it->first);
+//            notfound = false;
+//        }
+//    }
+
+//    if (notfound == true) {
+//        ui->listWidget->clear();
+//    }
 }
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
@@ -124,3 +142,12 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         }
     }
 }
+
+void MainWindow::on_listWidget_2_itemClicked(QListWidgetItem *item)
+{
+    map<QString, QVariant>::iterator it = mymap.find(item->text());;
+    if (it != mymap.end()){
+        ui->label_2->setText(it->second.toString());
+    }
+}
+

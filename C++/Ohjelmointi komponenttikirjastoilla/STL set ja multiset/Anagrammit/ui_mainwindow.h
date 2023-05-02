@@ -33,10 +33,9 @@ public:
     QTextEdit *textEdit;
     QListWidget *listWidget;
     QLabel *label;
-    QLabel *label_2;
     QSpacerItem *horizontalSpacer_2;
     QListWidget *listWidget_2;
-    QSpacerItem *horizontalSpacer;
+    QLabel *label_2;
     QMenuBar *menubar;
     QMenu *menuMainWindow;
     QStatusBar *statusbar;
@@ -147,33 +146,30 @@ public:
 
         gridLayout_2->addWidget(label, 2, 1, 1, 1);
 
-        label_2 = new QLabel(centralwidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        QFont font1;
-        font1.setPointSize(9);
-        label_2->setFont(font1);
-        label_2->setFrameShape(QFrame::NoFrame);
-        label_2->setFrameShadow(QFrame::Plain);
-        label_2->setScaledContents(false);
-        label_2->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-        label_2->setWordWrap(true);
-
-        gridLayout_2->addWidget(label_2, 1, 1, 1, 2);
-
         horizontalSpacer_2 = new QSpacerItem(468, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_2->addItem(horizontalSpacer_2, 2, 2, 1, 1);
 
         listWidget_2 = new QListWidget(centralwidget);
         listWidget_2->setObjectName(QString::fromUtf8("listWidget_2"));
-        listWidget_2->setMaximumSize(QSize(16777215, 250));
+        listWidget_2->setMaximumSize(QSize(16777215, 200));
         listWidget_2->setAutoFillBackground(false);
 
         gridLayout_2->addWidget(listWidget_2, 3, 1, 1, 2);
 
-        horizontalSpacer = new QSpacerItem(568, 28, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        QFont font1;
+        font1.setPointSize(9);
+        label_2->setFont(font1);
+        label_2->setAutoFillBackground(false);
+        label_2->setFrameShape(QFrame::NoFrame);
+        label_2->setFrameShadow(QFrame::Plain);
+        label_2->setScaledContents(false);
+        label_2->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        label_2->setWordWrap(true);
 
-        gridLayout_2->addItem(horizontalSpacer, 0, 1, 1, 2);
+        gridLayout_2->addWidget(label_2, 0, 1, 2, 2);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
