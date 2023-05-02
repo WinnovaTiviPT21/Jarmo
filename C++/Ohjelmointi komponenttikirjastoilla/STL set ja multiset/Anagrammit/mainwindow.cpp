@@ -6,6 +6,7 @@
 
 #include <map>
 
+
 #include <QFile>
 #include <QTextStream>
 #include <QListWidget>
@@ -101,7 +102,6 @@ void MainWindow::on_textEdit_textChanged()
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
     ui->listWidget_2->clear();
-
     QString str1 = item->text();
 
     map<QString, QVariant>::iterator it = mymap.find(str1);;
@@ -109,26 +109,18 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
         ui->label_2->setText(it->second.toString());
     }
 
-    sort(str1.begin(), str1.end());
     for (map<QString, QVariant>::iterator it2 = mymap.begin(); it2 != mymap.end(); it2++){
         QString str2 = it2->first;
-        sort(str2.begin(), str2.end());
 
-        bool match = false;
-        if (str1.length() == str2.length()) {
-            for(int i = 0; i < str1.length(); i++) {
-                if (str1[i] != str2[i]) {
-                    match = false;
-                    break;
-                } else {
-                    match = true;
-                }
+        if (it->first != it2->first) {
+            str1.remove(' ').remove('-');
+            str2.remove(' ').remove('-');
+            sort(str1.begin(), str1.end());
+            sort(str2.begin(), str2.end());
+
+            if (str1 == str2) {
+                ui->listWidget_2->addItem(it2->first);
             }
-        }
-
-        if (match == true) {
-            ui->listWidget_2->addItem(it2->first);
         }
     }
 }
-
