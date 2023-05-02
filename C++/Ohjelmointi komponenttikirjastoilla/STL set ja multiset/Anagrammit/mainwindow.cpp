@@ -3,13 +3,10 @@
 #include "ui_mainwindow.h"
 #include <QJsonObject>
 #include <QJsonDocument>
-
-#include <map>
-
-
 #include <QFile>
 #include <QTextStream>
 #include <QListWidget>
+#include <map>
 
 using namespace std;
 
@@ -50,14 +47,10 @@ MainWindow::MainWindow(QWidget *parent)
         exit(4);
     }
 
-    QVariantMap json_map = json_obj.toVariantMap();
+    json_map = json_obj.toVariantMap();
 
     for (QVariantMap::Iterator it = json_map.begin(); it != json_map.end(); it++) {
-        mymap.insert({it.key(), it.value()});
-    }
-
-    for (map<QString, QVariant>::iterator it = mymap.begin(); it != mymap.end(); it++){
-        ui->listWidget->addItem(it->first);
+        ui->listWidget->addItem(it.key());
     }
 }
 
@@ -68,76 +61,45 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_textEdit_textChanged()
 {
-//    ui->listWidget->clear();
-//    ui->listWidget_2->clear();
-//    ui->label_2->clear();
+    ui->listWidget->clear();
+    ui->listWidget_2->clear();
+    ui->label_2->clear();
 
-    QString input_txt = "te"/*ui->textEdit->toPlainText()*/;
+    QString input_txt = ui->textEdit->toPlainText();
 
+    for (QVariantMap::Iterator it = json_map.begin(); it != json_map.end(); it++) {
+        QString str = it.key();
 
-
-    map<QString, QVariant>::iterator it = mymap.find(input_txt);
-
-    for (map<QString, QVariant>::iterator it2 = mymap.begin(); it2 != mymap.end(); it2++){
-        QString str = "testi" /*it2->first*/;
-        QString comp = str.left(input_txt.length());
-
-        if (input_txt == comp) {
-            qDebug("onnistui");
+        if (input_txt == str.left(input_txt.length())) {
+            ui->listWidget->addItem(it.key());
+            //ui->listWidget_2->selectedItems();
+            //ui->listWidget_2->scrollToItem();
         }
     }
-
-    if (it != mymap.end()){
-        ui->listWidget_2->selectedItems();
-        //ui->listWidget_2->scrollToItem();
-    }
-
-
-
-//    bool notfound = true;
-//    for (map<QString, QVariant>::iterator it = mymap.begin(); it != mymap.end(); it++){
-//        int charsfound = 0;
-
-//        for (int i = 0; i < input_txt.length(); i++) {
-//            if (input_txt[i] == it->first[i] && it->first.length() >= input_txt.length()) {
-//                charsfound++;
-//            } else {
-//                break;
-//            }
-//        }
-
-//        if (charsfound == input_txt.length()) {
-//            ui->listWidget->addItem(it->first);
-//            notfound = false;
-//        }
-//    }
-
-//    if (notfound == true) {
-//        ui->listWidget->clear();
-//    }
 }
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
     ui->listWidget_2->clear();
+
     QString str1 = item->text();
 
-    map<QString, QVariant>::iterator it = mymap.find(str1);;
-    if (it != mymap.end()){
-        ui->label_2->setText(it->second.toString());
+    QVariantMap::Iterator it = json_map.find(str1);
+    if (it != json_map.end()){
+        ui->label_2->setText(it.value().toString());
     }
 
-    for (map<QString, QVariant>::iterator it2 = mymap.begin(); it2 != mymap.end(); it2++){
-        QString str2 = it2->first;
+    for (QVariantMap::Iterator it2 = json_map.begin(); it2 != json_map.end(); it2++){
+        QString str2 = it2.key();
 
-        if (it->first != it2->first) {
+        if (it.key() != it2.key()) {
             str1.remove(' ').remove('-');
             str2.remove(' ').remove('-');
             sort(str1.begin(), str1.end());
             sort(str2.begin(), str2.end());
 
             if (str1 == str2) {
-                ui->listWidget_2->addItem(it2->first);
+                ui->listWidget_2->addItem(it2.key());
             }
         }
     }
@@ -145,9 +107,9 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 
 void MainWindow::on_listWidget_2_itemClicked(QListWidgetItem *item)
 {
-    map<QString, QVariant>::iterator it = mymap.find(item->text());;
-    if (it != mymap.end()){
-        ui->label_2->setText(it->second.toString());
+    QVariantMap::iterator it = json_map.find(item->text());;
+    if (it != json_map.end()){
+        ui->label_2->setText(it.value().toString());
     }
 }
 

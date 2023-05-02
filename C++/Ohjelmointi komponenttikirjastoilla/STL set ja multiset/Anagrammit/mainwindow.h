@@ -17,7 +17,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    std::map<QString, QVariant> mymap;
+    QMap<QString, QVariant> json_map;
 
 private slots:
     void on_textEdit_textChanged();
