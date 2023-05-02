@@ -83,7 +83,7 @@ void MainWindow::on_textEdit_textChanged()
         QString str = it.key();
 
         if (input_txt == str.left(input_txt.length())) {
-            QListWidgetItem* item = ui->listWidget->findItems(it.key(), Qt::MatchExactly).at(0);
+            QListWidgetItem *item = ui->listWidget->findItems(it.key(), Qt::MatchExactly).at(0);
             ui->listWidget->scrollToItem(item, QAbstractItemView::PositionAtTop);
             break;
         }
