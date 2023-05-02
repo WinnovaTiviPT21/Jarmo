@@ -6,7 +6,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QListWidget>
-#include <map>
 
 using namespace std;
 
