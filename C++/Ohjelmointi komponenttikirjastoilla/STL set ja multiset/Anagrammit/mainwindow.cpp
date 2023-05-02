@@ -60,21 +60,32 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_textEdit_textChanged()
 {
-    ui->listWidget->clear();
-    ui->listWidget_2->clear();
-    ui->label_2->clear();
-
+    /*
+     *
+     * Wanha
+     *
+     * ui->listWidget->clear();
+     * ui->listWidget_2->clear();
+     * ui->label_2->clear();
+     *
+     * QString input_txt = ui->textEdit->toPlainText();
+     * for (QVariantMap::Iterator it = json_map.begin(); it != json_map.end(); it++) {
+     *    QString str = it.key();
+     *    if (input_txt == str.left(input_txt.length())) {
+     *        ui->listWidget->addItem(it.key());
+     *    }
+     * }
+     *
+    */
     QString input_txt = ui->textEdit->toPlainText();
 
     for (QVariantMap::Iterator it = json_map.begin(); it != json_map.end(); it++) {
         QString str = it.key();
 
         if (input_txt == str.left(input_txt.length())) {
-            ui->listWidget->addItem(it.key());
-            //ui->listWidget_2->selectedItems();
-            //ui->listWidget_2->scrollToItem();
-            //ui->listWidget->findItems(it.key(), Qt::MatchStartsWith);
-            //break;
+            QListWidgetItem* item = ui->listWidget->findItems(it.key(), Qt::MatchExactly).at(0);
+            ui->listWidget->scrollToItem(item, QAbstractItemView::PositionAtTop);
+            break;
         }
     }
 }
