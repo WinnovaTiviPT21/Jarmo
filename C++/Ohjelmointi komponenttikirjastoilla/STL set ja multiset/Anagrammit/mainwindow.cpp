@@ -74,6 +74,8 @@ void MainWindow::on_textEdit_textChanged()
             ui->listWidget->addItem(it.key());
             //ui->listWidget_2->selectedItems();
             //ui->listWidget_2->scrollToItem();
+            //ui->listWidget->findItems(it.key(), Qt::MatchStartsWith);
+            //break;
         }
     }
 }
