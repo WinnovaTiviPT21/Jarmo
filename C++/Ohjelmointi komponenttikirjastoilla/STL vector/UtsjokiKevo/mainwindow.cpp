@@ -16,6 +16,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "data.h"
+
 #include <QtCharts/QChartView>
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QBarSet>
@@ -23,15 +25,21 @@
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
 
+#include <iostream>
+#include <vector>
 
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
+    Mittaus m;
+
     QLineSeries *series = new QLineSeries();
     /*
+
     QFile sunSpots(":sun");
     if (!sunSpots.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return;
@@ -48,43 +56,39 @@ MainWindow::MainWindow(QWidget *parent)
         series->append(momentInTime.toMSecsSinceEpoch(), values[2].toDouble());
     }
     sunSpots.close();
+
     */
 
-    QFile kevo("UtsjokiKevo.csv");
-    if (!kevo.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    QFile UtsjokiKevo("UtsjokiKevo.csv");
+    if (!UtsjokiKevo.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return;
     }
 
-    QTextStream stream(&kevo);
+    QTextStream stream(&UtsjokiKevo);
     while (!stream.atEnd()) {
         QString line = stream.readLine();
         if (line.startsWith("V"))
             continue;
-        QStringList values = line.split(QLatin1Char(','), Qt::SkipEmptyParts);
-        //QStringList values = line.split(QLatin1Char(','));
-        QDateTime momentInTime;
-        momentInTime.setDate(QDate(values[0].toInt(), values[1].toInt(), 15));
-        series->append(momentInTime.toMSecsSinceEpoch(), values[2].toDouble());
+        QStringList values = line.split(QLatin1Char(',')/*, Qt::SkipEmptyParts*/);
+
+        Data datastruct;
+        datastruct.v = values[0].toInt();
+        datastruct.kk = values[1].toInt();
+        datastruct.pv = values[2].toInt();
+        //datastruct.klo = values[3].toStdString();
+        //datastruct.aikavyohyke = values[4].toStdString();
+        datastruct.sademaara = values[5].toFloat();
+        datastruct.lumensyvyys = values[6].toInt();
+        datastruct.ilman_lampotila = values[7].toFloat();
+        datastruct.ylin_lampotila = values[8].toFloat();
+        datastruct.alin_lampotila = values[9].toFloat();
+
+        m.datavector.push_back (datastruct);
     }
-    kevo.close();
+    UtsjokiKevo.close();
 
-    QChart *chart = new QChart();
-    chart->addSeries(series);
-    chart->legend()->hide();
-    chart->setTitle("Insert title here");
-
-    QDateTimeAxis *axisX = new QDateTimeAxis;
-    axisX->setTickCount(10);
-    axisX->setFormat("MMM yyyy");
-    axisX->setTitleText("Date");
-    chart->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
-
-    QValueAxis *axisY = new QValueAxis;
-    axisY->setLabelFormat("%i");
-    axisY->setTitleText("Tieteellinen teksti tähän");
-    chart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
+    m.i = 0;
+    QChart *chart = m.mittaus(m.i, m.datavector, series);
 
     ui->widget->setRenderHint(QPainter::Antialiasing);
     ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
