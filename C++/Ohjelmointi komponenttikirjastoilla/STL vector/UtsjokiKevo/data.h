@@ -9,10 +9,11 @@
 class Mittaus
 {
 public:
-    QChart *mittaus(int i, std::vector<Data> datavector, QLineSeries *series);
-    std::vector<Data> datavector;
-    int i = 10;
+    int i = 1;
 
+    std::vector<Data> datavector;
+
+    QChart *mittaus(int i, std::vector<Data> datavector, QLineSeries *series);
 };
 
 #endif // DATA_H

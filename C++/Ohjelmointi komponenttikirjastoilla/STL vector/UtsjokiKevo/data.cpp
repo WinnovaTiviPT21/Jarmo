@@ -1,43 +1,34 @@
-#include "data.h"
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "data.h"
 #include <QtCharts/QChartView>
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QBarSet>
 #include <QtCharts/QLegend>
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
-
 #include <vector>
 
-QChart* Mittaus::mittaus(int input, std::vector<Data> datavector, QLineSeries *series)
+QChart *Mittaus::mittaus(int input, std::vector<Data> datavector, QLineSeries *series)
 {
     for(Data row : datavector) {
-        if (input == 0) {
-            QDateTime momentInTime;
-            momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+
+        QDateTime momentInTime;
+        momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+
+        if (input == 1) {
             series->append(momentInTime.toMSecsSinceEpoch(), row.sademaara);
         }
-        if (input == 1) {
-            QDateTime momentInTime;
-            momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+        if (input == 2) {
             series->append(momentInTime.toMSecsSinceEpoch(), row.lumensyvyys);
         }
-        if (input == 2) {
-            QDateTime momentInTime;
-            momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+        if (input == 3) {
             series->append(momentInTime.toMSecsSinceEpoch(), row.ilman_lampotila);
         }
-        if (input == 3) {
-            QDateTime momentInTime;
-            momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+        if (input == 4) {
             series->append(momentInTime.toMSecsSinceEpoch(), row.alin_lampotila);
         }
-        if (input == 4) {
-            QDateTime momentInTime;
-            momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+        if (input == 5) {
             series->append(momentInTime.toMSecsSinceEpoch(), row.ylin_lampotila);
         }
     }

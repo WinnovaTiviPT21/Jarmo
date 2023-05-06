@@ -26,8 +26,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES += \
-    sundata.qrc
+RESOURCES +=
 
 DISTFILES += \
-    ../build-UtsjokiKevo-Desktop_Qt_5_15_10_MinGW_64_bit-Debug/UtsjokiKevo.csv
+    ../build-UtsjokiKevo-Desktop_Qt_5_15_10_MinGW_64_bit-Debug/UtsjokiKevo.csv \
+    UtsjokiKevo.csv

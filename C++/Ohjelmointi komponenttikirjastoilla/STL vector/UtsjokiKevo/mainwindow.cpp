@@ -15,16 +15,13 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include "data.h"
-
 #include <QtCharts/QChartView>
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QBarSet>
 #include <QtCharts/QLegend>
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
-
 #include <iostream>
 #include <vector>
 
@@ -38,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
     Mittaus m;
 
     QLineSeries *series = new QLineSeries();
+
     /*
 
     QFile sunSpots(":sun");
@@ -87,7 +85,6 @@ MainWindow::MainWindow(QWidget *parent)
     }
     UtsjokiKevo.close();
 
-    m.i = 0;
     QChart *chart = m.mittaus(m.i, m.datavector, series);
 
     ui->widget->setRenderHint(QPainter::Antialiasing);
@@ -104,6 +101,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_checkBox_rain_stateChanged(int arg1)
 {
+//    Mittaus m;
+//    QLineSeries *series = new QLineSeries();
 
+//    QChart *chart = m.mittaus(m.i, m.datavector, series);
+
+//    ui->widget->setRenderHint(QPainter::Antialiasing);
+//    ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
+//    ui->widget->setChart(chart);
 }
 
