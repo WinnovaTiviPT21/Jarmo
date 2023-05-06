@@ -70,16 +70,17 @@ MainWindow::MainWindow(QWidget *parent)
         QStringList values = line.split(QLatin1Char(',')/*, Qt::SkipEmptyParts*/);
 
         Data datastruct;
-        datastruct.v = values[0].toInt();
-        datastruct.kk = values[1].toInt();
-        datastruct.pv = values[2].toInt();
+        datastruct.v = values[0].toDouble();
+        datastruct.kk = values[1].toDouble();
+        datastruct.pv = values[2].toDouble();
         //datastruct.klo = values[3].toStdString();
         //datastruct.aikavyohyke = values[4].toStdString();
-        datastruct.sademaara = values[5].toFloat();
-        datastruct.lumensyvyys = values[6].toInt();
-        datastruct.ilman_lampotila = values[7].toFloat();
-        datastruct.ylin_lampotila = values[8].toFloat();
-        datastruct.alin_lampotila = values[9].toFloat();
+        datastruct.sademaara = values[5].toDouble();
+        datastruct.lumensyvyys = values[6].toDouble();
+        datastruct.ilman_lampotila = values[7].toDouble();
+        //datastruct.maanpintaminimi = values[8].toDouble();
+        datastruct.ylin_lampotila = values[9].toDouble();
+        datastruct.alin_lampotila = values[10].toDouble();
 
         m.datavector.push_back (datastruct);
     }
@@ -90,6 +91,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->widget->setRenderHint(QPainter::Antialiasing);
     ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
     ui->widget->setChart(chart);
+
 }
 
 
@@ -101,13 +103,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_checkBox_rain_stateChanged(int arg1)
 {
-//    Mittaus m;
-//    QLineSeries *series = new QLineSeries();
 
-//    QChart *chart = m.mittaus(m.i, m.datavector, series);
-
-//    ui->widget->setRenderHint(QPainter::Antialiasing);
-//    ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
-//    ui->widget->setChart(chart);
 }
 

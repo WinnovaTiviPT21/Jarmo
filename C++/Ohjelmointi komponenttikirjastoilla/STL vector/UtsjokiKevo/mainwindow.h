@@ -10,7 +10,7 @@ QT_END_NAMESPACE
 struct Data {
     std::string aikavyohyke, klo;
     int v, kk, pv, lumensyvyys;
-    float sademaara, ilman_lampotila, ylin_lampotila, alin_lampotila;
+    double sademaara, ilman_lampotila, maanpintaminimi, ylin_lampotila, alin_lampotila;
 };
 
 class MainWindow : public QMainWindow

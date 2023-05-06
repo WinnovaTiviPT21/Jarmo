@@ -51,5 +51,7 @@ QChart *Mittaus::mittaus(int input, std::vector<Data> datavector, QLineSeries *s
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 
+    chart->setAnimationOptions(QChart::AllAnimations);
+
     return chart;
 }
