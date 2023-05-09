@@ -24,7 +24,6 @@
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
 
-//#include <QtWidgets/QCheckBox>
 
 #include <iostream>
 #include <vector>
@@ -35,31 +34,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow) {
     ui->setupUi(this);
-
-    Mittaus m;
-
-    QLineSeries *series = new QLineSeries();
-
-    /*
-
-    QFile sunSpots(":sun");
-    if (!sunSpots.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        return;
-    }
-
-    QTextStream stream(&sunSpots);
-    while (!stream.atEnd()) {
-        QString line = stream.readLine();
-        if (line.startsWith("#") || line.startsWith(":"))
-            continue;
-        QStringList values = line.split(QLatin1Char(' '), Qt::SkipEmptyParts);
-        QDateTime momentInTime;
-        momentInTime.setDate(QDate(values[0].toInt(), values[1].toInt() , 15));
-        series->append(momentInTime.toMSecsSinceEpoch(), values[2].toDouble());
-    }
-    sunSpots.close();
-
-    */
 
     QFile UtsjokiKevo("UtsjokiKevo.csv");
     if (!UtsjokiKevo.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -91,30 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
     UtsjokiKevo.close();
 
-    /*
-    ESIMERRKI
-
-    m_aaCheckBox = new QCheckBox();
-    m_animationsCheckBox = new QCheckBox();
-    m_animationsCheckBox->setCheckState(Qt::Checked);
-    m_legendCheckBox = new QCheckBox();
-
-    connect(m_aaCheckBox, &QCheckBox::toggled, this, &MainWidget::updateChartSettings);
-    connect(m_animationsCheckBox, &QCheckBox::toggled, this, &MainWidget::updateChartSettings);
-    connect(m_legendCheckBox, &QCheckBox::toggled, this, &MainWidget::updateChartSettings);
-    */
-
-    QChart *chart = m.mittaus(m.datavector, series);
-
-    ui->widget->setRenderHint(QPainter::Antialiasing);
-    ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
-    ui->widget->setChart(chart);
-
-//    chart = m.ilman_lampotila(series);
-//    ui->widget->setRenderHint(QPainter::Antialiasing);
-//    ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
-//    ui->widget->setChart(chart);
-
+    ui->checkBox_rain->setCheckState(Qt::Unchecked);
 }
 
 
@@ -126,6 +77,140 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_checkBox_rain_stateChanged(int arg1)
 {
+    if (ui->checkBox_rain->isChecked()) {
+        QLineSeries *series = new QLineSeries();
+        QChart *chart = m.sademaara(m.datavector, series);
 
+        ui->widget->setRenderHint(QPainter::Antialiasing);
+        ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
+        ui->widget->setChart(chart);
+
+        ui->checkBox_snow->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureAir->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureGround->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureMin->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureMax->setCheckState(Qt::Unchecked);
+
+
+        ui->widget->setVisible(true);
+    } else {
+        ui->widget->setVisible(false);
+    }
+}
+
+
+void MainWindow::on_checkBox_snow_stateChanged(int arg1)
+{
+    if (ui->checkBox_snow->isChecked()) {
+        QLineSeries *series = new QLineSeries();
+        QChart *chart = m.lumensyvyys(m.datavector, series);
+
+        ui->widget->setRenderHint(QPainter::Antialiasing);
+        ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
+        ui->widget->setChart(chart);
+
+        ui->checkBox_rain->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureAir->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureGround->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureMin->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureMax->setCheckState(Qt::Unchecked);
+
+        ui->widget->setVisible(true);
+    }   else {
+        ui->widget->setVisible(false);
+    }
+}
+
+
+
+void MainWindow::on_checkBox_temperatureAir_stateChanged(int arg1)
+{
+    if (ui->checkBox_temperatureAir->isChecked()) {
+        QLineSeries *series = new QLineSeries();
+        QChart *chart = m.ilman_lampotila(m.datavector, series);
+
+        ui->widget->setRenderHint(QPainter::Antialiasing);
+        ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
+        ui->widget->setChart(chart);
+
+        ui->checkBox_rain->setCheckState(Qt::Unchecked);
+        ui->checkBox_snow->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureGround->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureMin->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureMax->setCheckState(Qt::Unchecked);
+
+        ui->widget->setVisible(true);
+    }   else {
+        ui->widget->setVisible(false);
+    }
+}
+
+
+void MainWindow::on_checkBox_temperatureGround_stateChanged(int arg1)
+{
+    if (ui->checkBox_temperatureGround->isChecked()) {
+        QLineSeries *series = new QLineSeries();
+        QChart *chart = m.maanpintaminimi(m.datavector, series);
+
+        ui->widget->setRenderHint(QPainter::Antialiasing);
+        ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
+        ui->widget->setChart(chart);
+
+        ui->checkBox_rain->setCheckState(Qt::Unchecked);
+        ui->checkBox_snow->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureAir->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureMin->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureMax->setCheckState(Qt::Unchecked);
+
+        ui->widget->setVisible(true);
+    }   else {
+        ui->widget->setVisible(false);
+    }
+}
+
+
+void MainWindow::on_checkBox_temperatureMin_stateChanged(int arg1)
+{
+    if (ui->checkBox_temperatureMin->isChecked()) {
+        QLineSeries *series = new QLineSeries();
+        QChart *chart = m.alin_lampotila(m.datavector, series);
+
+        ui->widget->setRenderHint(QPainter::Antialiasing);
+        ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
+        ui->widget->setChart(chart);
+
+        ui->checkBox_rain->setCheckState(Qt::Unchecked);
+        ui->checkBox_snow->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureAir->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureGround->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureMax->setCheckState(Qt::Unchecked);
+
+        ui->widget->setVisible(true);
+    }   else {
+        ui->widget->setVisible(false);
+    }
+}
+
+
+void MainWindow::on_checkBox_temperatureMax_stateChanged(int arg1)
+{
+    if (ui->checkBox_temperatureMax->isChecked()) {
+        QLineSeries *series = new QLineSeries();
+        QChart *chart = m.ylin_lampotila(m.datavector, series);
+
+        ui->widget->setRenderHint(QPainter::Antialiasing);
+        ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
+        ui->widget->setChart(chart);
+
+        ui->checkBox_rain->setCheckState(Qt::Unchecked);
+        ui->checkBox_snow->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureAir->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureGround->setCheckState(Qt::Unchecked);
+        ui->checkBox_temperatureMin->setCheckState(Qt::Unchecked);
+
+        ui->widget->setVisible(true);
+    }   else {
+        ui->widget->setVisible(false);
+    }
 }
 

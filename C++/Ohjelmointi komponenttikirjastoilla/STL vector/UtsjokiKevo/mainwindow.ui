@@ -37,10 +37,13 @@
      <enum>Qt::Vertical</enum>
     </property>
     <widget class="QCheckBox" name="checkBox_rain">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="text">
       <string>Rain</string>
      </property>
-     <property name="checked">
+     <property name="checkable">
       <bool>true</bool>
      </property>
     </widget>
@@ -92,22 +95,5 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>checkBox_rain</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>widget</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1015</x>
-     <y>41</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>464</x>
-     <y>300</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

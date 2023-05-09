@@ -9,7 +9,7 @@
 #include <QtCharts/QValueAxis>
 #include <vector>
 
-QChart *Mittaus::mittaus(std::vector<Data> datavector, QLineSeries *series)
+QChart *Mittaus::sademaara(std::vector<Data> datavector, QLineSeries *series)
 {
     /*
     for(Data row : datavector) {
@@ -84,33 +84,157 @@ QChart *Mittaus::mittaus(std::vector<Data> datavector, QLineSeries *series)
     return chart;
 }
 
-//QChart *Mittaus::ilman_lampotila(QLineSeries *series)
-//{
-//    for(Data row : datavector) {
-//        QDateTime momentInTime;
-//        momentInTime.setDate(QDate(row.v, row.kk, row.pv));
-//        series->append(momentInTime.toMSecsSinceEpoch(), row.sademaara);
-//    }
+QChart *Mittaus::lumensyvyys(std::vector<Data> datavector, QLineSeries *series)
+{
+    for(Data row : datavector) {
+        QDateTime momentInTime;
+        momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+        series->append(momentInTime.toMSecsSinceEpoch(), row.lumensyvyys);
+    }
 
-//    QChart *chart = new QChart();
-//    chart->addSeries(series);
-//    chart->legend()->hide();
-//    chart->setTitle("Sateen määrä 1962 - 2014");
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->legend()->hide();
+    chart->setTitle("Lumen määrä 1962 - 2014");
 
-//    QDateTimeAxis *axisX = new QDateTimeAxis;
-//    axisX->setTickCount(10);
-//    axisX->setFormat("d MMM yyyy");
-//    axisX->setTitleText("Date");
-//    chart->addAxis(axisX, Qt::AlignBottom);
-//    series->attachAxis(axisX);
+    QDateTimeAxis *axisX = new QDateTimeAxis;
+    axisX->setTickCount(10);
+    axisX->setFormat("d MMM yyyy");
+    axisX->setTitleText("Date");
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
 
-//    QValueAxis *axisY = new QValueAxis;
-//    axisY->setLabelFormat("%i");
-//    axisY->setTitleText("Sademäärä (mm)");
-//    chart->addAxis(axisY, Qt::AlignLeft);
-//    series->attachAxis(axisY);
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setLabelFormat("%i");
+    axisY->setTitleText("Lumensyvyys (cm)");
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
 
-//    chart->setAnimationOptions(QChart::AllAnimations);
+    chart->setAnimationOptions(QChart::AllAnimations);
 
-//    return chart;
-//}
+    return chart;
+}
+
+QChart *Mittaus::ilman_lampotila(std::vector<Data> datavector, QLineSeries *series)
+{
+    for(Data row : datavector) {
+        QDateTime momentInTime;
+        momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+        series->append(momentInTime.toMSecsSinceEpoch(), row.ilman_lampotila);
+    }
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->legend()->hide();
+    chart->setTitle("Ilman lämpötila 1962 - 2014");
+
+    QDateTimeAxis *axisX = new QDateTimeAxis;
+    axisX->setTickCount(10);
+    axisX->setFormat("d MMM yyyy");
+    axisX->setTitleText("Date");
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setLabelFormat("%i");
+    axisY->setTitleText("Lämpötila (degC)");
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    chart->setAnimationOptions(QChart::AllAnimations);
+
+    return chart;
+}
+
+QChart *Mittaus::maanpintaminimi(std::vector<Data> datavector, QLineSeries *series)
+{
+    for(Data row : datavector) {
+        QDateTime momentInTime;
+        momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+        series->append(momentInTime.toMSecsSinceEpoch(), row.maanpintaminimi);
+    }
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->legend()->hide();
+    chart->setTitle("Maanpinnan lämpötila 1962 - 2014");
+
+    QDateTimeAxis *axisX = new QDateTimeAxis;
+    axisX->setTickCount(10);
+    axisX->setFormat("d MMM yyyy");
+    axisX->setTitleText("Date");
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setLabelFormat("%i");
+    axisY->setTitleText("Lämpötila (degC)");
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    chart->setAnimationOptions(QChart::AllAnimations);
+
+    return chart;
+}
+
+QChart *Mittaus::alin_lampotila(std::vector<Data> datavector, QLineSeries *series)
+{
+    for(Data row : datavector) {
+        QDateTime momentInTime;
+        momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+        series->append(momentInTime.toMSecsSinceEpoch(), row.alin_lampotila);
+    }
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->legend()->hide();
+    chart->setTitle("Alin lämpötila 1962 - 2014");
+
+    QDateTimeAxis *axisX = new QDateTimeAxis;
+    axisX->setTickCount(10);
+    axisX->setFormat("d MMM yyyy");
+    axisX->setTitleText("Date");
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setLabelFormat("%i");
+    axisY->setTitleText("Lämpötila (degC)");
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    chart->setAnimationOptions(QChart::AllAnimations);
+
+    return chart;
+}
+
+QChart *Mittaus::ylin_lampotila(std::vector<Data> datavector, QLineSeries *series)
+{
+    for(Data row : datavector) {
+        QDateTime momentInTime;
+        momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+        series->append(momentInTime.toMSecsSinceEpoch(), row.ylin_lampotila);
+    }
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->legend()->hide();
+    chart->setTitle("Ylin lämpötila 1962 - 2014");
+
+    QDateTimeAxis *axisX = new QDateTimeAxis;
+    axisX->setTickCount(10);
+    axisX->setFormat("d MMM yyyy");
+    axisX->setTitleText("Date");
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setLabelFormat("%i");
+    axisY->setTitleText("Lämpötila (degC)");
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    chart->setAnimationOptions(QChart::AllAnimations);
+
+    return chart;
+}

@@ -2,16 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "data.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-struct Data {
-    std::string aikavyohyke, klo;
-    int v, kk, pv, lumensyvyys;
-    double sademaara, ilman_lampotila, maanpintaminimi, ylin_lampotila, alin_lampotila;
-};
+
 
 class MainWindow : public QMainWindow
 {
@@ -22,13 +19,22 @@ public:
   ~MainWindow();
 
 
-
-
 private slots:
   void on_checkBox_rain_stateChanged(int arg1);
 
+  void on_checkBox_snow_stateChanged(int arg1);
+
+  void on_checkBox_temperatureAir_stateChanged(int arg1);
+
+  void on_checkBox_temperatureGround_stateChanged(int arg1);
+
+  void on_checkBox_temperatureMin_stateChanged(int arg1);
+
+  void on_checkBox_temperatureMax_stateChanged(int arg1);
 
 private:
   Ui::MainWindow *ui;
+  Mittaus m;
+
 };
 #endif // MAINWINDOW_H
