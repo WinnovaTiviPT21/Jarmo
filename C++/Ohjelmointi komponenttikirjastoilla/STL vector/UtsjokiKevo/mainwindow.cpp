@@ -91,7 +91,6 @@ void MainWindow::on_checkBox_rain_stateChanged(int arg1)
         ui->checkBox_temperatureMin->setCheckState(Qt::Unchecked);
         ui->checkBox_temperatureMax->setCheckState(Qt::Unchecked);
 
-
         ui->widget->setVisible(true);
     } else {
         ui->widget->setVisible(false);
