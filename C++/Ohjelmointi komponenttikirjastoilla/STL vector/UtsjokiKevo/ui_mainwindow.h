@@ -48,10 +48,11 @@ public:
         widget->setGeometry(QRect(9, 9, 911, 541));
         splitter = new QSplitter(centralwidget);
         splitter->setObjectName(QString::fromUtf8("splitter"));
-        splitter->setGeometry(QRect(940, 10, 151, 251));
+        splitter->setGeometry(QRect(940, 10, 151, 152));
         splitter->setOrientation(Qt::Vertical);
         checkBox_rain = new QCheckBox(splitter);
         checkBox_rain->setObjectName(QString::fromUtf8("checkBox_rain"));
+        checkBox_rain->setChecked(true);
         splitter->addWidget(checkBox_rain);
         checkBox_snow = new QCheckBox(splitter);
         checkBox_snow->setObjectName(QString::fromUtf8("checkBox_snow"));
@@ -78,6 +79,7 @@ public:
         MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);
+        QObject::connect(checkBox_rain, SIGNAL(toggled(bool)), widget, SLOT(setVisible(bool)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi

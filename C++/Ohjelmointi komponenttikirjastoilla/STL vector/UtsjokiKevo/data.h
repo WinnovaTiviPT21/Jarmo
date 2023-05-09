@@ -14,6 +14,7 @@ public:
     std::vector<Data> datavector;
 
     QChart *mittaus(int i, std::vector<Data> datavector, QLineSeries *series);
+//    QChart *ilman_lampotila(QLineSeries *series);
 };
 
 #endif // DATA_H

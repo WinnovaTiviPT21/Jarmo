@@ -11,6 +11,7 @@
 
 QChart *Mittaus::mittaus(int input, std::vector<Data> datavector, QLineSeries *series)
 {
+    /*
     for(Data row : datavector) {
 
         QDateTime momentInTime;
@@ -52,6 +53,64 @@ QChart *Mittaus::mittaus(int input, std::vector<Data> datavector, QLineSeries *s
     series->attachAxis(axisY);
 
     chart->setAnimationOptions(QChart::AllAnimations);
+    */
+
+    for(Data row : datavector) {
+        QDateTime momentInTime;
+        momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+        series->append(momentInTime.toMSecsSinceEpoch(), row.sademaara);
+    }
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->legend()->hide();
+    chart->setTitle("Sateen määrä 1962 - 2014");
+
+    QDateTimeAxis *axisX = new QDateTimeAxis;
+    axisX->setTickCount(10);
+    axisX->setFormat("d MMM yyyy");
+    axisX->setTitleText("Date");
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setLabelFormat("%i");
+    axisY->setTitleText("Sademäärä (mm)");
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    chart->setAnimationOptions(QChart::AllAnimations);
 
     return chart;
 }
+
+//QChart *Mittaus::ilman_lampotila(QLineSeries *series)
+//{
+//    for(Data row : datavector) {
+//        QDateTime momentInTime;
+//        momentInTime.setDate(QDate(row.v, row.kk, row.pv));
+//        series->append(momentInTime.toMSecsSinceEpoch(), row.sademaara);
+//    }
+
+//    QChart *chart = new QChart();
+//    chart->addSeries(series);
+//    chart->legend()->hide();
+//    chart->setTitle("Sateen määrä 1962 - 2014");
+
+//    QDateTimeAxis *axisX = new QDateTimeAxis;
+//    axisX->setTickCount(10);
+//    axisX->setFormat("d MMM yyyy");
+//    axisX->setTitleText("Date");
+//    chart->addAxis(axisX, Qt::AlignBottom);
+//    series->attachAxis(axisX);
+
+//    QValueAxis *axisY = new QValueAxis;
+//    axisY->setLabelFormat("%i");
+//    axisY->setTitleText("Sademäärä (mm)");
+//    chart->addAxis(axisY, Qt::AlignLeft);
+//    series->attachAxis(axisY);
+
+//    chart->setAnimationOptions(QChart::AllAnimations);
+
+//    return chart;
+//}

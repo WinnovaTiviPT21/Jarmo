@@ -30,7 +30,7 @@
       <x>940</x>
       <y>10</y>
       <width>151</width>
-      <height>251</height>
+      <height>152</height>
      </rect>
     </property>
     <property name="orientation">
@@ -39,6 +39,9 @@
     <widget class="QCheckBox" name="checkBox_rain">
      <property name="text">
       <string>Rain</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QCheckBox" name="checkBox_snow">
@@ -89,5 +92,22 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>checkBox_rain</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>widget</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1015</x>
+     <y>41</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>464</x>
+     <y>300</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -16,12 +16,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "data.h"
+
 #include <QtCharts/QChartView>
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QBarSet>
 #include <QtCharts/QLegend>
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
+
+//#include <QtWidgets/QCheckBox>
+
 #include <iostream>
 #include <vector>
 
@@ -67,6 +71,7 @@ MainWindow::MainWindow(QWidget *parent)
         QString line = stream.readLine();
         if (line.startsWith("V"))
             continue;
+        // Jos tyhjä niin antaa automaattisesti arvoksi 0.
         QStringList values = line.split(QLatin1Char(',')/*, Qt::SkipEmptyParts*/);
 
         Data datastruct;
@@ -78,7 +83,7 @@ MainWindow::MainWindow(QWidget *parent)
         datastruct.sademaara = values[5].toDouble();
         datastruct.lumensyvyys = values[6].toDouble();
         datastruct.ilman_lampotila = values[7].toDouble();
-        //datastruct.maanpintaminimi = values[8].toDouble();
+        datastruct.maanpintaminimi = values[8].toDouble();
         datastruct.ylin_lampotila = values[9].toDouble();
         datastruct.alin_lampotila = values[10].toDouble();
 
@@ -86,11 +91,29 @@ MainWindow::MainWindow(QWidget *parent)
     }
     UtsjokiKevo.close();
 
+    /*
+    ESIMERRKI
+
+    m_aaCheckBox = new QCheckBox();
+    m_animationsCheckBox = new QCheckBox();
+    m_animationsCheckBox->setCheckState(Qt::Checked);
+    m_legendCheckBox = new QCheckBox();
+
+    connect(m_aaCheckBox, &QCheckBox::toggled, this, &MainWidget::updateChartSettings);
+    connect(m_animationsCheckBox, &QCheckBox::toggled, this, &MainWidget::updateChartSettings);
+    connect(m_legendCheckBox, &QCheckBox::toggled, this, &MainWidget::updateChartSettings);
+    */
+
     QChart *chart = m.mittaus(m.i, m.datavector, series);
 
     ui->widget->setRenderHint(QPainter::Antialiasing);
     ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
     ui->widget->setChart(chart);
+
+//    chart = m.ilman_lampotila(series);
+//    ui->widget->setRenderHint(QPainter::Antialiasing);
+//    ui->widget->setRubberBand(QChartView::HorizontalRubberBand);
+//    ui->widget->setChart(chart);
 
 }
 
