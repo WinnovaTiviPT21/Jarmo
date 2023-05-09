@@ -104,7 +104,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_legendCheckBox, &QCheckBox::toggled, this, &MainWidget::updateChartSettings);
     */
 
-    QChart *chart = m.mittaus(m.i, m.datavector, series);
+    QChart *chart = m.mittaus(m.datavector, series);
 
     ui->widget->setRenderHint(QPainter::Antialiasing);
     ui->widget->setRubberBand(QChartView::HorizontalRubberBand);

@@ -9,7 +9,7 @@
 #include <QtCharts/QValueAxis>
 #include <vector>
 
-QChart *Mittaus::mittaus(int input, std::vector<Data> datavector, QLineSeries *series)
+QChart *Mittaus::mittaus(std::vector<Data> datavector, QLineSeries *series)
 {
     /*
     for(Data row : datavector) {

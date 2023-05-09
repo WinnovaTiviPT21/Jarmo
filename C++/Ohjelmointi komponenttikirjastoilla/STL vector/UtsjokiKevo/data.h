@@ -9,11 +9,9 @@
 class Mittaus
 {
 public:
-    int i = 1;
-
     std::vector<Data> datavector;
 
-    QChart *mittaus(int i, std::vector<Data> datavector, QLineSeries *series);
+    QChart *mittaus(std::vector<Data> datavector, QLineSeries *series);
 //    QChart *ilman_lampotila(QLineSeries *series);
 };
 
