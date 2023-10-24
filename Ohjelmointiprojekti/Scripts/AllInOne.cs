@@ -21,7 +21,7 @@ public class AllInOne : MonoBehaviour
     private float initialScale;
 
     // SHAKE VARIABLES
-    private bool isShaking = false;
+    //private bool isShaking = false;
     private float shakeThreshold = 3.0f;
     private float rotationTime = 0.5f;
     private Quaternion targetRotation = Quaternion.Euler(0, 180, 0);
@@ -32,27 +32,27 @@ public class AllInOne : MonoBehaviour
     public TextMeshPro textMesh; // Tai TMP_Text (tekstikomponentti)
 
     // TAULUKOT ENNUSTUKSISTA
-    public string[] predictionsEn = { 
-        "It is certain", 
-        "It is decidedly so", 
-        "Without a doubt", 
-        "Yes definitely", 
-        "You may rely on it", 
-        "As I see it, yes", 
-        "Most likely", 
-        "Outlook good", 
-        "Yes", 
-        "Signs point to yes", 
-        "Reply hazy, try again", 
-        "Ask again later", 
-        "Better not tell you now", 
-        "Cannot predict now", 
-        "Concentrate and ask again", 
-        "Don't count on it", 
-        "My reply is no", 
-        "My sources say no", 
-        "Outlook not so good", 
-        "Very doubtful" 
+    public string[] predictionsEn = {
+        "It is certain",
+        "It is decidedly so",
+        "Without a doubt",
+        "Yes definitely",
+        "You may rely on it",
+        "As I see it, yes",
+        "Most likely",
+        "Outlook good",
+        "Yes",
+        "Signs point to yes",
+        "Reply hazy, try again",
+        "Ask again later",
+        "Better not tell you now",
+        "Cannot predict now",
+        "Concentrate and ask again",
+        "Don't count on it",
+        "My reply is no",
+        "My sources say no",
+        "Outlook not so good",
+        "Very doubtful"
     };
 
     public string[] predictionsFi = {
@@ -88,7 +88,7 @@ public class AllInOne : MonoBehaviour
 
     // Update is called once per frame
     // LateUpdate korjaa liikkeen glitsit yms.
-    void LateUpdate() 
+    void LateUpdate()
     {
         if (Input.touchCount == 0)
         {
@@ -264,7 +264,7 @@ public class AllInOne : MonoBehaviour
     }
 
     // T‰m‰ funktio tarkistaa laitteen t‰rin‰n ja k‰ynnist‰‰ tarvittavat toimet, jos t‰rin‰ ylitt‰‰ kynnysarvon.
-    void CheckShake()
+    /*void CheckShake()
     {
         // Tarkista, onko laite kokenut riitt‰v‰n voimakasta t‰rin‰‰ tai onko k‰ytt‰j‰ painanut hiiren vasenta painiketta.
         if (Input.acceleration.sqrMagnitude >= shakeThreshold * shakeThreshold || Input.GetMouseButtonDown(0))
@@ -280,6 +280,15 @@ public class AllInOne : MonoBehaviour
         {
             // Jos t‰rin‰ ei en‰‰ ole voimassa, aseta isShaking-muuttuja todeksi.
             isShaking = false;
+        }
+    }*/
+    void CheckShake()
+    {
+        // Tarkista, onko laite kokenut riitt‰v‰n voimakasta liikett‰
+        if (Input.acceleration.sqrMagnitude >= shakeThreshold * shakeThreshold /*|| Input.GetMouseButtonDown(0)*/)
+        {
+            StartCoroutine(RotateToTarget()); // K‰ynnist‰ funktio, joka k‰‰nt‰‰ jotain kohti t‰rin‰n yhteydess‰.
+            StartCoroutine(Prediction());     // K‰ynnist‰ ennustustoiminto t‰rin‰n yhteydess‰. 
         }
     }
 
@@ -310,36 +319,29 @@ public class AllInOne : MonoBehaviour
             // P‰ivitet‰‰n alkuper‰inen rotaatio uusimmaksi rotaatioksi
             initialRotation = transform.rotation;
         }
-
-        // Kiertoliike on valmis, joten laitetaan kontrolli takaisin p‰‰lle
-        controlDisabled = false;
     }
 
     // Enumerator-funktio, joka k‰sittelee ennusteen
     IEnumerator Prediction()
     {
-        // Tarkista, onko textMesh-komponentti poistettu k‰ytˆst‰
-        if (!textMesh.enabled)
-        {
-            // Valitse satunnainen indeksi ennusteiden joukosta
-            int randomIndex = Random.Range(0, predictionsFi.Length);
+        // Valitse satunnainen indeksi ennusteiden joukosta
+        int randomIndex = Random.Range(0, predictionsFi.Length);
 
-            // Hae satunnainen sana ennusteista
-            string randomWord = predictionsFi[randomIndex];
+        // Hae satunnainen sana ennusteista
+        string randomWord = predictionsFi[randomIndex];
 
-            // Aseta satunnainen sana textMesh-tekstikomponenttiin
-            textMesh.text = randomWord;
+        // Aseta satunnainen sana textMesh-tekstikomponenttiin
+        textMesh.text = randomWord;
 
-            // Odota hetki ennen kuin kytkee textMesh-komponentin p‰‰lle
-            yield return new WaitForSeconds(enableDelayInSeconds);
-            textMesh.enabled = true;
+        // Odota hetki ennen kuin kytkee textMesh-komponentin p‰‰lle
+        yield return new WaitForSeconds(enableDelayInSeconds);
+        textMesh.enabled = true;
 
-            // Odota toinen hetki ennen kuin kytkee textMesh-komponentin pois p‰‰lt‰
-            yield return new WaitForSeconds(disableDelayInSeconds);
-            textMesh.enabled = false;
+        // Odota toinen hetki ennen kuin kytkee textMesh-komponentin pois p‰‰lt‰
+        yield return new WaitForSeconds(disableDelayInSeconds);
+        textMesh.enabled = false;
 
-            // Merkitse, ett‰ kontrolli ei ole poistettu k‰ytˆst‰
-            controlDisabled = false;
-        }
+        // Merkitse, ett‰ kontrolli ei ole poistettu k‰ytˆst‰
+        controlDisabled = false;
     }
 }
