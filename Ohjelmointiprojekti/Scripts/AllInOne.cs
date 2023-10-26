@@ -30,8 +30,8 @@ public class AllInOne : MonoBehaviour
     public float enableDelayInSeconds = 1.0f;
     public float disableDelayInSeconds = 2.0f;
     public TextMeshPro textMesh; // Tai TMP_Text (tekstikomponentti)
-
-    // TAULUKOT ENNUSTUKSISTA
+    
+    // PREDICKTIONS
     public string[] predictionsEn = {
         "It is certain",
         "It is decidedly so",
@@ -82,13 +82,12 @@ public class AllInOne : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        initialRotation = transform.rotation; // Turha?
-        textMesh.enabled = false; // Piilottaa tekstin alussa
+        initialRotation = transform.rotation; // Alustaa pallon asennon Turha?
+        textMesh.enabled = false; // Piilottaa tekstin (elementin) alussa
     }
 
     // Update is called once per frame
-    // LateUpdate korjaa liikkeen glitsit yms.
-    void LateUpdate()
+    void LateUpdate() // LateUpdate korjaa liikkeen glitsailun yms.
     {
         if (Input.touchCount == 0)
         {
@@ -106,7 +105,7 @@ public class AllInOne : MonoBehaviour
 
     void BallRotation()
     {
-        // Tarkista, onko vain yksi kosketus ja ohjaus ei ole poistettu k‰ytˆst‰
+        // Tarkistaa, onko vain yksi kosketus ja ohjaus ei ole poistettu k‰ytˆst‰
         if (Input.touchCount == 1 && !controlDisabled)
         {
             // Hae ensimm‰inen kosketus
@@ -157,8 +156,7 @@ public class AllInOne : MonoBehaviour
         }
     }
 
-    // Pallon liikuttaminen pilkottuna pienempiin funktioihin
-    /*
+    /* Pallon liikuttaminen pilkottuna pienempiin funktioihin
     void BallRotation()
     {
         // Tarkistetaan, onko kosketuksia vain yksi ja ohjaus ei ole poistettu k‰ytˆst‰.
@@ -229,7 +227,7 @@ public class AllInOne : MonoBehaviour
 
     void PinchZoom()
     {
-        // Tarkista, onko n‰ytˆll‰ tarkalleen kaksi kosketusta
+        // Tarkista, onko n‰ytˆll‰ kaksi kosketusta
         if (Input.touchCount == 2)
         {
             // Hae tiedot kahdesta kosketuksesta
@@ -263,7 +261,7 @@ public class AllInOne : MonoBehaviour
         }
     }
 
-    // T‰m‰ funktio tarkistaa laitteen t‰rin‰n ja k‰ynnist‰‰ tarvittavat toimet, jos t‰rin‰ ylitt‰‰ kynnysarvon.
+    // T‰m‰ funktio tarkistaa laitteen t‰rin‰n/liikkeen ja k‰ynnist‰‰ funktion, jos kynnysarvo ylittyy.
     /*void CheckShake()
     {
         // Tarkista, onko laite kokenut riitt‰v‰n voimakasta t‰rin‰‰ tai onko k‰ytt‰j‰ painanut hiiren vasenta painiketta.
@@ -285,10 +283,10 @@ public class AllInOne : MonoBehaviour
     void CheckShake()
     {
         // Tarkista, onko laite kokenut riitt‰v‰n voimakasta liikett‰
-        if (Input.acceleration.sqrMagnitude >= shakeThreshold * shakeThreshold /*|| Input.GetMouseButtonDown(0)*/)
+        if (Input.acceleration.sqrMagnitude >= shakeThreshold * shakeThreshold && !controlDisabled || Input.GetMouseButtonDown(0) && !controlDisabled)
         {
-            StartCoroutine(RotateToTarget()); // K‰ynnist‰ funktio, joka k‰‰nt‰‰ jotain kohti t‰rin‰n yhteydess‰.
-            StartCoroutine(Prediction());     // K‰ynnist‰ ennustustoiminto t‰rin‰n yhteydess‰. 
+            StartCoroutine(RotateToTarget()); // K‰ynnist‰‰ funktion, joka k‰‰nt‰‰ pallon n‰ytˆn k‰ytt‰j‰n suuntaan
+            StartCoroutine(Prediction());     // K‰ynnist‰‰ ennustus funktion 
         }
     }
 
@@ -324,24 +322,25 @@ public class AllInOne : MonoBehaviour
     // Enumerator-funktio, joka k‰sittelee ennusteen
     IEnumerator Prediction()
     {
-        // Valitse satunnainen indeksi ennusteiden joukosta
+        // Valitsee satunnaisen indeksin ennustuksista
         int randomIndex = Random.Range(0, predictionsFi.Length);
 
-        // Hae satunnainen sana ennusteista
+        // Tallentaa satunnaisen ennustuksen muuttujaan
         string randomWord = predictionsFi[randomIndex];
 
-        // Aseta satunnainen sana textMesh-tekstikomponenttiin
+        // Asetaa ennustuksen textMesh-tekstikomponenttiin
         textMesh.text = randomWord;
 
-        // Odota hetki ennen kuin kytkee textMesh-komponentin p‰‰lle
+        // Viive ennen kuin kytketkee textMesh-komponentin p‰‰lle
         yield return new WaitForSeconds(enableDelayInSeconds);
         textMesh.enabled = true;
 
-        // Odota toinen hetki ennen kuin kytkee textMesh-komponentin pois p‰‰lt‰
+        // Viive ennen kuin kytkee textMesh-komponentin pois p‰‰lt‰
         yield return new WaitForSeconds(disableDelayInSeconds);
         textMesh.enabled = false;
 
-        // Merkitse, ett‰ kontrolli ei ole poistettu k‰ytˆst‰
+        // Viive ennen kuin kontolli palautuu k‰ytt‰j‰lle
+        yield return new WaitForSeconds(enableDelayInSeconds);
         controlDisabled = false;
     }
 }
