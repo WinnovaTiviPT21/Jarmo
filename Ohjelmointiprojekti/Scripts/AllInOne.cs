@@ -7,12 +7,20 @@ using Random = UnityEngine.Random;
 
 public class AllInOne : MonoBehaviour
 {
+    public float rotationSpeed = 10f;
+
+    private Rigidbody rb;
+    private Vector2 initialTouchPosition;
+    private bool isDragging = false;
+    private bool controlDisabled = false;
+
     // ROTATION VARIABLES
-    private bool isDragging = false;      // K‰ytt‰j‰ k‰‰nt‰‰ objectia
-    private bool controlDisabled;         // Onko ohjaus k‰ytˆss‰
-    private Vector2 initialTouchPosition; // Kosketuksen alkuper‰inen sijainti
-    private Quaternion initialRotation;   // Alkuper‰inen kierto
-    public float rotationSpeed = 5.0f;    // Kierron nopeus
+    private Rigidbody m_Rigidbody;
+    //private bool isDragging = false;      // K‰ytt‰j‰ k‰‰nt‰‰ objectia
+    //private bool controlDisabled;         // Onko ohjaus k‰ytˆss‰
+    //private Vector2 initialTouchPosition; // Kosketuksen alkuper‰inen sijainti
+    //private Quaternion initialRotation;   // Alkuper‰inen kierto
+    //public float rotationSpeed = 5.0f;    // Kierron nopeus
 
     // ZOOM VARIABLES
     private float minZoom = 0.25f;        // Pienin mahdollinen zoom
@@ -32,6 +40,7 @@ public class AllInOne : MonoBehaviour
 
     // PREDICKTIONS
     public string[] predictionsEn = {
+        "Hell Yeah",
         "It is certain",
         "It is decidedly so",
         "Without a doubt",
@@ -51,7 +60,9 @@ public class AllInOne : MonoBehaviour
         "My reply is no",
         "My sources say no",
         "Outlook not so good",
-        "Very doubtful"
+        "Very doubtful",
+        "That's a yikes from me",
+        "No way in hell"
     };
 
     public string[] predictionsFi = {
@@ -82,6 +93,7 @@ public class AllInOne : MonoBehaviour
     void Start()
     {
         //initialRotation = transform.rotation; // Alustaa pallon asennon (Turha?)
+        rb = GetComponent<Rigidbody>();
         textMesh.enabled = false; // Piilottaa tekstin (elementin) alussa
     }
 
@@ -102,100 +114,44 @@ public class AllInOne : MonoBehaviour
         }
     }
 
-    //void BallRotation()
-    //{
-    //    // Tarkistetaan, onko kosketuksia vain yksi ja ohjaus ei ole poistettu k‰ytˆst‰.
-    //    if (Input.touchCount == 1 && !controlDisabled)
-    //    {
-    //        HandleSingleTouchInput(); // K‰sitell‰‰n yhden kosketuksen syˆttˆ.
-    //    }
-    //    else
-    //    {
-    //        isDragging = false; // Jos kosketuksia on useampia tai ohjaus on poistettu k‰ytˆst‰, asetetaan raahaaminen pois p‰‰lt‰.
-    //    }
-    //}
-
-    //void HandleSingleTouchInput()
-    //{
-    //    Touch touch = Input.GetTouch(0); // Haetaan ensimm‰inen kosketus.
-
-    //    switch (touch.phase)
-    //    {
-    //        case TouchPhase.Began:
-    //            isDragging = true; // Asetetaan raahaaminen p‰‰lle.
-    //            initialTouchPosition = touch.position; // Tallennetaan alkuper‰inen kosketuskohta.
-    //            break;
-
-    //        case TouchPhase.Moved:
-    //            Vector2 currentTouchPosition = touch.position;
-    //            Vector2 dragVector = currentTouchPosition - initialTouchPosition;
-
-    //            float rotationX = dragVector.y * rotationSpeed * Time.deltaTime;
-    //            float rotationY = -dragVector.x * rotationSpeed * Time.deltaTime;
-
-    //            Quaternion xRotation = Quaternion.AngleAxis(rotationX, Vector3.right);
-    //            Quaternion yRotation = Quaternion.AngleAxis(rotationY, Vector3.up);
-
-    //            transform.rotation = initialRotation * xRotation * yRotation;
-    //            break;
-
-    //        case TouchPhase.Ended:
-    //            isDragging = false; // Kun kosketus p‰‰ttyy, asetetaan raahaaminen pois p‰‰lt‰.
-    //            initialRotation = transform.rotation; // Tallennetaan alkuper‰inen rotaatio.
-    //            break;
-    //    }
-    //}
-
-    void BallRotation()
+    private void BallRotation()
     {
-        // Tarkistaa, onko vain yksi kosketus ja ohjaus ei ole poistettu k‰ytˆst‰
-        if (Input.touchCount == 1 && !controlDisabled)
+        // Hae ensimm‰inen kosketus
+        Touch touch = Input.GetTouch(0);
+
+        // K‰sittele kosketuksen vaiheet
+        switch (touch.phase)
         {
-            // Hae ensimm‰inen kosketus
-            Touch touch = Input.GetTouch(0);
+            // Kosketus aloitettu
+            case TouchPhase.Began:
+                isDragging = true;
+                initialTouchPosition = touch.position;
+                break;
 
-            // K‰sittele kosketuksen vaiheet
-            switch (touch.phase)
-            {
-                // Kosketus aloitettu
-                case TouchPhase.Began:
-                    isDragging = true;
-                    initialTouchPosition = touch.position;
-                    break;
+            // Kosketusta liikutetaan
+            case TouchPhase.Moved:
+                if (isDragging)
+                {
+                    // Hae nykyinen kosketuskohta
+                    Vector2 currentTouchPosition = touch.position;
+                    // Laske vetovektori
+                    Vector2 dragVector = currentTouchPosition - initialTouchPosition;
 
-                // Kosketusta liikutetaan
-                case TouchPhase.Moved:
-                    if (isDragging)
-                    {
-                        // Hae nykyinen kosketuskohta
-                        Vector2 currentTouchPosition = touch.position;
-                        // Laske vetovektori
-                        Vector2 dragVector = currentTouchPosition - initialTouchPosition;
+                    // Laske rotaatio x- ja y-akseleilla perustuen vetovektoriin
+                    float rotationX = dragVector.y * rotationSpeed * Time.deltaTime;
+                    float rotationY = -dragVector.x * rotationSpeed * Time.deltaTime;
 
-                        // Laske rotaatio x- ja y-akseleilla perustuen vetovektoriin
-                        float rotationX = dragVector.y * rotationSpeed * Time.deltaTime;
-                        float rotationY = -dragVector.x * rotationSpeed * Time.deltaTime;
+                    // Lis‰‰ momenttia Rigidbodylle k‰‰nt‰miseen
+                    rb.AddTorque(Vector3.up * rotationY);
+                    rb.AddTorque(Vector3.right * rotationX);
 
-                        // Luo rotaatiot ymp‰ri x- ja y-akseleita
-                        Quaternion xRotation = Quaternion.AngleAxis(rotationX, Vector3.right);
-                        Quaternion yRotation = Quaternion.AngleAxis(rotationY, Vector3.up);
+                }
+                break;
 
-                        // P‰ivit‰ pallon rotaatio alkuper‰isen rotaation avulla
-                        transform.rotation = initialRotation * xRotation * yRotation;
-                    }
-                    break;
-
-                // Kosketus p‰‰ttyy
-                case TouchPhase.Ended:
-                    isDragging = false;
-                    initialRotation = transform.rotation;
-                    break;
-            }
-        }
-        else
-        {
-            // Muissa tapauksissa
-            isDragging = false;
+            // Kosketus p‰‰ttyy
+            case TouchPhase.Ended:
+                isDragging = false;
+                break;
         }
     }
 
@@ -271,7 +227,7 @@ public class AllInOne : MonoBehaviour
             yield return null;
 
             // P‰ivitet‰‰n alkuper‰inen rotaatio uusimmaksi rotaatioksi
-            initialRotation = transform.rotation;
+            //initialRotation = transform.rotation;
         }
     }
 
@@ -279,10 +235,10 @@ public class AllInOne : MonoBehaviour
     IEnumerator Prediction()
     {
         // Valitsee satunnaisen indeksin ennustuksista
-        int randomIndex = Random.Range(0, predictionsFi.Length);
+        int randomIndex = Random.Range(0, predictionsEn.Length);
 
         // Asetaa ennustuksen textMesh-tekstikomponenttiin
-        textMesh.text = predictionsFi[randomIndex];
+        textMesh.text = predictionsEn[randomIndex];
 
         // Viive ennen kuin kytketkee textMesh-komponentin p‰‰lle
         yield return new WaitForSeconds(enableDelayInSeconds);
